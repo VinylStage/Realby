@@ -1,6 +1,9 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import React from 'react'
 
-export default function Home() {
-  return <div>hello</div>;
+const Home = () => {
+  return (
+    <div>와ㅏㅏ</div>
+  )
 }
+
+export default Home
