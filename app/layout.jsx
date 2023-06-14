@@ -1,6 +1,12 @@
-import "./globals.css";
+import React from 'react'
+import "@styles/globals.css";
 
-export default function RootLayout({ children }) {
+export const metadata = {
+  title: "RealBy",
+  description: ""
+}
+
+const RootLayout = ({children}) => {
   return (
     <html lang="kr">
       <head>
@@ -10,9 +16,16 @@ export default function RootLayout({ children }) {
         <header>
           <a href="/auth/login">login</a>
         </header>
-        {children}
-        <footer>ⓒ 2023 Blog Platform Company. All Rights Reserved.</footer>
+        <main className="app">
+          {children}
+        </main>
+        <footer>
+          ⓒ 2023 Blog Platform Company. All Rights Reserved.
+        </footer>
       </body>
     </html>
   );
 }
+
+export default RootLayout;
+
