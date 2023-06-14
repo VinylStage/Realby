@@ -1,10 +1,10 @@
-import React from "react";
-import BlogCreate from "../../../../components/BlogCreate";
+import BlogCreate from "@/components/BlogCreate";
 
 export default function myBlogs() {
   return (
     <>
       <BlogCreate />
+      <div>hello?</div>
     </>
   );
 }

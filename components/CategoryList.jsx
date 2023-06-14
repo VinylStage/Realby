@@ -22,6 +22,7 @@ export default function CategoryList({ blog_name: blog_name }) {
       console.error(error);
     }
   };
+
   return (
     <>
       {data &&

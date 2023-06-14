@@ -30,7 +30,7 @@ export default function CategoryCreate({ blog_name: blog_name }) {
   }
   return (
     <section>
-      <form action="post">
+      <form>
         <input
           type="text"
           placeholder="카테고리추가"

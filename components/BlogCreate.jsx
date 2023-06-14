@@ -10,29 +10,31 @@ export default function BlogCreate() {
   const [blog_intro, setBlogIntro] = useState("");
   const token = localStorage.getItem("access");
 
-  //   const router = useRouter();
-  async function handlePosts() {
+  const router = useRouter();
+  const handlePosts = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/blogs/blogcreate/", {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        method: "POST",
-        body: JSON.stringify({
-          blog_name: blog_name,
-          blog_intro: blog_intro,
-        }),
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/blogs/blogcreate/",
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            blog_name: blog_name,
+            blog_intro: blog_intro,
+          }),
+        }
+      );
 
       setData(response.data);
     } catch (error) {
       console.error(error);
     }
 
-    // router.push("/");
-    // router.refresh();
-  }
+    router.push("/");
+    router.refresh();
+  };
   return (
     <section>
       <form>

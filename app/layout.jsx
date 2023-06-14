@@ -1,12 +1,13 @@
-import React from 'react'
+import React from "react";
 import "@styles/globals.css";
+import Link from "next/link";
 
 export const metadata = {
   title: "RealBy",
-  description: ""
-}
+  description: "",
+};
 
-const RootLayout = ({children}) => {
+const RootLayout = ({ children }) => {
   return (
     <html lang="kr">
       <head>
@@ -14,18 +15,15 @@ const RootLayout = ({children}) => {
       </head>
       <body>
         <header>
-          <a href="/auth/login">login</a>
+          <Link href={"/"}>홈</Link>
+          <br />
+          <Link href={"/auth/login"}>login</Link>
         </header>
-        <main className="app">
-          {children}
-        </main>
-        <footer>
-          ⓒ 2023 Blog Platform Company. All Rights Reserved.
-        </footer>
+        <main className="app">{children}</main>
+        <footer>ⓒ 2023 Team. Survivors All Rights Reserved.</footer>
       </body>
     </html>
   );
-}
+};
 
 export default RootLayout;
-

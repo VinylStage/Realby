@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryCreate from "../../../../components/CategoryCreate";
+import CategoryCreate from "@/components/CategoryCreate";
 
 export default function categoryManage({ params }) {
   return (

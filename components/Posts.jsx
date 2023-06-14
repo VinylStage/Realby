@@ -9,44 +9,44 @@ export default function Posts({ blog_name: blog_name }) {
   const [content, setContent] = useState("");
   const [topic, setTopic] = useState("");
   const [category, setCategory] = useState("");
-  const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
 
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
-      const response = await axios.post(
+      const response = await fetch(
         `http://localhost:8000/blogs/${blog_name}/write/`,
         {
           headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          method: "POST",
           body: JSON.stringify({
             title: title,
             content: content,
             topic: topic,
             category: category,
-            file: file,
+            image: image,
           }),
         }
       );
-      setData(response.data);
+      console.log(typeof response);
     } catch (error) {
       console.error(error);
     }
   }
-
   return (
     <>
       <section>
-        <form action="post">
+        <form>
           <div>
             <select
               name="category"
               value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
-              <option value={null}>카테고리없음</option>
+              <option value="null">카테고리없음</option>
               <CategoryList blog_name={blog_name} />
             </select>
             <select
@@ -54,7 +54,7 @@ export default function Posts({ blog_name: blog_name }) {
               value={topic}
               onChange={(event) => setTopic(event.target.value)}
             >
-              <option value={null}>토픽없음</option>
+              <option value="null">토픽없음</option>
               <option value="CULTURE">문화</option>
               <option value="LIFE">일상</option>
               <option value="SPORTS">스포츠</option>
@@ -70,8 +70,6 @@ export default function Posts({ blog_name: blog_name }) {
             />
             <textarea
               name="content"
-              cols="30"
-              rows="10"
               placeholder="content"
               value={content}
               onChange={(event) => setContent(event.target.value)}
@@ -79,8 +77,8 @@ export default function Posts({ blog_name: blog_name }) {
             <input
               type="file"
               accept="image/*"
-              value={file}
-              onChange={(event) => setFile(event.target.value)}
+              value={image}
+              onChange={(event) => setImage(event.target.value)}
             />
           </div>
           <button onClick={hanldePosts} type="submit">
