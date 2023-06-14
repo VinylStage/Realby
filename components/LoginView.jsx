@@ -9,10 +9,11 @@ export default function LoginView() {
   const router = useRouter();
 
   async function handleLogin() {
-    const response = await axios.post("http://127.0.0.1:8000/users/login/", {
+    const response = await fetch("http://127.0.0.1:8000/users/login/", {
       headers: {
         "content-type": "application/json",
       },
+      method: "POST",
       body: JSON.stringify({ email: email, password: password }),
     });
 

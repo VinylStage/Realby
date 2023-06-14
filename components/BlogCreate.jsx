@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function BlogCreate() {
+  /** 블로그개설 컴포넌트 **/
   const [blog_name, setBlogName] = useState("");
   const [blog_intro, setBlogIntro] = useState("");
   const token = localStorage.getItem("access");
