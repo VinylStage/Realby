@@ -25,10 +25,12 @@ export default function CategoryList({ blog_name: blog_name }) {
   return (
     <>
       {data &&
-        data.map((cate) => {
-          const category = cate.category;
-          const id = cate.id;
-          return <option value={id}>{category}</option>;
+        data.map((e) => {
+          return (
+            <option value={e.id} key={e.id}>
+              {e.category}
+            </option>
+          );
         })}
     </>
   );
