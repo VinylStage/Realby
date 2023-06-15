@@ -1,10 +1,12 @@
 "use client";
 
 import axios from "axios";
+// import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function CategoryList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
+  //   const router = useRouter();
 
   useEffect(() => {
     fetchData();
@@ -24,15 +26,40 @@ export default function CategoryList({ blog_name: blog_name }) {
   };
 
   return (
-    <>
-      {data &&
-        data.map((e) => {
-          return (
-            <option value={e.id} key={e.id}>
-              {e.category}
-            </option>
-          );
-        })}
-    </>
+    <section>
+      <form>
+        {data &&
+          data.map((e) => {
+            const id = e.id;
+            const category = e.category;
+            const handleCategoryDelete = async () => {
+              try {
+                const token = localStorage.getItem("access");
+                const response = await axios.delete(
+                  `http://127.0.0.1:8000/blogs/${blog_name}/category/${id}/`,
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                );
+              } catch (error) {
+                console.error(error);
+              }
+              router.refresh();
+            };
+
+            return (
+              <ul key={id}>
+                <li>{category}라는 카테고리</li>
+                <button type="submit" onClick={handleCategoryDelete} value={id}>
+                  카테고리삭제
+                </button>
+              </ul>
+            );
+          })}
+      </form>
+    </section>
   );
 }

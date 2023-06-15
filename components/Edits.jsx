@@ -1,27 +1,53 @@
 "use client";
 
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryList from "./CategorySelectList";
 
-export default function Posts({ blog_name: blog_name }) {
+export default function Posts({
+  blog_name: blog_name,
+  article_id: article_id,
+}) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [topic, setTopic] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [article_id]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/blogs/${blog_name}/detail/${article_id}/`
+      );
+      const data = response.data;
+
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadTitle = data.title;
+  const loadContent = data.content;
+  const loadTopic = data.topic;
+  const loadCategory = data.category;
+  const loadImage = data.image;
 
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
-      const response = await fetch(
-        `http://localhost:8000/blogs/${blog_name}/write/`,
+      const response = await axios.put(
+        `http://localhost:8000/blogs/${blog_name}/detail/${article_id}/`,
         {
           headers: {
             "content-type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          method: "POST",
           body: JSON.stringify({
             title: title,
             content: content,
@@ -67,6 +93,7 @@ export default function Posts({ blog_name: blog_name }) {
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
+
             <textarea
               name="content"
               placeholder="content"
