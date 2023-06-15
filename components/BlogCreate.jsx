@@ -1,29 +1,28 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function BlogCreate() {
   /** 블로그개설 컴포넌트 **/
   const [blog_name, setBlogName] = useState("");
   const [blog_intro, setBlogIntro] = useState("");
-  const token = localStorage.getItem("access");
 
-  const router = useRouter();
   const handlePosts = async () => {
+    const token = localStorage.getItem("access");
+
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/blogs/blogcreate/",
         {
+          blog_name: blog_name,
+          blog_intro: blog_intro,
+        },
+        {
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            blog_name: blog_name,
-            blog_intro: blog_intro,
-          }),
         }
       );
 
@@ -31,13 +30,10 @@ export default function BlogCreate() {
     } catch (error) {
       console.error(error);
     }
-
-    router.push("/");
-    router.refresh();
   };
   return (
     <section>
-      <form>
+      <form action="/">
         <input
           type="text"
           placeholder="블로그 이름"

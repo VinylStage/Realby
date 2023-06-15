@@ -4,7 +4,6 @@ export default function myBlogs() {
   return (
     <>
       <BlogCreate />
-      <div>hello?</div>
     </>
   );
 }
