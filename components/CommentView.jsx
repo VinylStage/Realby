@@ -1,10 +1,12 @@
 "use client";
 
 import axios from "axios";
+import { headers } from "next/dist/client/components/headers";
 import React, { useEffect, useState } from "react";
 
 export default function CommentView({ article_id: article_id }) {
   const [data, setData] = useState([]);
+  const [commentEdit, setCommentEdit] = useState("");
   useEffect(() => {
     fetchData();
   }, [article_id]);
@@ -23,12 +25,13 @@ export default function CommentView({ article_id: article_id }) {
   };
 
   return (
-    <>
+    <ul>
       {data &&
         data.map((e) => {
           const comment = e.comment;
           const user = e.user;
           const token = localStorage.getItem("access");
+
           const handleCommentDelete = async () => {
             try {
               const response = await axios.delete(
@@ -47,19 +50,17 @@ export default function CommentView({ article_id: article_id }) {
             <>
               <section>
                 <form>
-                  <ul>
-                    <li key={e.id}>
-                      {user} :{comment}
-                    </li>
-                    <button type="submit" onClick={handleCommentDelete}>
-                      댓글삭제
-                    </button>
-                  </ul>
+                  <li key={e.id}>
+                    {user} :{comment}
+                  </li>
+                  <button type="submit" onClick={handleCommentDelete}>
+                    댓글삭제
+                  </button>
                 </form>
               </section>
             </>
           );
         })}
-    </>
+    </ul>
   );
 }

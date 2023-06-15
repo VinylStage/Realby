@@ -38,7 +38,7 @@ export default function Posts({ blog_name: blog_name }) {
   return (
     <>
       <section>
-        <form>
+        <form action={`/${blog_name}`}>
           <div>
             <select
               name="category"
