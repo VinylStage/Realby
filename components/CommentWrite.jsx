@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 export default function CommentWrite({ article_id }) {
@@ -10,17 +9,16 @@ export default function CommentWrite({ article_id }) {
   async function handleComment() {
     try {
       const token = localStorage.getItem("access");
-      const response = await fetch(
+      const response = await axios.post(
         `http://localhost:8000/blogs/${article_id}/comments/`,
         {
+          comment: comment,
+        },
+        {
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          method: "POST",
-          body: JSON.stringify({
-            comment: comment,
-          }),
         }
       );
     } catch (error) {

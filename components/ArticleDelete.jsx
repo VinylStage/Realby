@@ -1,14 +1,12 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function ArticleDelete({
   blog_name: blog_name,
   article_id: article_id,
 }) {
-  const router = useRouter();
   async function handleArticleDelete() {
     const token = localStorage.getItem("access");
     const response = await axios.delete(

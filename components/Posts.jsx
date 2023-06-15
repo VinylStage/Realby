@@ -14,21 +14,20 @@ export default function Posts({ blog_name: blog_name }) {
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
-      const response = await fetch(
+      const response = await axios.post(
         `http://localhost:8000/blogs/${blog_name}/write/`,
         {
+          title: title,
+          content: content,
+          topic: topic,
+          category: category,
+          image: image,
+        },
+        {
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          method: "POST",
-          body: JSON.stringify({
-            title: title,
-            content: content,
-            topic: topic,
-            category: category,
-            image: image,
-          }),
         }
       );
     } catch (error) {
