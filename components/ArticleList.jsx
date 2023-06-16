@@ -36,6 +36,7 @@ export default function ArticleList({ blog_name: blog_name }) {
               </Link>
               <li>content : {e.content}</li>
               <li>created_at : {e.created_at}</li>
+              <li>=================</li>
             </ul>
           );
         })}

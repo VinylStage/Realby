@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CategoryList from "./CategorySelectList";
 
-export default function Posts({
+export default function Edits({
   blog_name: blog_name,
   article_id: article_id,
 }) {
@@ -32,29 +32,23 @@ export default function Posts({
     }
   };
 
-  const loadTitle = data.title;
-  const loadContent = data.content;
-  const loadTopic = data.topic;
-  const loadCategory = data.category;
-  const loadImage = data.image;
-
-  async function hanldePosts() {
+  async function hanldeEdits() {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.put(
         `http://localhost:8000/blogs/${blog_name}/detail/${article_id}/`,
         {
+          title: title,
+          content: content,
+          topic: topic,
+          category: category,
+          image: image,
+        },
+        {
           headers: {
-            "content-type": "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            title: title,
-            content: content,
-            topic: topic,
-            category: category,
-            image: image,
-          }),
         }
       );
     } catch (error) {
@@ -68,17 +62,17 @@ export default function Posts({
           <div>
             <select
               name="category"
-              value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
+              <option defaultValue={data.category}>{data.category}</option>
               <option>카테고리없음</option>
               <CategoryList blog_name={blog_name} />
             </select>
             <select
               name="topic"
-              value={topic}
               onChange={(event) => setTopic(event.target.value)}
             >
+              <option defaultValue={data.topic}>{data.topic}</option>
               <option>토픽없음</option>
               <option value="CULTURE">문화</option>
               <option value="LIFE">일상</option>
@@ -90,24 +84,24 @@ export default function Posts({
               type="text"
               placeholder="title"
               name="title"
-              value={title}
+              defaultValue={data.title}
               onChange={(event) => setTitle(event.target.value)}
             />
 
             <textarea
               name="content"
               placeholder="content"
-              value={content}
+              defaultValue={data.content}
               onChange={(event) => setContent(event.target.value)}
             />
             <input
               type="file"
               accept="image/*"
-              value={image}
+              defaultValue={data.image}
               onChange={(event) => setImage(event.target.value)}
             />
           </div>
-          <button onClick={hanldePosts} type="submit">
+          <button onClick={hanldeEdits} type="submit">
             작성
           </button>
         </form>

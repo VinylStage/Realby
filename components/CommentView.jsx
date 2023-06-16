@@ -25,9 +25,10 @@ export default function CommentView({ article_id: article_id }) {
   };
 
   return (
-    <ul>
+    <>
       {data &&
         data.map((e) => {
+          const id = e.id;
           const comment = e.comment;
           const user = e.user;
           const token = localStorage.getItem("access");
@@ -50,9 +51,11 @@ export default function CommentView({ article_id: article_id }) {
             <>
               <section>
                 <form>
-                  <li key={e.id}>
-                    {user} :{comment}
-                  </li>
+                  <ul key={id}>
+                    <li>
+                      {user} :{comment}
+                    </li>
+                  </ul>
                   <button type="submit" onClick={handleCommentDelete}>
                     댓글삭제
                   </button>
@@ -61,6 +64,6 @@ export default function CommentView({ article_id: article_id }) {
             </>
           );
         })}
-    </ul>
+    </>
   );
 }
