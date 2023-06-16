@@ -16,7 +16,7 @@ export default function ArticleList({ blog_name: blog_name }) {
       const response = await axios.get(
         `http://127.0.0.1:8000/blogs/${blog_name}/detail/`
       );
-      const data = response.data;
+      const data = response.data.results;
 
       setData(data);
     } catch (error) {
