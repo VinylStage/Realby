@@ -22,5 +22,8 @@
     "react-dom": "18.2.0",
     "react-native": "^0.71.10",
     "styled-components": "^5.3.11"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }

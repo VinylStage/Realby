@@ -42,6 +42,7 @@ export default function ArticleDetail({
       <div>user : {data.user}</div>
       <div>updated : {data.updated_at}</div>
       <div>조회수 : {data.hits}</div>
+      <div>공감 : {data.empathys}</div>
       <div>생성일 : {data.created_at}</div>
     </>
   );
