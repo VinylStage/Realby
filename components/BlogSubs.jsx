@@ -8,6 +8,7 @@ export default function BlogSubs({ blog_name: blog_name }) {
     const token = localStorage.getItem("access");
     const response = await axios.post(
       `http://127.0.0.1:8000/blogs/subscribe/${blog_name}/`,
+      null,
       {
         headers: {
           Authorization: `Bearer ${token}`,
