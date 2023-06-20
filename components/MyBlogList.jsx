@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+/** 내 블로그 리스트 */
 export default function MyBlogList() {
   const [data, setData] = useState([]);
 

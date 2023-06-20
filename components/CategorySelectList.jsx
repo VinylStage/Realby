@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+/** 카테고리 선택창 */
 export default function CategoryList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
 
