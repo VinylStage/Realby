@@ -9,23 +9,24 @@ export default function Posts({ blog_name: blog_name }) {
   const [content, setContent] = useState("");
   const [topic, setTopic] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("topic", topic);
+      formData.append("category", category);
+      formData.append("image", image);
+
       const response = await axios.post(
         `http://localhost:8000/blogs/${blog_name}/write/`,
-        {
-          title: title,
-          content: content,
-          topic: topic,
-          category: category,
-          image: image,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         }
@@ -75,8 +76,7 @@ export default function Posts({ blog_name: blog_name }) {
             <input
               type="file"
               accept="image/*"
-              value={image}
-              onChange={(event) => setImage(event.target.value)}
+              onChange={(event) => setImage(event.target.files[0])}
             />
           </div>
           <button onClick={hanldePosts} type="submit">
