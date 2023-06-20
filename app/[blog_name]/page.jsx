@@ -5,6 +5,7 @@ import ArticleList from "@components/ArticleList";
 import BlogDelete from "@components/BlogDelete";
 import BlogSubs from "@components/BlogSubs";
 
+/** 블로그 메인 페이지 */
 export default function Blog({ params }) {
   return (
     <>

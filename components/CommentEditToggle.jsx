@@ -56,6 +56,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
+/** MUI 드롭다운 */
 export default function CustomizedMenus({
   comment_id: comment_id,
   blog_name: blog_name,
