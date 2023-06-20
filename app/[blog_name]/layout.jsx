@@ -3,7 +3,10 @@ import "../page.module.css";
 import Link from "next/link";
 import React from "react";
 
-/** 블로그 메인페이지 레이아웃 */
+/**
+ * 블로그 메인페이지 레이아웃
+ * @params {blog_name} 블로그 이름
+ */
 export default function blogLayout({ children, params }) {
   return (
     <>
