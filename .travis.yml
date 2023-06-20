@@ -1,0 +1,21 @@
+# .travis.yml
+
+language: node_js
+node_js:
+  - "18.16"
+
+branches:
+  only:
+    - main
+    
+cache:
+  directories:
+    - `$HOME/.m2/repository`
+    - `$HOME/.gradle`
+   
+script: "./gradlew clean build"
+
+notifications:
+  email:
+    recipients:
+      - mcpe9869@gmail.com
