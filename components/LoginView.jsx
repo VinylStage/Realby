@@ -35,7 +35,6 @@ export default function LoginView() {
     );
     localStorage.setItem("payload", jsonPayload);
     router.push("/");
-    router.refresh();
   }
 
   return (
