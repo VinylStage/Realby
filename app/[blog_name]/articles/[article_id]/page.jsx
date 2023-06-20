@@ -26,7 +26,10 @@ export default function articleDetail({ params }) {
         article_id={params.article_id}
       />
       <div>======================</div>
-      <CommentView article_id={params.article_id} />
+      <CommentView
+        article_id={params.article_id}
+        blog_name={params.blog_name}
+      />
       <div>======================</div>
       <CommentWrite article_id={params.article_id} />
       <div>======================</div>
