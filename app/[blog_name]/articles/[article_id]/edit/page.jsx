@@ -1,6 +1,7 @@
 import Edits from "@/components/Edits";
 import React from "react";
 
+/** 게시글 수정페이지 */
 export default function edit({ params }) {
   return (
     <>

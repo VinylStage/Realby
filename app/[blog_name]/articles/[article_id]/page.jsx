@@ -5,6 +5,7 @@ import ArticleDelete from "@components/ArticleDelete";
 import Link from "next/link";
 import ArticleLike from "@components/ArticleLike";
 
+/** 상세 게시글 페이지 */
 export default function articleDetail({ params }) {
   return (
     <>

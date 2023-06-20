@@ -2,8 +2,9 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import CategoryList from "./CategorySelectList";
+import CategoryList from "@components/CategorySelectList";
 
+/** 게시물 작성 */
 export default function Posts({ blog_name: blog_name }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -17,9 +18,18 @@ export default function Posts({ blog_name: blog_name }) {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("content", content);
-      formData.append("topic", topic);
-      formData.append("category", category);
-      formData.append("image", image);
+
+      if (image) {
+        formData.append("image", image);
+      }
+
+      if (topic) {
+        formData.append("topic", topic);
+      }
+
+      if (category) {
+        formData.append("category", category);
+      }
 
       const response = await axios.post(
         `http://localhost:8000/blogs/${blog_name}/write/`,

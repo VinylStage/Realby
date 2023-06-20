@@ -1,3 +1,3 @@
-export default function blogs({}) {
-  return <div>blogs</div>;
+export default function travel() {
+  return <div>travel</div>;
 }

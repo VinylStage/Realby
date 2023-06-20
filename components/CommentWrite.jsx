@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
+/** 댓글작성 */
 export default function CommentWrite({ article_id }) {
   const [comment, setComment] = useState("");
 

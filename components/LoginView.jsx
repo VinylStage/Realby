@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
+/** 임시로그인(추후 네비게이터와 수정통합 에정) */
 export default function LoginView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +40,7 @@ export default function LoginView() {
 
   return (
     <section className="col-6 col-12-narrower">
-      <form method="post" action="#">
+      <form method="post">
         <div className="row gtr-50">
           <div className="col-12 col-12-mobile">
             <input

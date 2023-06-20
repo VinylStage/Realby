@@ -1,3 +1,3 @@
-export default function blogs({}) {
-  return <div>blogs</div>;
+export default function it() {
+  return <div>it</div>;
 }

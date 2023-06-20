@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+/** 상세 게시글 보기/삭제 */
 export default function ArticleDetail({
   blog_name: blog_name,
   article_id: article_id,

@@ -3,6 +3,7 @@
 import axios from "axios";
 import React from "react";
 
+/** 블로그 삭제버튼 */
 export default function BlogDelete({ blog_name: blog_name }) {
   const handleBlogDelete = async () => {
     const token = localStorage.getItem("access");

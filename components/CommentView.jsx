@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CommentEditToggle from "@components/CommentEditToggle";
 
+/** 댓글불러오기 */
 export default function CommentView({
   article_id: article_id,
   blog_name: blog_name,

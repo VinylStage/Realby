@@ -3,6 +3,7 @@
 import axios from "axios";
 import React from "react";
 
+/** 블로그 구독 */
 export default function BlogSubs({ blog_name: blog_name }) {
   const handleSubs = async () => {
     const token = localStorage.getItem("access");

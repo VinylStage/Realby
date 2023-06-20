@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+/** 댓글수정 팝업페이지 */
 export default function CommentView({ comment_id: comment_id }) {
   const [data, setData] = useState("");
   const [comment, setComment] = useState("");
