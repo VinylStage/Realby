@@ -9,7 +9,7 @@ import CategoryList from "@components/CategoryList";
 export default function categoryManage({ params }) {
   return (
     <>
-      hellow
+      <h4>Category</h4>
       <CategoryCreate blog_name={params.blog_name} />
       <br />
       <CategoryList blog_name={params.blog_name} />

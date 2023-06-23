@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import MenuItem from "@mui/material/MenuItem";
 
 /** 카테고리 선택창 */
 export default function CategoryList({ blog_name: blog_name }) {
@@ -29,9 +30,9 @@ export default function CategoryList({ blog_name: blog_name }) {
       {data &&
         data.map((e) => {
           return (
-            <option value={e.id} key={e.id}>
+            <MenuItem value={e.id} key={e.id}>
               {e.category}
-            </option>
+            </MenuItem>
           );
         })}
     </>

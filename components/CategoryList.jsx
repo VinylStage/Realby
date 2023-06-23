@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-
 import React, { useEffect, useState } from "react";
 
 /** 카테고리 리스트(삭제) */
@@ -52,13 +51,16 @@ export default function CategoryList({ blog_name: blog_name }) {
 
             return (
               <ul key={id}>
-                <li>{category}라는 카테고리</li>
+                <br />
+                <li>{category}</li>
+                <br />
                 <button type="submit" onClick={handleCategoryDelete} value={id}>
                   카테고리삭제
                 </button>
               </ul>
             );
           })}
+        <br />
       </form>
     </section>
   );
