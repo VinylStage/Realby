@@ -53,7 +53,7 @@ export default function Posts({ blog_name: blog_name }) {
       }
 
       const response = await axios.post(
-        `http://localhost:8000/blogs/${blog_name}/write/`,
+        `http://54.180.120.169/blogs/${blog_name}/write/`,
         formData,
         {
           headers: {
