@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import {signIn, signOut, useSession, getProviders} from 'next-auth/react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
     const isUserLoggedIn = true;
@@ -20,18 +20,17 @@ const Nav = () => {
     })
 
     return (
-        <nav className=''> 
-            <Link href="/" className=''>
-                <Image src="" alt='' width={30} height={30} className=''/>
-                <p className='logo_text'>Realby</p>
+        <nav className="flex-between w-full md-16 pt-3"> 
+            <Link href="/" className="flex gap-2 flex-center">
+                <Image src="/assets/images/realby_logo.png" alt="Realby Logo" width={90} height={33} className="object-contain"/>
             </Link>
 
             {/* Desktop Navigation */}
             <div className='sm:flex hidden'>
                 {isUserLoggedIn ? (
-                    <div className="">
+                    <div className="flex gap-3 md:gap-5">
                         {/* 드롭다운(온클릭) 추가해서 마이프로필, 마이블로그들을 링크로 */}
-                        <Image src="" width={37} height={37} className='' alt=''
+                        <Image src="/assets/images/default_pf_image.png" width={37} height={37} className='' alt=''
                         onClick={() => setToggleDropdown((prev) => !prev)}/>
 
                         {toggleDropdown && (
