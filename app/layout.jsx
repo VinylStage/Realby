@@ -1,6 +1,6 @@
 import React from "react";
-import "@styles/globals.css";
 import Link from "next/link";
+import "../styles/globals.css";
 
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';

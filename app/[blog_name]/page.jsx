@@ -2,8 +2,7 @@ import React from "react";
 import BlogPage from "../../components/BlogPage";
 import Link from "next/link";
 import ArticleList from "@components/ArticleList";
-import BlogDelete from "@components/BlogDelete";
-import BlogSubs from "@components/BlogSubs";
+import BlogDeleteSubs from "@components/BlogDeleteSubs";
 
 /**
  * 블로그 메인 페이지
@@ -20,13 +19,10 @@ export default function Blog({ params }) {
         카테고리 생성하기
       </Link>
       <div>모든 게시물 불러와</div>
+      <h3>=================</h3>
       <ArticleList blog_name={params.blog_name} />
       <div>
-        <BlogDelete blog_name={params.blog_name} />
-      </div>
-      <div>
-        wowwowowo
-        <BlogSubs blog_name={params.blog_name} />
+        <BlogDeleteSubs blog_name={params.blog_name} />
       </div>
     </>
   );

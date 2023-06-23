@@ -8,7 +8,7 @@ import Posts from "@/components/Posts";
 export default function posts({ params }) {
   return (
     <>
-      <div>posts</div>
+      <div>게시글을 작성하시오오오오</div>
       <Posts blog_name={params.blog_name} />
     </>
   );

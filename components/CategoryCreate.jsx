@@ -1,9 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
-
+import TextField from "@mui/material/TextField";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
 /** 카테고리 생성 */
 export default function CategoryCreate({ blog_name: blog_name }) {
   const [category, setCategory] = useState("");
@@ -31,15 +32,21 @@ export default function CategoryCreate({ blog_name: blog_name }) {
   return (
     <section>
       <form>
-        <input
-          type="text"
-          placeholder="카테고리추가"
+        <TextField
+          id="standard-basic"
+          label="Category Create"
+          variant="standard"
           value={category}
           onChange={(event) => setCategory(event.target.value)}
         />
-        <button onClick={handleCategory} type="submit">
+        <Button
+          onClick={handleCategory}
+          type="submit"
+          variant="contained"
+          endIcon={<SendIcon />}
+        >
           카테고리 생성
-        </button>
+        </Button>
       </form>
     </section>
   );

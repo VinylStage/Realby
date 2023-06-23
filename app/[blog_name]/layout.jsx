@@ -1,4 +1,4 @@
-import "../page.module.css";
+import "../../styles/page.module.css";
 
 import Link from "next/link";
 import React from "react";
