@@ -3,6 +3,7 @@
 import axios from "axios";
 import React from "react";
 
+/** 게시글삭제버튼 */
 export default function ArticleDelete({
   blog_name: blog_name,
   article_id: article_id,

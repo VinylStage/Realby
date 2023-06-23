@@ -2,30 +2,41 @@
 
 import axios from "axios";
 import React, { useState } from "react";
-import CategoryList from "./CategorySelectList";
+import CategoryList from "@components/CategorySelectList";
 
+/** 게시물 작성 */
 export default function Posts({ blog_name: blog_name }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [topic, setTopic] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
 
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", content);
+
+      if (image) {
+        formData.append("image", image);
+      }
+
+      if (topic) {
+        formData.append("topic", topic);
+      }
+
+      if (category) {
+        formData.append("category", category);
+      }
+
       const response = await axios.post(
         `http://localhost:8000/blogs/${blog_name}/write/`,
-        {
-          title: title,
-          content: content,
-          topic: topic,
-          category: category,
-          image: image,
-        },
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${token}`,
           },
         }
@@ -75,8 +86,7 @@ export default function Posts({ blog_name: blog_name }) {
             <input
               type="file"
               accept="image/*"
-              value={image}
-              onChange={(event) => setImage(event.target.value)}
+              onChange={(event) => setImage(event.target.files[0])}
             />
           </div>
           <button onClick={hanldePosts} type="submit">

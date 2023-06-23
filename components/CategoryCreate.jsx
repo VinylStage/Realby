@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
+/** 카테고리 생성 */
 export default function CategoryCreate({ blog_name: blog_name }) {
   const [category, setCategory] = useState("");
 

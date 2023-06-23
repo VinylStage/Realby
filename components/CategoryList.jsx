@@ -1,12 +1,12 @@
 "use client";
 
 import axios from "axios";
-// import { useRouter } from "next/router";
+
 import React, { useEffect, useState } from "react";
 
+/** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
-  //   const router = useRouter();
 
   useEffect(() => {
     fetchData();

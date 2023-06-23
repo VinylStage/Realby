@@ -1,8 +1,10 @@
 "use client";
 
 import axios from "axios";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+/** 상세 게시글 보기/삭제 */
 export default function ArticleDetail({
   blog_name: blog_name,
   article_id: article_id,
@@ -31,13 +33,17 @@ export default function ArticleDetail({
       `http://127.0.0.1:8000/blogs/${blog_name}/detail/${article_id}/`
     );
   };
-
   return (
     <>
       <div>title : {data.title}</div>
       <div>topic : {data.topic}</div>
       <div>category : {data.category}</div>
       <div>content : {data.content}</div>
+      {/* <Image
+        src={`http://127.0.0.1:8000${data.image}`}
+        width={500}
+        height={500}
+      /> */}
       <div>image : {data.image}</div>
       <div>user : {data.user}</div>
       <div>updated : {data.updated_at}</div>

@@ -1,12 +1,15 @@
 "use client";
 
 import axios from "axios";
-import { headers } from "next/dist/client/components/headers";
 import React, { useEffect, useState } from "react";
+import CommentEditToggle from "@components/CommentEditToggle";
 
-export default function CommentView({ article_id: article_id }) {
+/** 댓글불러오기 */
+export default function CommentView({
+  article_id: article_id,
+  blog_name: blog_name,
+}) {
   const [data, setData] = useState([]);
-  const [commentEdit, setCommentEdit] = useState("");
   useEffect(() => {
     fetchData();
   }, [article_id]);
@@ -25,10 +28,10 @@ export default function CommentView({ article_id: article_id }) {
   };
 
   return (
-    <>
+    <section>
       {data &&
         data.map((e) => {
-          const id = e.id;
+          const comment_id = e.id;
           const comment = e.comment;
           const user = e.user;
           const token = localStorage.getItem("access");
@@ -36,7 +39,7 @@ export default function CommentView({ article_id: article_id }) {
           const handleCommentDelete = async () => {
             try {
               const response = await axios.delete(
-                `http://127.0.0.1:8000/blogs/comments/${e.id}`,
+                `http://127.0.0.1:8000/blogs/comments/${comment_id}/`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,
@@ -48,22 +51,24 @@ export default function CommentView({ article_id: article_id }) {
             }
           };
           return (
-            <>
-              <section>
-                <form>
-                  <ul key={id}>
-                    <li>
-                      {user} :{comment}
-                    </li>
-                  </ul>
-                  <button type="submit" onClick={handleCommentDelete}>
-                    댓글삭제
-                  </button>
-                </form>
-              </section>
-            </>
+            <form key={comment_id}>
+              <ul>
+                <li>
+                  {user} :{comment}
+                </li>
+              </ul>
+              <button type="submit" onClick={handleCommentDelete}>
+                댓글삭제
+              </button>
+              <CommentEditToggle
+                comment_id={comment_id}
+                blog_name={blog_name}
+                article_id={article_id}
+              />
+              <span>========================</span>
+            </form>
           );
         })}
-    </>
+    </section>
   );
 }

@@ -5,6 +5,11 @@ import ArticleDelete from "@components/ArticleDelete";
 import Link from "next/link";
 import ArticleLike from "@components/ArticleLike";
 
+/**
+ * 상세 게시글 페이지
+ * @params {blog_name} 블로그 이름
+ * @params {article_id} 게시글 아이디
+ */
 export default function articleDetail({ params }) {
   return (
     <>
@@ -26,7 +31,10 @@ export default function articleDetail({ params }) {
         article_id={params.article_id}
       />
       <div>======================</div>
-      <CommentView article_id={params.article_id} />
+      <CommentView
+        article_id={params.article_id}
+        blog_name={params.blog_name}
+      />
       <div>======================</div>
       <CommentWrite article_id={params.article_id} />
       <div>======================</div>

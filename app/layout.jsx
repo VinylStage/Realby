@@ -10,6 +10,7 @@ export const metadata = {
   description: "",
 };
 
+/** 메인 레이아웃 */
 const RootLayout = ({ children }) => {
   return (
     <html lang="kr">

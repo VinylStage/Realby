@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
+/** 게시글 리스트 */
 export default function ArticleList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
 

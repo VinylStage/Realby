@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+/** 블로그 정보보기 */
 function BlogPage({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
 
