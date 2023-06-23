@@ -1,5 +1,5 @@
 import React from "react";
-import BlogPage from "../../components/BlogPage";
+import BlogPage from "@/components/BlogPage";
 import Link from "next/link";
 import ArticleList from "@components/ArticleList";
 
