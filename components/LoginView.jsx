@@ -10,33 +10,36 @@ export default function LoginView() {
   const router = useRouter();
 
   async function handleLogin() {
-    const response = await fetch("http://127.0.0.1:8000/users/login/", {
-      headers: {
-        "content-type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({ email: email, password: password }),
-    });
+    try {
+      const response = await fetch("http://54.180.120.169/users/login/", {
+        headers: {
+          "content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ email: email, password: password }),
+      });
 
-    const responseJson = await response.json();
+      const responseJson = await response.json();
 
-    localStorage.setItem("access", responseJson.access);
-    localStorage.setItem("refresh", responseJson.refresh);
+      localStorage.setItem("access", responseJson.access);
+      localStorage.setItem("refresh", responseJson.refresh);
 
-    const base64Url = responseJson.access.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-    localStorage.setItem("payload", jsonPayload);
-    router.push("/");
+      const base64Url = responseJson.access.split(".")[1];
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+      localStorage.setItem("payload", jsonPayload);
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
   }
-
   return (
     <section className="col-6 col-12-narrower">
       <form method="post">

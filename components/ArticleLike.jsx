@@ -12,7 +12,7 @@ export default function ArticleLike({
     const token = localStorage.getItem("access");
 
     const response = await axios.post(
-      `http://localhost:8000/blogs/${article_id}/empathys/`,
+      `http://54.180.120.169/blogs/${article_id}/empathys/`,
       null,
       {
         headers: {
