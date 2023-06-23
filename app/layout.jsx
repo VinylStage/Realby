@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/globals.css";
 import Link from "next/link";
 import "../styles/globals.css";
 
@@ -10,11 +11,13 @@ export const metadata = {
   description: "",
 };
 
-/** 메인 레이아웃 */
+/** 메인페이지 레이아웃 */
 const RootLayout = ({ children }) => {
   return (
     <html lang="kr">
       <body>
+        <div></div>
+
         <Provider>
           <header>
             <Link href={"/"}>홈</Link>
