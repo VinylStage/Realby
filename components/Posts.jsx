@@ -108,7 +108,7 @@ export default function Posts({ blog_name: blog_name }) {
                 </Select>
               </div>
               <div class="title">
-                <textarea
+                <TextField
                   id="outlined-basic"
                   label="title"
                   variant="outlined"
@@ -116,17 +116,17 @@ export default function Posts({ blog_name: blog_name }) {
                   name="title"
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
-                ></textarea>
+                ></TextField>
               </div>
               <div class="cont">
-                <textarea
+                <TextField
                   id="filled-basic"
                   label="content"
                   variant="filled"
                   placeholder="content"
                   value={content}
                   onChange={(event) => setContent(event.target.value)}
-                ></textarea>
+                ></TextField>
               </div>
               {/* <div className="title">
                 <TextField

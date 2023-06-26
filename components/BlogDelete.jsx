@@ -9,18 +9,6 @@ import Stack from "@mui/material/Stack";
 
 /** 블로그 삭제버튼 */
 export default function BlogDelete({ blog_name: blog_name }) {
-  const handleSubs = async () => {
-    const token = localStorage.getItem("access");
-    const response = await axios.post(
-      `http://54.180.120.169/blogs/subscribe/${blog_name}/`,
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  };
   const handleBlogDelete = async () => {
     const token = localStorage.getItem("access");
     const response = await axios.delete(
@@ -44,18 +32,6 @@ export default function BlogDelete({ blog_name: blog_name }) {
               onClick={handleBlogDelete}
             >
               Delete
-            </Button>
-          </form>
-        </section>
-        <section>
-          <form action={`/${blog_name}`}>
-            <Button
-              variant="contained"
-              endIcon={<SendIcon />}
-              type="submit"
-              onClick={handleSubs}
-            >
-              Subscribe
             </Button>
           </form>
         </section>

@@ -1,8 +1,9 @@
 "use client";
 
 import axios from "axios";
-import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import ArticleLike from "@components/ArticleLike";
 
 /** 상세 게시글 보기/삭제 */
 export default function ArticleDetail({
@@ -21,12 +22,29 @@ export default function ArticleDetail({
         `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
       );
       const data = response.data;
-
       setData(data);
     } catch (error) {
       console.error(error);
     }
   };
+  const title = data.title;
+  const category = data.category ? (
+    <p className="article-detail-category">{data.category}</p>
+  ) : (
+    "카테고리 없음"
+  );
+  const content = data.content;
+  const user = data.user;
+  const created_at = data.created_at;
+  const hits = data.hits;
+  const empathys = data.empathys;
+  const id = data.id;
+  const image = data.image ? (
+    <img
+      className="article-detail-image"
+      src={`http://54.180.120.169/${data.image}`}
+    />
+  ) : null;
 
   const articleViewCount = async () => {
     const response = await axios.post(
@@ -34,22 +52,24 @@ export default function ArticleDetail({
     );
   };
   return (
-    <>
-      <div>title : {data.title}</div>
-      <div>topic : {data.topic}</div>
-      <div>category : {data.category}</div>
-      <div>content : {data.content}</div>
-      {/* <Image
-        src={`http://127.0.0.1:8000${data.image}`}
-        width={500}
-        height={500}
-      /> */}
-      <div>image : {data.image}</div>
-      <div>user : {data.user}</div>
-      <div>updated : {data.updated_at}</div>
-      <div>조회수 : {data.hits}</div>
-      <div>공감 : {data.empathys}</div>
-      <div>생성일 : {data.created_at}</div>
-    </>
+    <div className="article-detail-wrap">
+      <div className="article-head-wrap">
+        {category}
+        <Link href={`/${blog_name}/articles/${id}`}>
+          <strong className="article-detail-title">{title}</strong>
+        </Link>
+      </div>
+      <div className="article-info">
+        {user} | {created_at}
+      </div>
+      <span className="article-detail-content">{content}</span>
+      <br />
+      {image}
+
+      <div className="article-hits-empathys">
+        {hits} |
+        <ArticleLike blog_name={blog_name} article_id={article_id} />
+      </div>
+    </div>
   );
 }

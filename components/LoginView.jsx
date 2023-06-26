@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -11,30 +12,21 @@ export default function LoginView() {
 
   async function handleLogin() {
     try {
-      const response = await fetch("http://localhost:8000/users/login/", {
-        headers: {
-          "content-type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({ email: email, password: password }),
-      });
 
-      const responseJson = await response.json();
+      const response = await axios.post(
+        "http://54.180.120.169/users/login/",
+        { email: email, password: password },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      const responseJson = await response.data;
 
       localStorage.setItem("access", responseJson.access);
       localStorage.setItem("refresh", responseJson.refresh);
 
-      const base64Url = responseJson.access.split(".")[1];
-      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      localStorage.setItem("payload", jsonPayload);
       router.push("/");
     } catch (error) {
       console.error(error);
@@ -42,7 +34,7 @@ export default function LoginView() {
   }
   return (
     <section className="col-6 col-12-narrower">
-      <form method="post">
+      <form method="post" action={"/"}>
         <div className="row gtr-50">
           <div className="col-12 col-12-mobile">
             <input
