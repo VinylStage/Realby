@@ -35,14 +35,14 @@ export default function LoginView() {
           .join("")
       );
       localStorage.setItem("payload", jsonPayload);
-
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
   }
   return (
     <section className="col-6 col-12-narrower">
-      <form action={"/"}>
+      <form method="post" action={"/"}>
         <div className="row gtr-50">
           <div className="col-12 col-12-mobile">
             <input
