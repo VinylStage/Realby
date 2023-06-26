@@ -1,6 +1,8 @@
 import "../../styles/globals.css";
+import BlogPage from "@components/BlogPage";
+import BlogLeftCategory from "@components/BlogLeftCategory";
+import HoverWriteCom from "@components/HoverWriteCom";
 
-import Link from "next/link";
 import React from "react";
 
 /**
@@ -9,10 +11,15 @@ import React from "react";
  */
 export default function blogLayout({ children, params }) {
   return (
-    <>
-      <div>{children}</div>
-      <div>lay</div>
-      <Link href={`/${params.blog_name}`}>블로그로 돌아가자</Link>
-    </>
+    <div id="blog-container">
+      <BlogPage blog_name={params.blog_name} />
+      <main className="blog-wrap">
+        <aside className="blog-left-category">
+          <BlogLeftCategory blog_name={params.blog_name} />
+        </aside>
+        <div>{children}</div>
+      </main>
+      <HoverWriteCom blog_name={params.blog_name} />
+    </div>
   );
 }

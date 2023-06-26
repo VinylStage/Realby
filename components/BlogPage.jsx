@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 /** 블로그 정보보기 */
 function BlogPage({ blog_name: blog_name }) {
@@ -25,12 +26,9 @@ function BlogPage({ blog_name: blog_name }) {
     }
   };
   const name = data.blog_name;
-  const intro = data.blog_intro;
-
   return (
     <>
-      <div>Blog : {name}</div>
-      <div>Intro : {intro}</div>
+      <Link href={`/${name}`}>{name}</Link>
     </>
   );
 }
