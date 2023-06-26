@@ -24,7 +24,7 @@ export default function Posts({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/category/`
+        `http://127.0.0.1:8000/blogs/${blog_name}/category/`
       );
       const data = response.data;
 
@@ -53,7 +53,7 @@ export default function Posts({ blog_name: blog_name }) {
       }
 
       const response = await axios.post(
-        `http://54.180.120.169/blogs/${blog_name}/write/`,
+        `http://127.0.0.1:8000/blogs/${blog_name}/write/`,
         formData,
         {
           headers: {

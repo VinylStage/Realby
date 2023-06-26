@@ -17,7 +17,7 @@ export default function CommentView({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${article_id}/comments/`
+        `http://127.0.0.1:8000/blogs/${article_id}/comments/`
       );
       const data = response.data;
 
@@ -39,7 +39,7 @@ export default function CommentView({
           const handleCommentDelete = async () => {
             try {
               const response = await axios.delete(
-                `http://54.180.120.169/blogs/comments/${comment_id}/`,
+                `http://127.0.0.1:8000/blogs/comments/${comment_id}/`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,

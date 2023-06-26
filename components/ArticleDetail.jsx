@@ -18,7 +18,7 @@ export default function ArticleDetail({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+        `http://127.0.0.1:8000/blogs/${blog_name}/detail/${article_id}/`
       );
       const data = response.data;
 
@@ -30,7 +30,7 @@ export default function ArticleDetail({
 
   const articleViewCount = async () => {
     const response = await axios.post(
-      `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+      `http://127.0.0.1:8000/blogs/${blog_name}/detail/${article_id}/`
     );
   };
   return (
