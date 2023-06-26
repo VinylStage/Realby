@@ -14,7 +14,7 @@ export default function CommentView({ comment_id: comment_id }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/blogs/comments/${comment_id}`
+        `http://54.180.120.169/blogs/comments/${comment_id}`
       );
       const data = response.data.comment;
 
@@ -28,7 +28,7 @@ export default function CommentView({ comment_id: comment_id }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.put(
-        `http://127.0.0.1:8000/blogs/comments/${comment_id}/`,
+        `http://54.180.120.169/blogs/comments/${comment_id}/`,
         {
           comment: comment,
         },

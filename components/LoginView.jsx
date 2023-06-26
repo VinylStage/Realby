@@ -11,7 +11,7 @@ export default function LoginView() {
 
   async function handleLogin() {
     try {
-      const response = await fetch("http://127.0.0.1:8000/users/login/", {
+      const response = await fetch("http://54.180.120.169/users/login/", {
         headers: {
           "content-type": "application/json",
         },

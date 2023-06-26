@@ -13,7 +13,7 @@ export default function BlogCreate() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/blogs/blogcreate/",
+        "http://54.180.120.169/blogs/blogcreate/",
         {
           blog_name: blog_name,
           blog_intro: blog_intro,
