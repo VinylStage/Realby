@@ -31,7 +31,7 @@ export default function ArticleList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/detail/`
+        `http://localhost:8000/blogs/${blog_name}/detail/`
       );
       const data = response.data.results;
 

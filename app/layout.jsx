@@ -1,6 +1,6 @@
 import React from "react";
 
-import "@styles/globals.css";
+import "../styles/globals.css";
 
 import Link from "next/link";
 
@@ -23,8 +23,9 @@ const RootLayout = ({ children }) => {
         
         <Provider>
         <main className="app">
-          <Nav></Nav>
+          <Nav>
           {children}
+          </Nav>
         </main>
         <footer>
           ⓒ 2023 Team. Survivors All Rights Reserved.
