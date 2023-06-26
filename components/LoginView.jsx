@@ -18,8 +18,8 @@ export default function LoginView() {
         method: "POST",
         body: JSON.stringify({ email: email, password: password }),
       });
-
       const responseJson = await response.json();
+      console.log(responseJson);
 
       localStorage.setItem("access", responseJson.access);
       localStorage.setItem("refresh", responseJson.refresh);
