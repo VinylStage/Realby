@@ -1,5 +1,4 @@
 import React from "react";
-
 import "../styles/globals.css";
 
 import Link from "next/link";
@@ -20,7 +19,6 @@ const RootLayout = ({ children }) => {
         <div>
 
         </div>
-        
         <Provider>
         <main className="app">
           <Nav>
