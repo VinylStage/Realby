@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -11,15 +12,16 @@ export default function LoginView() {
 
   async function handleLogin() {
     try {
-      const response = await fetch("http://54.180.120.169/users/login/", {
-        headers: {
-          "content-type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({ email: email, password: password }),
-      });
-      const responseJson = await response.json();
-      console.log(responseJson);
+      const response = await axios.post(
+        "http://54.180.120.169/users/login/",
+        { email: email, password: password },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      const responseJson = await response.data;
 
       localStorage.setItem("access", responseJson.access);
       localStorage.setItem("refresh", responseJson.refresh);
