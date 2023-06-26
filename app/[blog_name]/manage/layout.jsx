@@ -5,7 +5,6 @@ import React from "react";
 import BlogPage from "@components/BlogPage";
 import Link from "next/link";
 import ArticleList from "@components/ArticleList";
-import BlogDeleteSubs from "@components/BlogDeleteSubs";
 
 /** 관리페이지 레이아웃 */
 const ManageLayout = ({ children, params }) => {
