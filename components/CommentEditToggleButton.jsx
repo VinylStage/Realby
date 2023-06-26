@@ -15,7 +15,7 @@ export default function CommentEditToggleButton({
     const top = (window.innerHeight - height) / 2; // 팝업 창 세로 위치
 
     const popupWindow = window.open(
-      `/${blog_name}/manage/${comment_id}`,
+      `/comment/update/${comment_id}`,
       "댓글수정",
       `width=${width},height=${height},left=${left},top=${top}`
     );
