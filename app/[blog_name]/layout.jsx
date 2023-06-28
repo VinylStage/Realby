@@ -18,8 +18,8 @@ export default function blogLayout({ children, params }) {
           <BlogLeftCategory blog_name={params.blog_name} />
         </aside>
         <div>{children}</div>
+        <HoverWriteCom blog_name={params.blog_name} />
       </main>
-      <HoverWriteCom blog_name={params.blog_name} />
     </div>
   );
 }

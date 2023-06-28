@@ -11,7 +11,7 @@ export default function ArticleDelete({
   async function handleArticleDelete() {
     const token = localStorage.getItem("access");
     const response = await axios.delete(
-      `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`,
+      `http://localhost:8000/blogs/detail/${article_id}/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
