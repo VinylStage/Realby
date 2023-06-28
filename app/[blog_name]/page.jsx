@@ -1,6 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ArticleList from "@components/ArticleList";
-import BlogDelete from "@components/BlogDelete";
+
 /**
  * 블로그 메인 페이지
  * @params {blog_name} 블로그 이름

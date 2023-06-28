@@ -14,7 +14,7 @@ export default function UserProfileToggle() {
     try {
       const token = localStorage.getItem("access");
 
-      const response = await axios.get(`http://54.180.120.169/users/profile/`, {
+      const response = await axios.get(`http://localhost:8000/users/profile/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

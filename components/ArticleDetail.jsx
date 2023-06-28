@@ -19,9 +19,10 @@ export default function ArticleDetail({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+        `http://localhost:8000/blogs/detail/${article_id}/`
       );
       const data = response.data;
+
       setData(data);
     } catch (error) {
       console.error(error);
@@ -37,18 +38,10 @@ export default function ArticleDetail({
   const user = data.user;
   const created_at = data.created_at;
   const hits = data.hits;
-  const empathys = data.empathys;
   const id = data.id;
-  const image = data.image ? (
-    <img
-      className="article-detail-image"
-      src={`http://54.180.120.169/${data.image}`}
-    />
-  ) : null;
-
   const articleViewCount = async () => {
     const response = await axios.post(
-      `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+      `http://localhost:8000/blogs/detail/${article_id}/`
     );
   };
   return (
@@ -62,10 +55,10 @@ export default function ArticleDetail({
       <div className="article-info">
         {user} | {created_at}
       </div>
-      <span className="article-detail-content">{content}</span>
-      <br />
-      {image}
-
+      <div
+        className="airtlcie-detail-body"
+        dangerouslySetInnerHTML={{ __html: content }}
+      ></div>
       <div className="article-hits-empathys">
         {hits} |
         <ArticleLike blog_name={blog_name} article_id={article_id} />
