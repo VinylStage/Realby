@@ -25,13 +25,13 @@ const Nav = () => {
   return (
     <nav className="flex-between w-full md-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
-        <Image
+        {/* <Image
           src="/assets/images/realby_logo.png"
           alt="Realby Logo"
-          width={90}
-          height={30}
+          width={60}
+          height={20}
           className="object-contain"
-        />
+        /> */}
       </Link>
 
       {/* {alert(session?.user)} */}

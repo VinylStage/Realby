@@ -27,7 +27,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   };
 
   return (
-    <section className="category-link-wrap">
+    <section className="p-5">
       <form>
         {data &&
           data.map((e) => {
@@ -35,8 +35,13 @@ export default function CategoryList({ blog_name: blog_name }) {
             const category = e.category;
             return (
               <ul key={id}>
-                <li className="category-link">
-                  <Link href={`/${blog_name}/${category}`}>{category}</Link>
+                <li className="mb-2.5">
+                  <Link
+                    href={`/${blog_name}/${category}`}
+                    className="no-underline text-black hover:underline"
+                  >
+                    {category}
+                  </Link>
                 </li>
               </ul>
             );

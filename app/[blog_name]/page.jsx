@@ -1,5 +1,6 @@
 import React from "react";
 import ArticleList from "@components/ArticleList";
+import Layout from "./layout";
 
 /**
  * 블로그 메인 페이지
@@ -7,7 +8,7 @@ import ArticleList from "@components/ArticleList";
  * */
 export default function Blog({ params }) {
   return (
-    <div className="blog-article-list-wrap">
+    <div className="w-full max-w-screen-sm">
       <ArticleList blog_name={params.blog_name} />
     </div>
   );
