@@ -17,7 +17,7 @@ export default function OpenIconSpeedDial({ blog_name: blog_name }) {
     {
       icon: <EditIcon />,
       name: "Posts",
-      href: `/${blog_name}/manage/posts`,
+      href: `/${blog_name}/manage/newpost`,
     },
     { icon: <SaveIcon />, name: "Save" },
     { icon: <PrintIcon />, name: "Print" },

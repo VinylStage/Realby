@@ -6,7 +6,12 @@ import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
+import dynamic from "next/dynamic";
+
+const EditorApp = dynamic(() => import("@components/EditorApp"), {
+  ssr: false,
+});
 
 /** 게시물 작성 */
 export default function Posts({ blog_name: blog_name }) {
@@ -14,7 +19,6 @@ export default function Posts({ blog_name: blog_name }) {
   const [content, setContent] = useState("");
   const [topic, setTopic] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function Posts({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/category/`
+        `http://localhost:8000/blogs/${blog_name}/category/`
       );
       const data = response.data;
 
@@ -36,25 +40,9 @@ export default function Posts({ blog_name: blog_name }) {
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("content", content);
-
-      if (image) {
-        formData.append("image", image);
-      }
-
-      if (topic) {
-        formData.append("topic", topic);
-      }
-
-      if (category) {
-        formData.append("category", category);
-      }
-
       const response = await axios.post(
-        `http://54.180.120.169/blogs/${blog_name}/write/`,
-        formData,
+        `http://localhost:8000/blogs/${blog_name}/write/`,
+        { title: title, content: content, topic: topic, category: category },
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -66,6 +54,10 @@ export default function Posts({ blog_name: blog_name }) {
       console.error(error);
     }
   }
+  const handleContentChange = (newContent) => {
+    setContent(newContent);
+  };
+
   return (
     <>
       <section>
@@ -107,28 +99,7 @@ export default function Posts({ blog_name: blog_name }) {
                   <MenuItem value="IT">IT</MenuItem>
                 </Select>
               </div>
-              <div class="title">
-                <TextField
-                  id="outlined-basic"
-                  label="title"
-                  variant="outlined"
-                  placeholder="title"
-                  name="title"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                ></TextField>
-              </div>
-              <div class="cont">
-                <TextField
-                  id="filled-basic"
-                  label="content"
-                  variant="filled"
-                  placeholder="content"
-                  value={content}
-                  onChange={(event) => setContent(event.target.value)}
-                ></TextField>
-              </div>
-              {/* <div className="title">
+              <div className="title">
                 <TextField
                   id="outlined-basic"
                   label="title"
@@ -138,20 +109,7 @@ export default function Posts({ blog_name: blog_name }) {
                   onChange={(event) => setTitle(event.target.value)}
                 />
               </div>
-              <div className="cont">
-                <TextField
-                  id="filled-basic"
-                  label="content"
-                  variant="filled"
-                  value={content}
-                  onChange={(event) => setContent(event.target.value)}
-                />
-              </div> */}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(event) => setImage(event.target.files[0])}
-              />
+              <EditorApp content={content} onChange={handleContentChange} />
               <Button
                 className="bt_submit"
                 onClick={hanldePosts}
@@ -163,7 +121,6 @@ export default function Posts({ blog_name: blog_name }) {
               </Button>
             </div>
           </div>
-          <br />
         </form>
       </section>
     </>

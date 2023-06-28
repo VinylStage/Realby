@@ -13,7 +13,7 @@ export default function LoginView() {
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://54.180.120.169/users/login/",
+        "http://localhost:8000/users/login/",
         { email: email, password: password },
         {
           headers: {

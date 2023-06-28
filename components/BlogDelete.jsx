@@ -12,7 +12,7 @@ export default function BlogDelete({ blog_name: blog_name }) {
   const handleBlogDelete = async () => {
     const token = localStorage.getItem("access");
     const response = await axios.delete(
-      `http://54.180.120.169/blogs/${blog_name}/`,
+      `http://localhost:8000/blogs/${blog_name}/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
