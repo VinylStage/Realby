@@ -35,7 +35,9 @@ export default function CommentWrite({ article_id }) {
           placeholder="댓글입력"
           value={comment}
           onChange={(event) => setComment(event.target.value)}
+          className="border-2 rounded-lg w-30 h-10"
         />
+
         <button type="submit" onClick={handleComment}>
           댓글작성
         </button>

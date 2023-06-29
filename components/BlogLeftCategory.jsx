@@ -29,13 +29,16 @@ export default function CategoryList({ blog_name: blog_name }) {
   return (
     <section className="p-2.5">
       <form>
+        <Link href={`/${blog_name}/manage/newpost`} className="hover:underline">
+          ✏️글쓰기
+        </Link>
         {data &&
           data.map((e) => {
             const id = e.id;
             const category = e.category;
             return (
-              <ul key={id}>
-                <li className="mb-2.5">
+              <ul key={id} className="mb-2.5 mt-2.5">
+                <li>
                   <Link
                     href={`/${blog_name}/${category}`}
                     className="no-underline text-inherit hover:underline text-base"
