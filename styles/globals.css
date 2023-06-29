@@ -3,4 +3,5 @@
 @tailwind utilities;
 
 @import url(reset.css);
-@import url(boyoung.css);
+/* @import url(boyoung.css); */
+/* 해당 css파일 내용으로 스크롤이 잠김 */

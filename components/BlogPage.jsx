@@ -28,7 +28,9 @@ function BlogPage({ blog_name: blog_name }) {
   const name = data.blog_name;
   return (
     <>
-      <Link href={`/${name}`}>{name}</Link>
+      <Link href={`/${name}`} className="text-7xl">
+        {name}
+      </Link>
     </>
   );
 }

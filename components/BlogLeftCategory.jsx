@@ -27,7 +27,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   };
 
   return (
-    <section className="p-5">
+    <section className="p-2.5">
       <form>
         {data &&
           data.map((e) => {
@@ -38,7 +38,7 @@ export default function CategoryList({ blog_name: blog_name }) {
                 <li className="mb-2.5">
                   <Link
                     href={`/${blog_name}/${category}`}
-                    className="no-underline text-black hover:underline"
+                    className="no-underline text-inherit hover:underline text-base"
                   >
                     {category}
                   </Link>

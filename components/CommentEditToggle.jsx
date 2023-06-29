@@ -96,11 +96,7 @@ export default function CustomizedMenus({
       >
         <MenuItem onClick={handleClose} disableRipple>
           <EditIcon />
-          <CommentEditToggleButton
-            comment_id={comment_id}
-            blog_name={blog_name}
-            article_id={article_id}
-          />
+          <CommentEditToggleButton comment_id={comment_id} />
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <FileCopyIcon />

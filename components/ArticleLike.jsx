@@ -42,8 +42,12 @@ export default function ArticleLike({
 
   return (
     <form>
-      <button type="submit" onClick={handleLike}>
-        {data.empathys}
+      <button
+        type="submit"
+        onClick={handleLike}
+        className="text-[16px] border-black border rounded-md pl-1 pr-1 inline-block hover:bg-[#d3d3d3]"
+      >
+        공감 {data.empathys}
       </button>
     </form>
   );
