@@ -41,7 +41,7 @@ export default function ArticleLike({
   };
 
   return (
-    <form>
+    <form className="ml-2">
       <button type="submit" onClick={handleLike}>
         {data.empathys}
       </button>

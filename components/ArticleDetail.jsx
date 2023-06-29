@@ -32,12 +32,12 @@ export default function ArticleDetail({
   const category = data.category ? (
     <Link
       href={`/${blog_name}/${category}`}
-      className="mb-2.7 text-sm font-semibold no-underline hover:underline"
+      className="mb-2.7 text-sm font-semibold no-underline hover:underline text-gray-600"
     >
       {data.category}
     </Link>
   ) : (
-    "카테고리 없음"
+    <p className="text-gray-900 mb-2.7 text-sm">카테고리 없음</p>
   );
   const content = data.content;
   const user = data.user;
@@ -50,24 +50,26 @@ export default function ArticleDetail({
     );
   };
   return (
-    <div>
-      <div>
+    <>
+      <div className="shadow-xl rounded-lg ml-2.5 p-6 w-[875px]">
         {category}
-        <Link
-          href={`/${blog_name}/articles/${id}`}
-          className="no-underline text-black"
-        >
-          <strong className="text-3xl mt-2.5">{title}</strong>
-        </Link>
+        <div className="mt-2.5 mb-2.5 w-full">
+          <Link
+            href={`/${blog_name}/articles/${id}`}
+            className="no-underline text-black"
+          >
+            <strong className="text-6xl mt-2.5">{title}</strong>
+          </Link>
+        </div>
+        <p className="opacity-100 text-xs leading-normal border-solid border-b border-b-bbg mb-2 pb-2">
+          {user} | {created_at}
+        </p>
+        <div dangerouslySetInnerHTML={{ __html: content }}></div>
       </div>
-      <div className="opacity-100 text-xs leading-normal">
-        {user} | {created_at}
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: content }}></div>
-      <div className="mt-2 pb-2 mb-1 border-solid border-b border-b-bbg">
+      <div className="mt-2 pb-2 mb-1 flex border-solid border-t border-b-bbg">
         {hits} |
         <ArticleLike blog_name={blog_name} article_id={article_id} />
       </div>
-    </div>
+    </>
   );
 }

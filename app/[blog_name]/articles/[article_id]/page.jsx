@@ -11,7 +11,7 @@ import Link from "next/link";
  */
 export default function articleDetail({ params }) {
   return (
-    <div className="article-detail">
+    <>
       <ArticleDetail
         blog_name={params.blog_name}
         article_id={params.article_id}
@@ -28,6 +28,6 @@ export default function articleDetail({ params }) {
         blog_name={params.blog_name}
       />
       <CommentWrite article_id={params.article_id} />
-    </div>
+    </>
   );
 }

@@ -10,21 +10,25 @@ import Link from "next/link";
  */
 export default function blogLayout({ children, params }) {
   return (
-    <div>
-      <BlogPage blog_name={params.blog_name} />
-      <br />
-      <Link
-        href={`/${params.blog_name}/manage/newpost`}
-        className="hover:underline"
-      >
-        ✏️글쓰기
-      </Link>
-      <main className="flex justify-center">
-        <aside className="w-64 flex flex-row justify-between pl-2.5 m-0">
+    <>
+      <header className="flex justify-center p-2.5">
+        <BlogPage blog_name={params.blog_name} />
+      </header>
+      {/* <nav className="bg-blue-400 h-16">
+        <Link
+          href={`/${params.blog_name}/manage/newpost`}
+          className="hover:underline"
+        >
+          ✏️글쓰기
+        </Link>
+      </nav> */}
+
+      <main className="flex justify-center mt-10">
+        <aside className="w-68 flex flex-row justify-between p-2.5 m-0 shadow-xl rounded-md">
           <BlogLeftCategory blog_name={params.blog_name} />
         </aside>
-        <div>{children}</div>
+        <div className="ml-0 p-6">{children}</div>
       </main>
-    </div>
+    </>
   );
 }

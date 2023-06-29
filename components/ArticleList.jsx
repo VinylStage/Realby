@@ -27,13 +27,15 @@ export default function ArticleList({ blog_name: blog_name }) {
   };
 
   return (
-    <div>
+    <>
       {data &&
         data.map((e) => {
           const id = e.id;
           const title = e.title;
           const content = e.content ? (
-            <p className="text-gray-400">{e.content.substr(0, 100)}...</p>
+            <p className="text-gray-400 break-all">
+              {e.content.substr(0, 100)}...
+            </p>
           ) : null;
           const created = e.created_at.substr(0, 10);
           const category = e.category ? (
@@ -46,12 +48,10 @@ export default function ArticleList({ blog_name: blog_name }) {
           ) : (
             "카테고리 없음"
           );
-          const user = e.user;
-
           return (
             <article
               key={id}
-              className="flex flex-row justify-between mb-1.5 text-xl font-medium leading-relaxed"
+              className="flex flex-row justify-between mb-2.5 mt-1.5 p-1.5 text-xl font-medium leading-relaxed shadow-lg rounded-lg"
             >
               <div>
                 <Link
@@ -61,8 +61,8 @@ export default function ArticleList({ blog_name: blog_name }) {
                   <strong className="mb-5">{title}</strong>
                   {content}
                 </Link>
-                <div className="mt-2.5">
-                  <span>
+                <div className="mt-1">
+                  <span className="text-sm">
                     {category} | {created}
                   </span>
                 </div>
@@ -70,6 +70,6 @@ export default function ArticleList({ blog_name: blog_name }) {
             </article>
           );
         })}
-    </div>
+    </>
   );
 }
