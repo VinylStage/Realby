@@ -1,9 +1,8 @@
 import "../../styles/globals.css";
 import BlogPage from "@components/BlogPage";
 import BlogLeftCategory from "@components/BlogLeftCategory";
-import HoverWriteCom from "@components/HoverWriteCom";
-
 import React from "react";
+import Link from "next/link";
 
 /**
  * 블로그 메인페이지 레이아웃
@@ -11,15 +10,21 @@ import React from "react";
  */
 export default function blogLayout({ children, params }) {
   return (
-    <div id="blog-container">
+    <div>
       <BlogPage blog_name={params.blog_name} />
-      <main className="blog-wrap">
-        <aside className="blog-left-category">
+      <br />
+      <Link
+        href={`/${params.blog_name}/manage/newpost`}
+        className="hover:underline"
+      >
+        ✏️글쓰기
+      </Link>
+      <main className="flex justify-center">
+        <aside className="w-64 flex flex-row justify-between pl-2.5 m-0">
           <BlogLeftCategory blog_name={params.blog_name} />
         </aside>
         <div>{children}</div>
       </main>
-      <HoverWriteCom blog_name={params.blog_name} />
     </div>
   );
 }

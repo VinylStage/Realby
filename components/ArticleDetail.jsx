@@ -19,9 +19,10 @@ export default function ArticleDetail({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+        `http://localhost:8000/blogs/detail/${article_id}/`
       );
       const data = response.data;
+
       setData(data);
     } catch (error) {
       console.error(error);
@@ -29,7 +30,12 @@ export default function ArticleDetail({
   };
   const title = data.title;
   const category = data.category ? (
-    <p className="article-detail-category">{data.category}</p>
+    <Link
+      href={`/${blog_name}/${category}`}
+      className="mb-2.7 text-sm font-semibold no-underline hover:underline"
+    >
+      {data.category}
+    </Link>
   ) : (
     "카테고리 없음"
   );
@@ -37,36 +43,28 @@ export default function ArticleDetail({
   const user = data.user;
   const created_at = data.created_at;
   const hits = data.hits;
-  const empathys = data.empathys;
   const id = data.id;
-  const image = data.image ? (
-    <img
-      className="article-detail-image"
-      src={`http://54.180.120.169/${data.image}`}
-    />
-  ) : null;
-
   const articleViewCount = async () => {
     const response = await axios.post(
-      `http://54.180.120.169/blogs/${blog_name}/detail/${article_id}/`
+      `http://localhost:8000/blogs/detail/${article_id}/`
     );
   };
   return (
-    <div className="article-detail-wrap">
-      <div className="article-head-wrap">
+    <div>
+      <div>
         {category}
-        <Link href={`/${blog_name}/articles/${id}`}>
-          <strong className="article-detail-title">{title}</strong>
+        <Link
+          href={`/${blog_name}/articles/${id}`}
+          className="no-underline text-black"
+        >
+          <strong className="text-3xl mt-2.5">{title}</strong>
         </Link>
       </div>
-      <div className="article-info">
+      <div className="opacity-100 text-xs leading-normal">
         {user} | {created_at}
       </div>
-      <span className="article-detail-content">{content}</span>
-      <br />
-      {image}
-
-      <div className="article-hits-empathys">
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
+      <div className="mt-2 pb-2 mb-1 border-solid border-b border-b-bbg">
         {hits} |
         <ArticleLike blog_name={blog_name} article_id={article_id} />
       </div>

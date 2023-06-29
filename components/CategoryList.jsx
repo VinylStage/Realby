@@ -14,7 +14,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/category/`
+        `http://localhost:8000/blogs/${blog_name}/category/`
       );
       const data = response.data;
 
@@ -35,7 +35,7 @@ export default function CategoryList({ blog_name: blog_name }) {
               try {
                 const token = localStorage.getItem("access");
                 const response = await axios.delete(
-                  `http://54.180.120.169/blogs/${blog_name}/category/${category}/`,
+                  `http://localhost:8000/blogs/${blog_name}/category/${category}/`,
                   {
                     headers: {
                       "Content-Type": "application/json",

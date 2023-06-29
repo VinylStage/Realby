@@ -15,8 +15,9 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://54.180.120.169/blogs/${blog_name}/category/`
+        `http://localhost:8000/blogs/${blog_name}/category/`
       );
+
       const data = response.data;
 
       setData(data);
@@ -26,7 +27,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   };
 
   return (
-    <section className="category-link-wrap">
+    <section className="p-5">
       <form>
         {data &&
           data.map((e) => {
@@ -34,8 +35,13 @@ export default function CategoryList({ blog_name: blog_name }) {
             const category = e.category;
             return (
               <ul key={id}>
-                <li className="category-link">
-                  <Link href={`/${blog_name}/${category}`}>{category}</Link>
+                <li className="mb-2.5">
+                  <Link
+                    href={`/${blog_name}/${category}`}
+                    className="no-underline text-black hover:underline"
+                  >
+                    {category}
+                  </Link>
                 </li>
               </ul>
             );

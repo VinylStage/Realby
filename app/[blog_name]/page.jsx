@@ -1,13 +1,14 @@
-import React, { Suspense } from "react";
+import React from "react";
 import ArticleList from "@components/ArticleList";
-import BlogDelete from "@components/BlogDelete";
+import Layout from "./layout";
+
 /**
  * 블로그 메인 페이지
  * @params {blog_name} 블로그 이름
  * */
 export default function Blog({ params }) {
   return (
-    <div className="blog-article-list-wrap">
+    <div className="w-full max-w-screen-sm">
       <ArticleList blog_name={params.blog_name} />
     </div>
   );
