@@ -5,6 +5,7 @@ const ManageLayout = ({ children, params }) => {
   return (
     <>
       <div>{children}</div>
+      <div>test</div>
     </>
   );
 };

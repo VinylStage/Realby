@@ -27,30 +27,44 @@ export default function ArticleList({ blog_name: blog_name }) {
   };
 
   return (
-    <div className="blog-articleList">
+    <div>
       {data &&
         data.map((e) => {
           const id = e.id;
           const title = e.title;
           const content = e.content ? (
-            <p className="summary">{e.content.substr(0, 100)}...</p>
+            <p className="text-gray-400">{e.content.substr(0, 100)}...</p>
           ) : null;
           const created = e.created_at.substr(0, 10);
-          const category = e.category;
+          const category = e.category ? (
+            <Link
+              href={`/${blog_name}/${category}`}
+              className="no-underline text-black hover:underline"
+            >
+              {category}
+            </Link>
+          ) : (
+            "카테고리 없음"
+          );
+          const user = e.user;
 
           return (
-            <article key={id} className="article-wrap">
-              <div className="article-content">
+            <article
+              key={id}
+              className="flex flex-row justify-between mb-1.5 text-xl font-medium leading-relaxed"
+            >
+              <div>
                 <Link
                   href={`/${blog_name}/articles/${id}`}
-                  className="artielc-link"
+                  className="no-underline hover:underline"
                 >
-                  <strong className="article-title">{title}</strong>
+                  <strong className="mb-5">{title}</strong>
                   {content}
                 </Link>
-                <div className="box-datecate">
-                  <Link href={`/${blog_name}/${category}`}>{category}</Link>
-                  <span> | {created}</span>
+                <div className="mt-2.5">
+                  <span>
+                    {category} | {created}
+                  </span>
                 </div>
               </div>
             </article>
