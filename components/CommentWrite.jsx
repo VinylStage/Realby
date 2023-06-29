@@ -28,7 +28,7 @@ export default function CommentWrite({ article_id }) {
   }
 
   return (
-    <section>
+    <section className="mt-2.5">
       <form>
         <input
           type="text"

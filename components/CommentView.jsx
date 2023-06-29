@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CommentEditToggle from "@components/CommentEditToggle";
+import CommentEditToggleButton from "./CommentEditToggleButton";
 
 /** 댓글불러오기 */
 export default function CommentView({
@@ -50,22 +50,22 @@ export default function CommentView({
               console.error(error);
             }
           };
+
           return (
-            <form key={comment_id}>
+            <form key={comment_id} className="shadow-xl rounded-lg p-5 pt-8">
               <ul>
                 <li>
-                  {user} :{comment}
+                  {user} : {comment}
                 </li>
               </ul>
-              <button type="submit" onClick={handleCommentDelete}>
+              <button
+                type="submit"
+                onClick={handleCommentDelete}
+                className="mr-2"
+              >
                 댓글삭제
               </button>
-              <CommentEditToggle
-                comment_id={comment_id}
-                blog_name={blog_name}
-                article_id={article_id}
-              />
-              <span>========================</span>
+              <CommentEditToggleButton comment_id={comment_id} />
             </form>
           );
         })}

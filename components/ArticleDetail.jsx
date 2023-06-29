@@ -3,7 +3,6 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import ArticleLike from "@components/ArticleLike";
 
 /** 상세 게시글 보기/삭제 */
 export default function ArticleDetail({
@@ -42,7 +41,6 @@ export default function ArticleDetail({
   const content = data.content;
   const user = data.user;
   const created_at = data.created_at;
-  const hits = data.hits;
   const id = data.id;
   const articleViewCount = async () => {
     const response = await axios.post(
@@ -51,7 +49,7 @@ export default function ArticleDetail({
   };
   return (
     <>
-      <div className="shadow-xl rounded-lg ml-2.5 p-6 w-[875px]">
+      <div className="shadow-xl rounded-lg p-6">
         {category}
         <div className="mt-2.5 mb-2.5 w-full">
           <Link
@@ -65,10 +63,6 @@ export default function ArticleDetail({
           {user} | {created_at}
         </p>
         <div dangerouslySetInnerHTML={{ __html: content }}></div>
-      </div>
-      <div className="mt-2 pb-2 mb-1 flex border-solid border-t border-b-bbg">
-        {hits} |
-        <ArticleLike blog_name={blog_name} article_id={article_id} />
       </div>
     </>
   );

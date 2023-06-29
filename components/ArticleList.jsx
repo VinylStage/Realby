@@ -51,7 +51,7 @@ export default function ArticleList({ blog_name: blog_name }) {
           return (
             <article
               key={id}
-              className="flex flex-row justify-between mb-2.5 mt-1.5 p-1.5 text-xl font-medium leading-relaxed shadow-lg rounded-lg"
+              className="flex flex-row justify-between mb-2.5 mt-1.5 p-2.5 text-xl font-medium leading-relaxed shadow-lg rounded-lg"
             >
               <div>
                 <Link
