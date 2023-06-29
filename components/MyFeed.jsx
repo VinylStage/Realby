@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 /** 구독한 블로그 피드 */
-export default function Feed() {
+export default function MyFeed() {
   const [subscribedBlogs, setSubscribedBlogs] = useState([]);
   const [feed, setFeed] = useState([]);
 

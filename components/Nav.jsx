@@ -2,25 +2,27 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { useState } from "react";
 
 const Nav = () => {
-  // const isUserLoggedIn = true;
-  const { data: session } = useSession();
+  const isUserLoggedIn = false;
 
-  const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
+  async function handleLogout() {
+    try {
+      const refresh_token = localStorage.getItem("refresh_token");
 
-      setProviders(response);
-    };
+      await axios.post("http://localhost:8000/users/logout/", {
+        refresh_token: refresh_token,
+      });
 
-    setUpProviders();
-  }, []);
+      // 로그아웃 성공 처리
+    } catch (error) {
+      // 로그아웃 실패 처리
+      console.error(error);
+    }
+  }
 
   return (
     <nav className="flex-between w-full md-16 pt-3">
@@ -33,28 +35,31 @@ const Nav = () => {
           className="object-contain"
         /> */}
       </Link>
-
-      {/* {alert(session?.user)} */}
-      {/* {alert(providers)} */}
+      <Link href="/feed" className="flex gap-2 flex-center">
+        피드
+      </Link>
+      <Link href="/topic" className="flex gap-2 flex-center">
+        토픽
+      </Link>
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {session?.user ? (
+        {isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-5">
             {/* 드롭다운(온클릭) 추가해서 마이프로필, 마이블로그들을 링크로 */}
             <Image
               src="/assets/images/default_pf_image.png"
               width={37}
               height={37}
-              className=""
-              alt=""
+              className="rounded-full"
+              alt="profile"
               onClick={() => setToggleDropdown((prev) => !prev)}
             />
 
             {toggleDropdown && (
               <div className="dropdown">
                 <Link
-                  href={`/user`}
+                  href="/user/account"
                   className=""
                   onClick={() => setToggleDropdown(false)}
                 >
@@ -62,21 +67,21 @@ const Nav = () => {
                 </Link>
                 <>
                   <Link
-                    href={`/${params.blog_name}`}
+                    href=""
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     내 블로그
                   </Link>
                   <Link
-                    href={`/${params.blog_name}/manage/newpost`}
+                    href=""
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     글쓰기
                   </Link>
                   <Link
-                    href={`/${params.blog_name}/manage`}
+                    href=""
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
@@ -84,7 +89,15 @@ const Nav = () => {
                   </Link>
                 </>
 
-                <button type="button" onClick={signOut} className="">
+                <button
+                  type="submit"
+                  onClick={() => {
+                    setToggleDropdown(false);
+                    handleLogout();
+                  }}
+                  value="Logout"
+                  className="mt-5 w-full black_btn"
+                >
                   로그아웃
                 </button>
               </div>
@@ -92,31 +105,8 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            <Link href={`/login`}>
-              {providers &&
-                Object.values(providers).map((provider) => (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className=""
-                  >
-                    로그인
-                  </button>
-                ))}
-            </Link>
-            <Link href={`/login`}>
-              {providers &&
-                Object.values(providers).map((provider) => (
-                  <button
-                    type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
-                    className=""
-                  >
-                    시작하기
-                  </button>
-                ))}
+            <Link href="/auth/login" className="black_btn">
+              시작하기
             </Link>
           </>
         )}

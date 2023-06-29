@@ -11,6 +11,7 @@ import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 import NaverProvider from "next-auth/providers/naver";
 import GitHubProvider from "next-auth/providers/github";
+import axios from "axios";
 
 console.log({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -50,16 +51,22 @@ const handler = NextAuth({
             }
             return token
         },
-        async session({ session, token, user }) {
-            // Send properties to the client, like an access_token from a provider.
-            session.accessToken = token.accessToken
-            return session;
-        },
+        // async session({ session, token, user }) {
+        //     // Send properties to the client, like an access_token from a provider.
+        //     session.accessToken = token.accessToken
+        //     return session;
+        // },
         async signIn({ profile }) {
             try {
-    
+                await axios
+
+                // check if a user already exists
+
+                // if not, create a new user
+                return true; 
             } catch (error) {
-                
+              console.log(error);
+              return false;
             }
         }
     }
