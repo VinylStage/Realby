@@ -1,4 +1,4 @@
-import "../../styles/globals.css";
+import "../../../styles/globals.css";
 import BlogPage from "@components/BlogPage";
 import BlogLeftCategory from "@components/BlogLeftCategory";
 import React from "react";

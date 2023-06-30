@@ -32,24 +32,22 @@ export default function BlogCreate() {
     }
   };
   return (
-    <section>
-      <form action="/">
-        <input
-          type="text"
-          placeholder="블로그 이름"
-          value={blog_name}
-          onChange={(event) => setBlogName(event.target.value)}
-        />
-        <textarea
-          type="text"
-          placeholder="블로그 소개"
-          value={blog_intro}
-          onChange={(event) => setBlogIntro(event.target.value)}
-        />
-        <button onClick={handlePosts} type="submit">
-          블로그 개설
-        </button>
-      </form>
-    </section>
+    <form action="/">
+      <input
+        type="text"
+        placeholder="블로그 이름"
+        value={blog_name}
+        onChange={(event) => setBlogName(event.target.value)}
+      />
+      <textarea
+        type="text"
+        placeholder="블로그 소개"
+        value={blog_intro}
+        onChange={(event) => setBlogIntro(event.target.value)}
+      />
+      <button onClick={handlePosts} type="submit">
+        블로그 개설
+      </button>
+    </form>
   );
 }

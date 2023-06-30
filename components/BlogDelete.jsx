@@ -24,7 +24,7 @@ export default function BlogDelete({ blog_name: blog_name }) {
     <>
       <Stack direction="row" spacing={2}>
         <section>
-          <form action="/">
+          <form action={`/${blog_name}`}>
             <Button
               variant="outlined"
               startIcon={<DeleteIcon />}

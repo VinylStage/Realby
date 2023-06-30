@@ -7,7 +7,7 @@ class EditorApp extends Component {
   render() {
     const { content, onChange } = this.props;
     return (
-      <div className="w-4/5">
+      <div className="pt-5 pb-5 w-full">
         <CKEditor
           editor={Editor}
           config={Editor.defaultConfig}

@@ -16,13 +16,10 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="kr">
       <body>
-        <div className="main"></div>
-
         <main className="app">
           <Nav />
           {children}
         </main>
-
         <footer>ⓒ 2023 Team. Survivors All Rights Reserved.</footer>
       </body>
     </html>

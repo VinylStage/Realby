@@ -29,18 +29,15 @@ export default function MyBlogList() {
   };
   return (
     <>
-      <div>MyBlogList</div>
-      <>
-        {data &&
-          data.map((e) => {
-            const blog_name = e.blog_name;
-            return (
-              <Link href={`/${blog_name}`} key={e.id}>
-                {blog_name}
-              </Link>
-            );
-          })}
-      </>
+      {data &&
+        data.map((e) => {
+          const blog_name = e.blog_name;
+          return (
+            <Link href={`/${blog_name}`} key={e.id}>
+              {blog_name}
+            </Link>
+          );
+        })}
     </>
   );
 }

@@ -29,7 +29,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   return (
     <section className="p-2.5">
       <form>
-        <Link href={`/${blog_name}/manage/newpost`} className="hover:underline">
+        <Link href={`/${blog_name}/newpost`} className="hover:underline">
           ✏️글쓰기
         </Link>
         {data &&
