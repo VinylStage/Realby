@@ -12,6 +12,9 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
       colors: {
         bbg: "#d0d0d0", // border bottom gray
         rbo: "#ff3d00", // realby orange

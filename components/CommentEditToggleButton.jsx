@@ -3,11 +3,7 @@
 import React from "react";
 
 /** 댓글 수정페이지 팝업버튼 */
-export default function CommentEditToggleButton({
-  blog_name: blog_name,
-  comment_id: comment_id,
-  article_id: article_id,
-}) {
+export default function CommentEditToggleButton({ comment_id: comment_id }) {
   const openPopup = () => {
     const width = 800; // 팝업 창 가로 크기
     const height = 600; // 팝업 창 세로 크기

@@ -1,7 +1,10 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import React from "react";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 /** 게시글삭제버튼 */
 export default function ArticleDelete({
@@ -20,12 +23,23 @@ export default function ArticleDelete({
     );
   }
   return (
-    <section>
+    <div className="mt-2 pb-2 mb-1 flex border-solid pl-6 justify-end">
       <form action={`/${blog_name}/`}>
-        <button type="submit" onClick={handleArticleDelete}>
+        <Button
+          type="submit"
+          onClick={handleArticleDelete}
+          startIcon={<DeleteIcon />}
+          className="text-black mr-2"
+        >
           게시글 삭제
-        </button>
+        </Button>
+        <Link
+          href={`/${blog_name}/articles/${article_id}/edit`}
+          className="text-[14px] border-black border rounded-md pl-1 pr-1 inline-block hover:bg-[#d3d3d3]"
+        >
+          수정
+        </Link>
       </form>
-    </section>
+    </div>
   );
 }

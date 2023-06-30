@@ -8,7 +8,7 @@ import Layout from "./layout";
  * */
 export default function Blog({ params }) {
   return (
-    <div className="w-full max-w-screen-sm">
+    <div className="w-full max-w-screen-sm ml-4">
       <ArticleList blog_name={params.blog_name} />
     </div>
   );
