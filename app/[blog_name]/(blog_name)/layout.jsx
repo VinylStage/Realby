@@ -14,7 +14,7 @@ export default function blogLayout({ children, params }) {
         <BlogPage blog_name={params.blog_name} />
       </header>
       <main className="flex justify-center mt-10">
-        <aside className="w-68 flex flex-row justify-between p-2.5 m-0 shadow-xl rounded-md h-[300px]">
+        <aside className="w-68 flex flex-row justify-between p-2.5 m-0 shadow-xl rounded-md h-full">
           <BlogLeftCategory blog_name={params.blog_name} />
         </aside>
         <div className="ml-0 p-6">{children}</div>

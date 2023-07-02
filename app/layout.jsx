@@ -18,8 +18,8 @@ const RootLayout = ({ children }) => {
       <body>
         <main className="app">
           <Nav />
-          {children}
         </main>
+        {children}
         <footer>ⓒ 2023 Team. Survivors All Rights Reserved.</footer>
       </body>
     </html>

@@ -3,6 +3,11 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
@@ -28,7 +33,7 @@ export default function CategoryList({ blog_name: blog_name }) {
 
   return (
     <section className="p-2.5">
-      <form>
+      <form className="mb-10">
         <Link href={`/${blog_name}/newpost`} className="hover:underline">
           ✏️글쓰기
         </Link>
@@ -49,8 +54,14 @@ export default function CategoryList({ blog_name: blog_name }) {
               </ul>
             );
           })}
-        <br />
       </form>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DemoContainer components={["DateCalendar", "DateCalendar"]}>
+          <DemoItem label="Today">
+            <DateCalendar defaultValue={dayjs("2022-04-17")} readOnly />
+          </DemoItem>
+        </DemoContainer>
+      </LocalizationProvider>
     </section>
   );
 }

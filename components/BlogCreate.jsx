@@ -2,6 +2,8 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
 
 /** 블로그개설 */
 export default function BlogCreate() {
@@ -32,22 +34,35 @@ export default function BlogCreate() {
     }
   };
   return (
-    <form action="/">
-      <input
-        type="text"
-        placeholder="블로그 이름"
-        value={blog_name}
-        onChange={(event) => setBlogName(event.target.value)}
-      />
-      <textarea
-        type="text"
-        placeholder="블로그 소개"
-        value={blog_intro}
-        onChange={(event) => setBlogIntro(event.target.value)}
-      />
-      <button onClick={handlePosts} type="submit">
-        블로그 개설
-      </button>
-    </form>
+    <div className="mt-2.5 h-40 shadow-md pt-10 pl-5">
+      <form action="/">
+        <TextField
+          id="standard-textarea"
+          label="블로그 이름"
+          placeholder="이름을 입력하세요"
+          multiline
+          variant="standard"
+          value={blog_name}
+          onChange={(event) => setBlogName(event.target.value)}
+          className="mr-8"
+        />
+        <TextField
+          id="standard-textarea"
+          label="블로그 소개글"
+          placeholder="소개글을 입력하세요"
+          multiline
+          variant="standard"
+          value={blog_intro}
+          onChange={(event) => setBlogIntro(event.target.value)}
+        />
+        <Button
+          onClick={handlePosts}
+          type="submit"
+          className="ml-8 mt-3 text-black text-lg"
+        >
+          블로그 개설
+        </Button>
+      </form>
+    </div>
   );
 }
