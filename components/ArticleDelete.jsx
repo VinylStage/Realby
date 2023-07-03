@@ -34,7 +34,7 @@ export default function ArticleDelete({
           게시글 삭제
         </Button>
         <Link
-          href={`/${blog_name}/articles/${article_id}/edit`}
+          href={`/${blog_name}/articleupdate/${article_id}/edit`}
           className="text-[14px] border-black border rounded-md pl-1 pr-1 inline-block hover:bg-[#d3d3d3]"
         >
           수정

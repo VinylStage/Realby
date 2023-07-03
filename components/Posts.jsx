@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { TextField } from "@mui/material";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const EditorApp = dynamic(() => import("@components/EditorApp"), {
   ssr: false,
@@ -60,69 +61,65 @@ export default function Posts({ blog_name: blog_name }) {
 
   return (
     <>
-      <section>
-        <form action={`/${blog_name}`}>
-          <div className="board_wrap">
-            <div className="board_write">
-              <div className="select_cate">
-                <Select
-                  name="category"
-                  value={category}
-                  onChange={(event) => setCategory(event.target.value)}
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Category"
-                >
-                  <MenuItem>카테고리없음</MenuItem>
-                  {data &&
-                    data.map((e) => {
-                      return (
-                        <MenuItem value={e.id} key={e.id}>
-                          {e.category}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-                <Select
-                  name="topic"
-                  value={topic}
-                  onChange={(event) => setTopic(event.target.value)}
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Topic"
-                >
-                  <MenuItem>토픽없음</MenuItem>
-                  <MenuItem value="CULTURE">문화</MenuItem>
-                  <MenuItem value="LIFE">일상</MenuItem>
-                  <MenuItem value="SPORTS">스포츠</MenuItem>
-                  <MenuItem value="TRAVEL">여행</MenuItem>
-                  <MenuItem value="IT">IT</MenuItem>
-                </Select>
-              </div>
-              <div className="title">
-                <TextField
-                  id="outlined-basic"
-                  label="title"
-                  variant="outlined"
-                  name="title"
-                  value={title}
-                  onChange={(event) => setTitle(event.target.value)}
-                />
-              </div>
-              <EditorApp content={content} onChange={handleContentChange} />
-              <Button
-                className="bt_submit"
-                onClick={hanldePosts}
-                type="submit"
-                endIcon={<SendIcon />}
-                variant="contained"
-              >
-                작성
-              </Button>
-            </div>
-          </div>
-        </form>
-      </section>
+      <form action={`/${blog_name}`}>
+        <div className="mb-5 mt-10">
+          <Select
+            name="category"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Category"
+            className="mr-5"
+          >
+            <MenuItem>카테고리없음</MenuItem>
+            {data &&
+              data.map((e) => {
+                return (
+                  <MenuItem value={e.id} key={e.id}>
+                    {e.category}
+                  </MenuItem>
+                );
+              })}
+          </Select>
+          <Select
+            name="topic"
+            value={topic}
+            onChange={(event) => setTopic(event.target.value)}
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Topic"
+          >
+            <MenuItem>토픽없음</MenuItem>
+            <MenuItem value="CULTURE">문화</MenuItem>
+            <MenuItem value="LIFE">일상</MenuItem>
+            <MenuItem value="SPORTS">스포츠</MenuItem>
+            <MenuItem value="TRAVEL">여행</MenuItem>
+            <MenuItem value="IT">IT</MenuItem>
+          </Select>
+        </div>
+
+        <TextField
+          className="w-full"
+          id="outlined-basic"
+          label="title"
+          variant="outlined"
+          name="title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+
+        <EditorApp content={content} onChange={handleContentChange} />
+        <Button onClick={hanldePosts} type="submit" endIcon={<SendIcon />}>
+          작성
+        </Button>
+        <Link
+          href={`/${blog_name}`}
+          className="hover:border hover:bg-gray-100 rounded-md border-gray pr-1 pt-1 pl-1 pb-1 ml-2.5"
+        >
+          이전
+        </Link>
+      </form>
     </>
   );
 }

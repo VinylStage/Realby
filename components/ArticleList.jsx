@@ -40,10 +40,10 @@ export default function ArticleList({ blog_name: blog_name }) {
           const created = e.created_at.substr(0, 10);
           const category = e.category ? (
             <Link
-              href={`/${blog_name}/${category}`}
+              href={`/${blog_name}/${e.category}`}
               className="no-underline text-black hover:underline"
             >
-              {category}
+              {e.category}
             </Link>
           ) : (
             "카테고리 없음"
