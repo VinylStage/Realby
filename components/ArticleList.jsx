@@ -19,7 +19,7 @@ export default function ArticleList({ blog_name: blog_name }) {
         `http://localhost:8000/blogs/${blog_name}/detail/`
       );
       const data = response.data;
-      
+
       setData(data);
     } catch (error) {
       console.log(error);

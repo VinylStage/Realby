@@ -5,14 +5,12 @@ import CategoryArticle from "@components/CategoryArticle";
  * @params {category_name} 카테고리 이름
  */
 export default function categoryArticles({ params }) {
-  console.log(params.cateogry_name);
   return (
     <>
       <CategoryArticle
         blog_name={params.blog_name}
-        cateogry_name={params.cateogry_name}
+        category_name={params.category_name}
       />
-      <div>카테고리별 게시글</div>
     </>
   );
 }
