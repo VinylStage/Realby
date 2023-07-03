@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
-import { signIn, getProviders } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
@@ -19,7 +19,7 @@ export default function LoginView() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  // 소셜 로그인(회원가입)셜
+  // 소셜 로그인(회원가입)
   const [providers, setProviders] = useState(null);
 
   useEffect(() => {
@@ -59,6 +59,18 @@ export default function LoginView() {
       console.error(error);
     }
   }
+
+  async function handleSocialLogin() {
+    try {
+      await axios.post(
+        `http://localhost:8000/users/${provider.name}/login/`,
+      );
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <Link href="/" className="flex gap-2 flex-center">
@@ -107,12 +119,14 @@ export default function LoginView() {
               </ul>
             </div>
             <div className="col-12">
+              <p>소셜 계정으로 시작하기</p>
               {providers &&
                 Object.values(providers).map((provider) => (
-                  <button
+                  <button 
                     type="button"
-                    key={provider.name}
-                    onClick={() => signIn(provider.id)}
+                    key={provider.name}                  
+                    // onClick={() => signIn(provider.id)}
+                    onClick={handleSocialLogin}
                     className=""
                   />
                 ))}
@@ -123,3 +137,5 @@ export default function LoginView() {
     </>
   );
 }
+
+
