@@ -14,14 +14,14 @@ export const metadata = {
 /** 메인페이지 레이아웃 */
 const RootLayout = ({ children }) => {
   return (
-    
     <html lang="kr">
       <body>
-        <header className="app">
-          <Nav />
-        </header>
+        <div className="main"></div>
 
-        {children}
+        <main className="app">
+          <Nav />
+          {children}
+        </main>
 
         <footer>ⓒ 2023 Team. Survivors All Rights Reserved.</footer>
       </body>

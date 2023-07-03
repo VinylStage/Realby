@@ -42,6 +42,7 @@ export default function CategoryCreate({ blog_name: blog_name }) {
         <Button
           onClick={handleCategory}
           type="submit"
+          variant="contained"
           endIcon={<SendIcon />}
         >
           카테고리 생성
