@@ -1,6 +1,5 @@
 import React from "react";
 import Posts from "@/components/Posts";
-import NewpostLayout from "./layout";
 
 /**
  * 게시글 작성페이지
@@ -8,8 +7,8 @@ import NewpostLayout from "./layout";
  */
 export default function posts({ params }) {
   return (
-    <>
+    <div className="mt-10 w-[1100px]">
       <Posts blog_name={params.blog_name} />
-    </>
+    </div>
   );
 }

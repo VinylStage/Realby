@@ -4,6 +4,7 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 /** 내 블로그 리스트 */
 export default function MyBlogList() {
@@ -29,18 +30,33 @@ export default function MyBlogList() {
   };
   return (
     <>
-      <div>MyBlogList</div>
-      <>
-        {data &&
-          data.map((e) => {
-            const blog_name = e.blog_name;
-            return (
-              <Link href={`/${blog_name}`} key={e.id}>
-                {blog_name}
+      {data &&
+        data.map((e) => {
+          return (
+            <div className="h-20 mt-2.5 pt-2.5 pl-5 shadow-md" key={e.id}>
+              <Link href={`/${e.blog_name}`} className="text-xl">
+                {e.blog_name}
+                <p className="hover:underline text-sm text-[#6b6b6b] flex">
+                  블로그 바로가기
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
+                  </svg>
+                </p>
               </Link>
-            );
-          })}
-      </>
+            </div>
+          );
+        })}
     </>
   );
 }

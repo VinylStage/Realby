@@ -30,7 +30,7 @@ export default function ArticleDetail({
   const title = data.title;
   const category = data.category ? (
     <Link
-      href={`/${blog_name}/${category}`}
+      href={`/${blog_name}/${data.category}`}
       className="mb-2.7 text-sm font-semibold no-underline hover:underline text-gray-600"
     >
       {data.category}
@@ -51,7 +51,7 @@ export default function ArticleDetail({
     <>
       <div className="shadow-xl rounded-lg p-6">
         {category}
-        <div className="mt-2.5 mb-2.5 w-full">
+        <div className="mt-8 mb-10 w-full">
           <Link
             href={`/${blog_name}/articles/${id}`}
             className="no-underline text-black"
@@ -62,7 +62,10 @@ export default function ArticleDetail({
         <p className="opacity-100 text-xs leading-normal border-solid border-b border-b-bbg mb-2 pb-2">
           {user} | {created_at}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: content }}></div>
+        <div
+          dangerouslySetInnerHTML={{ __html: content }}
+          className="mt-10 mb-10"
+        ></div>
       </div>
     </>
   );
