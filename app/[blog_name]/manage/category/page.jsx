@@ -8,11 +8,13 @@ import CategoryList from "@components/CategoryList";
  */
 export default function categoryManage({ params }) {
   return (
-    <>
-      <h4>Category</h4>
-      <CategoryCreate blog_name={params.blog_name} />
-      <br />
-      <CategoryList blog_name={params.blog_name} />
-    </>
+    <main className="main_by">
+      <div class="mb-2.5 mt-1.5 p-2.5 text-xl font-medium leading-relaxed shadow-lg rounded-lg">
+        <h4>카테고리 분류</h4>
+        <CategoryList blog_name={params.blog_name} />
+        <CategoryCreate blog_name={params.blog_name} />
+      </div>
+    </main>
+    
   );
 }
