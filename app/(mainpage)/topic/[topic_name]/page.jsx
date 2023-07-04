@@ -1,10 +1,10 @@
-import React from 'react'
+import TopicFeed from "@components/TopicFeed";
+import React from "react";
 
-import TopicFeed from '@components/TopicFeed';
-
-
-export const page = () => {
+export default function topic({ params }) {
   return (
-    <div>page</div>
-  )
+    <>
+      <TopicFeed topic_name={params.topic_name} />
+    </>
+  );
 }

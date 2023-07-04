@@ -50,7 +50,7 @@ export default function ArticleDetail({
     const regex = /(<oembed[^>]+url="(.*?)"><\/oembed>)/g;
     const matches = content ? content.match(regex) : [];
 
-    if (matches.length === 0) {
+    if (!matches || matches.length === 0) {
       return content;
     }
 

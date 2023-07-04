@@ -31,7 +31,6 @@ export default function CategoryList({ blog_name: blog_name }) {
           data.map((e) => {
             const id = e.id;
             const category = e.category;
-            console.log(category, id)
             const handleCategoryDelete = async () => {
               try {
                 const token = localStorage.getItem("access");
@@ -52,8 +51,14 @@ export default function CategoryList({ blog_name: blog_name }) {
 
             return (
               <div>
-                <div>{category}
-                  <button type="submit" onClick={handleCategoryDelete} value={id} style={{float:"right"}}>
+                <div>
+                  {category}
+                  <button
+                    type="submit"
+                    onClick={handleCategoryDelete}
+                    value={id}
+                    style={{ float: "right" }}
+                  >
                     삭제
                   </button>
                 </div>

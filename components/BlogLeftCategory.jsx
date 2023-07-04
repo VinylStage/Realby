@@ -8,13 +8,16 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import jwt from "jsonwebtoken";
 
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
+  const [id, setId] = useState([]);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    fetchData();
+    fetchData(), idData();
   }, [blog_name]);
 
   const fetchData = async () => {
@@ -31,12 +34,29 @@ export default function CategoryList({ blog_name: blog_name }) {
     }
   };
 
+  const idData = async () => {
+    try {
+      const token = localStorage.getItem("access");
+      const userId = jwt.decode(token).user_id;
+      const response = await axios.get(
+        `http://localhost:8000/blogs/${blog_name}`
+      );
+      const data = response.data.user;
+
+      setId(data);
+      setUserId(userId);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <section className="p-2.5">
       <form className="mb-10">
-        <Link href={`/${blog_name}/newpost`} className="hover:underline">
-          ✏️글쓰기
-        </Link>
+        {id === userId && (
+          <Link href={`/${blog_name}/newpost`} className="hover:underline">
+            ✏️글쓰기
+          </Link>
+        )}
         {data &&
           data.map((e) => {
             const id = e.id;

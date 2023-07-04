@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CommentEditToggleButton from "./CommentEditToggleButton";
+import jwt from "jsonwebtoken";
 
 /** 댓글불러오기 */
 export default function CommentView({
@@ -10,18 +11,25 @@ export default function CommentView({
   blog_name: blog_name,
 }) {
   const [data, setData] = useState([]);
+  const [username, setUsername] = useState("");
+  const [token, setToken] = useState("");
+
   useEffect(() => {
     fetchData();
   }, [article_id]);
 
   const fetchData = async () => {
     try {
+      const token = localStorage.getItem("access");
+      const username = jwt.decode(token).username;
       const response = await axios.get(
         `http://localhost:8000/blogs/${article_id}/comments/`
       );
       const data = response.data;
 
       setData(data);
+      setToken(token);
+      setUsername(username);
     } catch (error) {
       console.error(error);
     }
@@ -34,8 +42,6 @@ export default function CommentView({
           const comment_id = e.id;
           const comment = e.comment;
           const user = e.user;
-          const token = localStorage.getItem("access");
-
           const handleCommentDelete = async () => {
             try {
               const response = await axios.delete(
@@ -58,14 +64,18 @@ export default function CommentView({
                   {user} : {comment}
                 </li>
               </ul>
-              <button
-                type="submit"
-                onClick={handleCommentDelete}
-                className="mr-2"
-              >
-                댓글삭제
-              </button>
-              <CommentEditToggleButton comment_id={comment_id} />
+              {user === username && (
+                <>
+                  <button
+                    type="submit"
+                    onClick={handleCommentDelete}
+                    className="mr-2"
+                  >
+                    댓글삭제
+                  </button>
+                  <CommentEditToggleButton comment_id={comment_id} />
+                </>
+              )}
             </form>
           );
         })}
