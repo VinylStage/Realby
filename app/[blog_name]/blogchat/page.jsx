@@ -1,10 +1,10 @@
 import BlogChat from "@components/BlogChat";
 import React from "react";
 
-export default function blogchat() {
+export default function blogchat({ params }) {
   return (
     <>
-      <BlogChat />
+      <BlogChat blog_name={params.blog_name} />
     </>
   );
 }
