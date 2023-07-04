@@ -1,14 +1,7 @@
 import React from "react";
 
-const Authlayout = ({}) => {
-  return (
-    <html lang="kr">
-      <body>
-        {/* <div className="main"></div>
-        <main className="app">{children}</main> */}
-      </body>
-    </html>
-  );
+const Authlayout = ({ children }) => {
+  return <main className="app">{children}</main>;
 };
 
 export default Authlayout;
