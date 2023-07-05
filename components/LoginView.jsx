@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import "../styles/elisa-main.css";
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -52,7 +53,7 @@ export default function LoginView() {
 
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
-      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("access", access_token);
 
       router.push("/");
     } catch (error) {
@@ -73,13 +74,13 @@ export default function LoginView() {
 
   return (
     <>
-      <Link href="/" className="flex gap-2 flex-center">
+      <Link href="/" className="">
         <Image
-          src="/assets/images/realby_logo.png"
+          src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
-          width={90}
-          height={30}
-          className="object-contain"
+          width={200}
+          height={50}
+          className=""
         />
       </Link>
       <section className="col-6 col-12-narrower">
