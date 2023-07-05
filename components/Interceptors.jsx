@@ -28,7 +28,7 @@ const interceptors = fetchIntercept.register({
   },
 });
 
-fetchIntercept.unregister(interceptors); // 앱 종료시 인터셉터 해제
+// fetchIntercept.unregister(interceptors); // 앱 종료시 인터셉터 해제
 
 // (응답 오류시) access 또는 refresh 토큰이 만료되었거나 유효하지 않을 경우
 const handleUnauthorizedError = () => {

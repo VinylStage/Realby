@@ -14,7 +14,7 @@ export default function CommentView({ comment_id: comment_id }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/comments/${comment_id}`
+        `https://www.realbyback.shop/blogs/comments/${comment_id}`
       );
       const data = response.data.comment;
 
@@ -28,7 +28,7 @@ export default function CommentView({ comment_id: comment_id }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.put(
-        `http://localhost:8000/blogs/comments/${comment_id}/`,
+        `https://www.realbyback.shop/blogs/comments/${comment_id}/`,
         {
           comment: comment,
         },

@@ -14,11 +14,14 @@ export default function UserProfileEdit() {
     try {
       const token = localStorage.getItem("access");
 
-      const response = await axios.get(`http://localhost:8000/users/profile/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `https://www.realbyback.shop/users/profile/`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = response.data;
       setData(data);
@@ -33,7 +36,7 @@ export default function UserProfileEdit() {
     <div className="userProfile w-56 h-[300px] mb-5 shadow-md">
       <div className="w-full h-3/4 pt-10 flex-center">
         <img
-          src={`http://localhost:8000${image}`}
+          src={`https://www.realbyback.shop${image}`}
           className="w-28 h-28 mt-0 m-auto"
         />
       </div>

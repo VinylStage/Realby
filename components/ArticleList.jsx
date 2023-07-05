@@ -16,7 +16,7 @@ export default function ArticleList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/detail/`
+        `https://www.realbyback.shop/blogs/${blog_name}/detail/`
       );
       const data = response.data;
 

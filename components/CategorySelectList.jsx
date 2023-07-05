@@ -15,7 +15,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/category/`
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`
       );
       const data = response.data;
 

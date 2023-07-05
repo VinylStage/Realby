@@ -23,7 +23,7 @@ export default function Edits({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/detail/${article_id}/`
+        `https://www.realbyback.shop/blogs/${blog_name}/detail/${article_id}/`
       );
       const data = response.data;
 
@@ -52,7 +52,7 @@ export default function Edits({
         formData.append("category", category);
       }
       const response = await axios.put(
-        `http://localhost:8000/blogs/${blog_name}/detail/${article_id}/`,
+        `https://www.realbyback.shop/blogs/${blog_name}/detail/${article_id}/`,
         formData,
         {
           headers: {
