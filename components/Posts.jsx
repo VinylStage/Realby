@@ -38,6 +38,7 @@ export default function Posts({ blog_name: blog_name }) {
       console.error(error);
     }
   };
+
   async function hanldePosts() {
     try {
       const token = localStorage.getItem("access");
