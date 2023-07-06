@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 // (일반 로근인) axios 서버 요청시 헤더에 자동으로 access 토큰 포함
 axios.interceptors.request.use(
   (config) => {
-    const access_token = localStorage.getItem("access");
-    if (access_token) {
-      config.headers["Authorization"] = `Bearer ${access_token}`;
+    const access = localStorage.getItem("access");
+    if (access) {
+      config.headers["Authorization"] = `Bearer ${access}`;
     }
     return config;
   },
@@ -20,9 +20,9 @@ axios.interceptors.request.use(
 // (일반 로근인) fetch 서버 요청시 헤더에 자동으로 access 토큰 포함
 // const interceptors = fetchIntercept.register({
 //   request: function (url, config) {
-//     const access_token = localStorage.getItem("access");
-//     if (access_token) {
-//       config.headers["Authorization"] = `Bearer ${access_token}`;
+//     const access = localStorage.getItem("access");
+//     if (access) {
+//       config.headers["Authorization"] = `Bearer ${access}`;
 //     }
 //     return [url, config];
 //   },
@@ -52,12 +52,12 @@ axios.interceptors.response.use(
 
         // refresh 토큰을 사용하여 새로운 access 토큰 요청
         const response = await axios.post("/api/token/refresh/", {
-          refresh_token: refresh_token,
+          refresh: refresh,
         });
 
         // 새로운 access 토큰을 받아서 originalRequest에 추가
-        const access_token = response.data;
-        originalRequest.headers["Authorization"] = `Bearer ${access_token}`;
+        const access = response.data;
+        originalRequest.headers["Authorization"] = `Bearer ${access}`;
 
         // 원래 요청을 다시 시도
         const retryResponse = await axios(originalRequest);

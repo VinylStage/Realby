@@ -6,8 +6,6 @@ import TopicFeed from '@components/TopicFeed';
 export default function TopicFeedPage({ children, params }) {
   return (
     <>
-      <TopicFeed topic_name={params.topic_name} />
-
       <div className="text-2xl text-black tracking-tighter">
         <ul className="flex flex-row justify-center mt-20 mb-20">
           <li className="hover:border-b-2 border-gray-400">
@@ -38,6 +36,7 @@ export default function TopicFeedPage({ children, params }) {
         </ul>
       </div>
       <>{children}</>
+      <TopicFeed topic_name={params.topic_name} />
     </>
   );
 }

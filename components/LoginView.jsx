@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { getProviders } from "next-auth/react";
+import axios from "axios";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
@@ -49,11 +50,11 @@ export default function LoginView() {
         }
       );
       const responseJson = await response.data;
-      const { access_token } = responseJson;
+      const access = responseJson.access;
 
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
-      localStorage.setItem("access", access_token);
+      localStorage.setItem("access", access);
 
       router.push("/");
     } catch (error) {

@@ -19,7 +19,7 @@ export default function SignupView() {
 
   async function handleSignup() {
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:8000/users/signup/",
         {
           username: username,
@@ -35,10 +35,8 @@ export default function SignupView() {
 
       if (response.status === 201) {
         setErrorMessage(""); // 이전 오류 메시지 초기화
-        alert("유저 인증용 이메일을 전송했습니다. 링크를 클릭하여 회원가입을 완료해주세요.");
-        router.push("/login");
+        alert("유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요.");
       }
-
     } catch (error) {
       console.error(error);
     }
@@ -48,32 +46,6 @@ export default function SignupView() {
       return;
     }
 
-    // useEffect(() => {
-    //   const urlParams = new URLSearchParams(window.location.search);
-    //   const token = urlParams.get("token");
-    //   const uidb64 = urlParams.get("uidb64");
-  
-    //   if (token && uidb64) {
-    //     handleEmailVerification(uidb64, token);
-    //   }
-    // }, []);
-  
-    // async function handleEmailVerification(uidb64, token) {
-    //   try {
-    //     const response = await axios.get(
-    //       `http://localhost:8000/users/email-verification/${uidb64}/${token}`
-    //     );
-  
-    //     if (response.status === 200) {
-    //       window.alert("이메일 인증이 완료되었습니다. 로그인 페이지로 이동합니다.");
-    //       router.push("/login");
-    //     } else {
-    //       window.alert("이메일 인증에 실패하였습니다.");
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // }
 
   }
 

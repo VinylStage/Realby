@@ -14,11 +14,11 @@ const FeedsNav = () => {
   useEffect(() => {
     async function checkUserLoggedIn() {
       try {
-        const access_token = localStorage.getItem("access");
+        const access = localStorage.getItem("access");
 
-        if (access_token) {
+        if (access) {
           await axios.post("http://localhost:8000/users/api/token/verify/", {
-            token: access_token,
+            token: access,
           });
 
           setIsUserLoggedIn(true);

@@ -14,11 +14,11 @@ const ProfileNav = () => {
   useEffect(() => {
     async function checkUserLoggedIn() {
       try {
-        const access_token = localStorage.getItem("access");
+        const access = localStorage.getItem("access");
 
-        if (access_token) {
+        if (access) {
           await axios.post("http://localhost:8000/users/api/token/verify/", {
-            token: access_token,
+            token: access,
           });
 
           setIsUserLoggedIn(true);
@@ -34,10 +34,10 @@ const ProfileNav = () => {
 
   async function handleLogout() {
     try {
-      const refresh_token = localStorage.getItem("refresh");
+      const refresh = localStorage.getItem("refresh");
 
       await axios.post("http://localhost:8000/users/logout/", {
-        token: refresh_token,
+        token: refresh,
       });
 
       // 로그아웃 성공 처리
