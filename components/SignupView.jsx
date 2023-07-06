@@ -20,7 +20,7 @@ export default function SignupView() {
   async function handleSignup() {
     try {
       await axios.post(
-        "http://localhost:8000/users/signup/",
+        "https://www.realbyback.shop/users/signup/",
         {
           username: username,
           email: email,

@@ -36,7 +36,7 @@ export default function LoginView() {
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/login/",
+        "https://www.realbyback.shop/users/login/",
         {
           email: email,
           password: password,
@@ -63,9 +63,8 @@ export default function LoginView() {
   async function handleSocialLogin() {
     try {
       await axios.post(
-        `http://localhost:8000/users/${provider.name}/login/`,
+        `https://www.realbyback.shop/users/${provider.name}/login/`
       );
-
     } catch (error) {
       console.error(error);
     }
@@ -122,9 +121,9 @@ export default function LoginView() {
               <p>소셜 계정으로 시작하기</p>
               {providers &&
                 Object.values(providers).map((provider) => (
-                  <button 
+                  <button
                     type="button"
-                    key={provider.name}                  
+                    key={provider.name}
                     // onClick={() => signIn(provider.id)}
                     onClick={handleSocialLogin}
                     className=""
@@ -137,5 +136,3 @@ export default function LoginView() {
     </>
   );
 }
-
-

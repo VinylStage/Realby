@@ -13,7 +13,7 @@ const Nav = () => {
     try {
       const refresh_token = localStorage.getItem("refresh_token");
 
-      await axios.post("http://localhost:8000/users/logout/", {
+      await axios.post("https://www.realbyback.shop/users/logout/", {
         refresh_token: refresh_token,
       });
 

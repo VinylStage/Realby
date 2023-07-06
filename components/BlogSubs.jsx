@@ -8,7 +8,7 @@ export default function BlogSubs({ blog_name: blog_name }) {
   const handleSubs = async () => {
     const token = localStorage.getItem("access");
     const response = await axios.post(
-      `http://localhost:8000/blogs/subscribe/${blog_name}/`,
+      `https://www.realbyback.shop/blogs/subscribe/${blog_name}/`,
       null,
       {
         headers: {

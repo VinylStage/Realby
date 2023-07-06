@@ -13,7 +13,7 @@ export default function CategoryCreate({ blog_name: blog_name }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.post(
-        `http://localhost:8000/blogs/${blog_name}/category/`,
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`,
         {
           category: category,
         },
@@ -39,11 +39,7 @@ export default function CategoryCreate({ blog_name: blog_name }) {
           value={category}
           onChange={(event) => setCategory(event.target.value)}
         />
-        <Button
-          onClick={handleCategory}
-          type="submit"
-          endIcon={<SendIcon />}
-        >
+        <Button onClick={handleCategory} type="submit" endIcon={<SendIcon />}>
           카테고리 생성
         </Button>
       </form>

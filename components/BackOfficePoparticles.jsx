@@ -11,7 +11,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleHit = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/backoffice/${blog_name}/hits/`
+        `https://www.realbyback.shop/backoffice/${blog_name}/hits/`
       );
       const data = response.data;
 
@@ -25,7 +25,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleEmpathy = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/backoffice/${blog_name}/empathys/`
+        `https://www.realbyback.shop/backoffice/${blog_name}/empathys/`
       );
       const data = response.data;
 

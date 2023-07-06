@@ -18,7 +18,7 @@ export default function ArticleDetail({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/detail/${article_id}/`
+        `https://www.realbyback.shop/blogs/detail/${article_id}/`
       );
       const data = response.data;
 
@@ -43,10 +43,31 @@ export default function ArticleDetail({
   const created_at = data.created_at;
   const id = data.id;
   const articleViewCount = async () => {
-    const response = await axios.post(
-      `http://localhost:8000/blogs/detail/${article_id}/`
-    );
+    await axios.post(`https://www.realbyback.shop/blogs/detail/${article_id}/`);
   };
+
+  const replaceOembedWithIframe = (content) => {
+    const regex = /(<oembed[^>]+url="(.*?)"><\/oembed>)/g;
+    const matches = content ? content.match(regex) : [];
+
+    if (!matches || matches.length === 0) {
+      return content;
+    }
+
+    let transformedContent = content;
+
+    matches.forEach((match) => {
+      const iframe = match.replace(
+        /<oembed[^>]+url="(.*?)"><\/oembed>/,
+        '<iframe src="$1"></iframe>'
+      );
+      transformedContent = transformedContent.replace(match, iframe);
+    });
+
+    return transformedContent;
+  };
+  const transformedContent = replaceOembedWithIframe(content);
+
   return (
     <>
       <div className="shadow-xl rounded-lg p-6">
@@ -63,7 +84,7 @@ export default function ArticleDetail({
           {user} | {created_at}
         </p>
         <div
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: transformedContent }}
           className="mt-10 mb-10"
         ></div>
       </div>

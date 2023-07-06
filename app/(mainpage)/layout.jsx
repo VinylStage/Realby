@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function BlogLayout({ children, params }) {
+export default function layout({ children }) {
   return <>{children}</>;
 }
