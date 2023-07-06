@@ -2,12 +2,10 @@
 
 import React from "react";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function EmailVerificationView() {
   const router = useRouter();
-
-  
 
   useEffect(() => {
     // 페이지 진입 시 팝업창 띄우기
