@@ -18,7 +18,7 @@ const ManageLayout = ({ children, params }) => {
               <img src="/assets/images/default_pf_image.png" />
               <Link href={`/${params.blog_name}`}>
                 <h2 className="home">
-                  {params.blog_name}
+                  {decodeURIComponent(params.blog_name)}
                   <span className="material-symbols-outlined">open_in_new</span>
                 </h2>
               </Link>
@@ -35,7 +35,7 @@ const ManageLayout = ({ children, params }) => {
               <span className="material-symbols-outlined">person</span>
               <h3>유저</h3>
             </Link>
-
+            
             <Link href={`/${params.blog_name}/manage/posts`}>
               <span className="material-symbols-outlined">article</span>
               <h3>글 관리</h3>

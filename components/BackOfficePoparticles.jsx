@@ -11,7 +11,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleHit = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/backoffice/${blog_name}/hits/`
+        `https://www.realbyback.shop/backoffice/${blog_name}/hits/`
       );
       const data = response.data;
 
@@ -25,7 +25,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleEmpathy = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/backoffice/${blog_name}/empathys/`
+        `https://www.realbyback.shop/backoffice/${blog_name}/empathys/`
       );
       const data = response.data;
 
@@ -51,8 +51,8 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
               const hits = e.hits;
               const empathys = e.empathys;
               const content = e.content ? (
-                <p className="text-gray-400 break-all">
-                  {e.content.substr(0, 100)}...
+                <p className="text-gray-400 break-all h-3/5">
+                  {e.content.substr(0, 49)}...
                 </p>
               ) : null;
               const created = e.created_at.substr(0, 10);
@@ -71,7 +71,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
                   key={id}
                   className="w-1/4 mb-4 mt-4 p-2.5 text-xl font-medium leading-relaxed shadow-lg rounded-lg"
                 >
-                  <div>
+                  <div className="article">
                     <Link
                       href={`/${blog_name}/articles/${id}`}
                       className="no-underline hover:underline"
@@ -79,7 +79,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
                       <strong className="mb-5">{title}</strong>
                       {content}
                     </Link>
-                    <div className="mt-11">
+                    <div >
                       <span className="text-sm">{category} </span>
                     </div>
                     <div>

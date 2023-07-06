@@ -12,7 +12,7 @@ export default function BlogDelete({ blog_name: blog_name }) {
   const handleBlogDelete = async () => {
     const token = localStorage.getItem("access");
     const response = await axios.delete(
-      `http://localhost:8000/blogs/${blog_name}/`,
+      `https://www.realbyback.shop/blogs/${blog_name}/`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

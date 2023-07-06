@@ -17,7 +17,7 @@ export default function ArticleLike({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/detail/${article_id}/`
+        `https://www.realbyback.shop/blogs/detail/${article_id}/`
       );
       const data = response.data;
       setData(data);
@@ -30,7 +30,7 @@ export default function ArticleLike({
     const token = localStorage.getItem("access");
 
     const response = await axios.post(
-      `http://localhost:8000/blogs/${article_id}/empathys/`,
+      `https://www.realbyback.shop/blogs/${article_id}/empathys/`,
       null,
       {
         headers: {

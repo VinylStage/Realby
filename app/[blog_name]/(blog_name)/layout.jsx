@@ -8,6 +8,7 @@ import React from "react";
  * @params {blog_name} 블로그 이름
  */
 export default function blogLayout({ children, params }) {
+  
   return (
     <>
       <header className="flex justify-center p-2.5">
@@ -17,7 +18,7 @@ export default function blogLayout({ children, params }) {
         <aside className="w-68 flex flex-row justify-between p-2.5 m-0 shadow-xl rounded-md h-full">
           <BlogLeftCategory blog_name={params.blog_name} />
         </aside>
-        <div className="ml-0 p-6">{children}</div>
+        <div className="ml-0 p-6 w-[1024px]">{children}</div>
       </main>
     </>
   );

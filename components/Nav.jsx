@@ -13,7 +13,7 @@ const Nav = () => {
     try {
       const refresh_token = localStorage.getItem("refresh_token");
 
-      await axios.post("http://localhost:8000/users/logout/", {
+      await axios.post("https://www.realbyback.shop/users/logout/", {
         refresh_token: refresh_token,
       });
 
@@ -48,7 +48,7 @@ const Nav = () => {
           <div className="flex gap-3 md:gap-5">
             {/* 드롭다운(온클릭) 추가해서 마이프로필, 마이블로그들을 링크로 */}
             <Image
-              src="/assets/images/default_pf_image.png"
+              src="/../public/assets/images/default_pf_image.png"
               width={37}
               height={37}
               className="rounded-full"

@@ -14,7 +14,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/category/`
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`
       );
       const data = response.data;
 
@@ -31,12 +31,11 @@ export default function CategoryList({ blog_name: blog_name }) {
           data.map((e) => {
             const id = e.id;
             const category = e.category;
-            console.log(category, id)
             const handleCategoryDelete = async () => {
               try {
                 const token = localStorage.getItem("access");
                 const response = await axios.delete(
-                  `http://localhost:8000/blogs/${blog_name}/category/${category}/`,
+                  `https://www.realbyback.shop/blogs/${blog_name}/category/${category}/`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -52,8 +51,14 @@ export default function CategoryList({ blog_name: blog_name }) {
 
             return (
               <div>
-                <div>{category}
-                  <button type="submit" onClick={handleCategoryDelete} value={id} style={{float:"right"}}>
+                <div>
+                  {category}
+                  <button
+                    type="submit"
+                    onClick={handleCategoryDelete}
+                    value={id}
+                    style={{ float: "right" }}
+                  >
                     삭제
                   </button>
                 </div>

@@ -2,6 +2,7 @@ import React from "react";
 
 import "@styles/elisa-terms.css";
 import Link from "next/link";
+import Image from "next/image";
 
 /** 약관 페이지 */
 const Terms = () => {
@@ -87,7 +88,7 @@ const Terms = () => {
         </ul>
         <ul class="footBtwrap clearfix">
           <li>
-            <Link href="/signup">
+            <Link href="/auth/signup">
               <button class="fpmgBt2">다음</button>
             </Link>
           </li>

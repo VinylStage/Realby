@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import { getProviders } from "next-auth/react";
+import { signIn, getProviders } from "next-auth/react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
@@ -25,18 +26,17 @@ export default function LoginView() {
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
-
       setProviders(response);
     };
 
     setUpProviders();
   }, []);
-
+  console.log(providers);
   // 일반 로그인
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/login/",
+        "https://www.realbyback.shop/users/login/",
         {
           email: email,
           password: password,
@@ -53,7 +53,7 @@ export default function LoginView() {
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
       localStorage.setItem("access_token", access_token);
-
+      alert("로그인이 완료되었습니다.");
       router.push("/");
     } catch (error) {
       console.error(error);
@@ -63,9 +63,8 @@ export default function LoginView() {
   async function handleSocialLogin() {
     try {
       await axios.post(
-        `http://localhost:8000/users/${provider.name}/login/`,
+        `https://www.realbyback.shop/users/${provider.name}/login/`
       );
-
     } catch (error) {
       console.error(error);
     }
@@ -75,7 +74,7 @@ export default function LoginView() {
     <>
       <Link href="/" className="flex gap-2 flex-center">
         <Image
-          src="/assets/images/realby_logo.png"
+          src="/../public/assets/images/realby_logo.png"
           alt="Realby Logo"
           width={90}
           height={30}
@@ -122,13 +121,15 @@ export default function LoginView() {
               <p>소셜 계정으로 시작하기</p>
               {providers &&
                 Object.values(providers).map((provider) => (
-                  <button 
+                  <button
                     type="button"
-                    key={provider.name}                  
+                    key={provider.name}
                     // onClick={() => signIn(provider.id)}
                     onClick={handleSocialLogin}
                     className=""
-                  />
+                  >
+                    버튼
+                  </button>
                 ))}
             </div>
           </div>
@@ -137,5 +138,3 @@ export default function LoginView() {
     </>
   );
 }
-
-
