@@ -8,6 +8,7 @@ import React from "react";
  * @params {blog_name} 블로그 이름
  */
 export default function blogLayout({ children, params }) {
+  
   return (
     <>
       <header className="flex justify-center p-2.5">
