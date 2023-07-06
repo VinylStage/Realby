@@ -2,19 +2,41 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const Nav = () => {
-  const isUserLoggedIn = false;
+const ProfileNav = () => {
+  // const isUserLoggedIn = false;
 
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+
+  useEffect(() => {
+    async function checkUserLoggedIn() {
+      try {
+        const access = localStorage.getItem("access");
+
+        if (access) {
+          await axios.post("http://localhost:8000/users/api/token/verify/", {
+            token: access,
+          });
+
+          setIsUserLoggedIn(true);
+        }
+      } catch (error) {
+        setIsUserLoggedIn(false);
+        console.error(error);
+      }
+    }
+
+    checkUserLoggedIn();
+  }, []);
 
   async function handleLogout() {
     try {
-      const refresh_token = localStorage.getItem("refresh_token");
+      const refresh = localStorage.getItem("refresh");
 
-      await axios.post("https://www.realbyback.shop/users/logout/", {
-        refresh_token: refresh_token,
+      await axios.post("http://localhost:8000/users/logout/", {
+        token: refresh,
       });
 
       // 로그아웃 성공 처리
@@ -28,27 +50,22 @@ const Nav = () => {
     <nav className="flex-between w-full md-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
-          src="/assets/images/realby_logo.png"
+          src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
-          width={60}
-          height={20}
+          width={120}
+          height={25}
           className="object-contain"
         />
-      </Link>
-      <Link href="/feed" className="flex gap-2 flex-center">
-        피드
-      </Link>
-      <Link href="/topic" className="flex gap-2 flex-center">
-        토픽
       </Link>
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {isUserLoggedIn ? (
+          // 로그인된 경우
           <div className="flex gap-3 md:gap-5">
             {/* 드롭다운(온클릭) 추가해서 마이프로필, 마이블로그들을 링크로 */}
             <Image
-              src="/../public/assets/images/default_pf_image.png"
+              src="/assets/images/default_pf_image.png"
               width={37}
               height={37}
               className="rounded-full"
@@ -104,6 +121,7 @@ const Nav = () => {
             )}
           </div>
         ) : (
+          // 로그인 안된 경우
           <>
             <Link href="/auth/login" className="black_btn">
               시작하기
@@ -118,4 +136,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default ProfileNav;

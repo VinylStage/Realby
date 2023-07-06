@@ -1,17 +1,16 @@
 "use client";
 
+import "../styles/elisa-main.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-
-import { getProviders } from "next-auth/react";
-import { signIn, getProviders } from "next-auth/react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { getProviders } from "next-auth/react";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
 import "./Interceptors.jsx";
+import axios from "axios";
 
 /** 일반 로그인 & 소셜 로그인(회원가입) 페이지 */
 export default function LoginView() {
@@ -48,12 +47,12 @@ export default function LoginView() {
         }
       );
       const responseJson = await response.data;
-      const { access_token } = responseJson;
+      const access = responseJson.access;
 
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
-      localStorage.setItem("access_token", access_token);
-      alert("로그인이 완료되었습니다.");
+      localStorage.setItem("access", access);
+
       router.push("/");
     } catch (error) {
       console.error(error);
@@ -72,13 +71,13 @@ export default function LoginView() {
 
   return (
     <>
-      <Link href="/" className="flex gap-2 flex-center">
+      <Link href="/" className="">
         <Image
-          src="/../public/assets/images/realby_logo.png"
+          src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
-          width={90}
-          height={30}
-          className="object-contain"
+          width={200}
+          height={50}
+          className=""
         />
       </Link>
       <section className="col-6 col-12-narrower">

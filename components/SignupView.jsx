@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /** 일반 회원가입 페이지 */
 export default function SignupView() {
@@ -18,8 +18,8 @@ export default function SignupView() {
 
   async function handleSignup() {
     try {
-      await axios.post(
-        "https://www.realbyback.shop/users/signup/",
+      const response = await axios.post(
+        "http://localhost:8000/users/signup/",
         {
           username: username,
           email: email,
@@ -31,8 +31,13 @@ export default function SignupView() {
           },
         }
       );
-      alert("인증메일이 전송되었습니다.");
-      router.push("/auth/login");
+
+      if (response.status === 201) {
+        setErrorMessage(""); // 이전 오류 메시지 초기화
+        alert(
+          "유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요."
+        );
+      }
     } catch (error) {
       console.error(error);
     }
@@ -47,10 +52,10 @@ export default function SignupView() {
     <>
       <Link href="/" className="flex gap-2 flex-center">
         <Image
-          src="/assets/images/realby_logo.png"
+          src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
-          width={90}
-          height={30}
+          width={200}
+          height={50}
           className="object-contain"
         />
       </Link>
@@ -62,7 +67,7 @@ export default function SignupView() {
                 type="text"
                 id="username"
                 name="username"
-                placeholder="유저네임"
+                placeholder="닉네임"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
               />
@@ -98,9 +103,9 @@ export default function SignupView() {
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
+              {errorMessage && <p>{errorMessage}</p>}
             </div>
             <div className="col-12 col-12-mobile">
-              {errorMessage && <p>{errorMessage}</p>}
               <button onClick={handleSignup}>가입하기</button>
             </div>
           </div>
