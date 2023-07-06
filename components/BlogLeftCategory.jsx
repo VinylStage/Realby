@@ -13,23 +13,15 @@ import jwt from "jsonwebtoken";
 
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
-  // const payload = localStorage.getItem('payload');
-  // const payload_parse = JSON.parse(payload);
   const [data, setData] = useState([]);
-  const [datablog, setblogData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  useEffect(() => {
-    fetchData();
-    fetchBlog();
-    
-  const [id, setId] = useState([]);
+  const [blogUsedrId, setBlogUserId] = useState("");
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    fetchData(), idData();
+    fetchData(), fetchBlog();
   }, [blog_name]);
 
-  
   const openModal = (event) => {
     event.preventDefault();
     const confirmation = window.confirm("Live방송을 시작하시겠습니까?");
@@ -46,7 +38,6 @@ export default function CategoryList({ blog_name: blog_name }) {
     }
   };
 
-
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -60,17 +51,7 @@ export default function CategoryList({ blog_name: blog_name }) {
     }
   };
 
-
   const fetchBlog = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/`
-      );
-      const blog = response.data;
-      
-      setblogData(blog);
-
-  const idData = async () => {
     try {
       const token = localStorage.getItem("access");
       const userId = jwt.decode(token).user_id;
@@ -78,10 +59,8 @@ export default function CategoryList({ blog_name: blog_name }) {
         `https://www.realbyback.shop/blogs/${blog_name}`
       );
       const data = response.data.user;
-
-      setId(data);
+      setBlogUserId(data);
       setUserId(userId);
-
     } catch (error) {
       console.error(error);
     }
@@ -113,7 +92,7 @@ export default function CategoryList({ blog_name: blog_name }) {
               </ul>
             );
           })}
-          {/* {datablog.user !== payload_parse.user_id ? (
+        {/* {datablog.user !== payload_parse.user_id ? (
             null // 조건이 참일 경우 아무것도 렌더링하지 않음
           ) : (
             <div>
@@ -123,12 +102,15 @@ export default function CategoryList({ blog_name: blog_name }) {
             </button>
           </div>
           )} */}
-          <div>
-            실시간 채팅방
-            <button onClick={isModalOpen ? closeModal : openModal} style={{marginLeft:"15px", color:"red"}}>
-              {isModalOpen ? "비활성화" : "활성화"}
-            </button>
-          </div>
+        <div>
+          실시간 채팅방
+          <button
+            onClick={isModalOpen ? closeModal : openModal}
+            style={{ marginLeft: "15px", color: "red" }}
+          >
+            {isModalOpen ? "비활성화" : "활성화"}
+          </button>
+        </div>
       </form>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar", "DateCalendar"]}>
