@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -32,8 +31,8 @@ export default function SignupView() {
           },
         }
       );
-
-      router.push("/login");
+      alert("인증메일이 전송되었습니다.");
+      router.push("/auth/login");
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +55,7 @@ export default function SignupView() {
         />
       </Link>
       <section className="col-6 col-12-narrower">
-        <form method="post" action={"/"}>
+        <form method="post">
           <div className="row gtr-50">
             <div className="col-12 col-12-mobile">
               <input

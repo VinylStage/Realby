@@ -31,7 +31,7 @@ const interceptors = fetchIntercept.register({
 // fetchIntercept.unregister(interceptors); // 앱 종료시 인터셉터 해제
 
 // (응답 오류시) access 또는 refresh 토큰이 만료되었거나 유효하지 않을 경우
-const handleUnauthorizedError = () => {
+function handleUnauthorizedError() {
   const router = useRouter();
 
   // 로그인 페이지로 이동
@@ -39,7 +39,7 @@ const handleUnauthorizedError = () => {
 
   // 메시지 창 표시
   alert("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
-};
+}
 
 axios.interceptors.response.use(
   async (response) => response,

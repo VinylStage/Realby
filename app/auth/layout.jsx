@@ -1,7 +1,7 @@
 import React from "react";
 
-const Authlayout = ({}) => {
-  return <main className="app">ㅇㅇㅇ</main>;
+const Authlayout = ({ children }) => {
+  return <main className="app">{children}</main>;
 };
 
 export default Authlayout;
