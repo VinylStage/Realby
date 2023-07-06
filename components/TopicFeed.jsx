@@ -1,12 +1,9 @@
 "use client";
 
-
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-
-/** 토필별 피드 */
 export default function TopicFeed({ topic_name: topic_name }) {
   const [data, setData] = useState([]);
 

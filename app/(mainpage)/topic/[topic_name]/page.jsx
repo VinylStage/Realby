@@ -1,9 +1,8 @@
-import Link from "next/link";
 import React from "react";
 
-import TopicFeed from '@components/TopicFeed';
+import TopicFeed from "@components/TopicFeed";
 
-export default function TopicFeedPage({ children, params }) {
+export const page = () => {
   return (
     <>
       <div className="text-2xl text-black tracking-tighter">
@@ -35,8 +34,7 @@ export default function TopicFeedPage({ children, params }) {
           </li>
         </ul>
       </div>
-      <>{children}</>
       <TopicFeed topic_name={params.topic_name} />
     </>
   );
-}
+};

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -35,18 +34,18 @@ export default function SignupView() {
 
       if (response.status === 201) {
         setErrorMessage(""); // 이전 오류 메시지 초기화
-        alert("유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요.");
+        alert(
+          "유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요."
+        );
       }
     } catch (error) {
       console.error(error);
     }
-    
+
     if (password !== confirmPassword) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
-
-
   }
 
   return (

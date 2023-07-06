@@ -4,10 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
-
 const ProfileNav = () => {
   // const isUserLoggedIn = false;
-  
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -58,7 +57,6 @@ const ProfileNav = () => {
           className="object-contain"
         />
       </Link>
-
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">

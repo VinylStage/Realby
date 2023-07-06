@@ -1,6 +1,5 @@
 import React from "react";
-import "../styles/elisa-main.css";
-
+import "../../styles/elisa-main.css";
 
 import FeedsNav from "@components/FeedsNav";
 
@@ -13,11 +12,10 @@ export const metadata = {
 /** 메인페이지(피드, 토픽) 레이아웃 */
 const MainLayout = ({ children }) => {
   return (
-        <main className="app">
-          <FeedsNav />
-          {children}
-        </main>
-        
+    <main className="app">
+      <FeedsNav />
+      {children}
+    </main>
   );
 };
 
