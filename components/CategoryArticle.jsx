@@ -19,7 +19,7 @@ export default function CategoryArticle({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/blogs/${blog_name}/detail/`
+        `http://localhost:8000/blogs/${blog_name}/detail/`
       );
       const data = response.data;
 

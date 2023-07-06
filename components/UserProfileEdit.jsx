@@ -20,14 +20,11 @@ export default function UserProfileEdit() {
     try {
       const token = localStorage.getItem("access");
 
-      const response = await axios.get(
-        `https://www.realbyback.shop/users/profile/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`http://localhost:8000/users/profile/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = response.data;
       console.log(data);
@@ -39,15 +36,12 @@ export default function UserProfileEdit() {
   const handleProfileEdit = async () => {
     try {
       const token = localStorage.getItem("access");
-      const response = await axios.put(
-        `https://www.realbyback.shop/users/profile/`,
-        {
-          birthday: birthdate,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.put(`http://localhost:8000/users/profile/`, {
+        birthday: birthdate,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } catch (error) {
       console.error(error);
     }

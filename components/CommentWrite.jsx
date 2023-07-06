@@ -11,7 +11,7 @@ export default function CommentWrite({ article_id }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.post(
-        `https://www.realbyback.shop/blogs/${article_id}/comments/`,
+        `http://localhost:8000/blogs/${article_id}/comments/`,
         {
           comment: comment,
         },

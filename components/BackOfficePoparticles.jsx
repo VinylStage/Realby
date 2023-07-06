@@ -11,7 +11,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleHit = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/backoffice/${blog_name}/hits/`
+        `http://localhost:8000/backoffice/${blog_name}/hits/`
       );
       const data = response.data;
 
@@ -25,7 +25,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
   const handleEmpathy = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/backoffice/${blog_name}/empathys/`
+        `http://localhost:8000/backoffice/${blog_name}/empathys/`
       );
       const data = response.data;
 
@@ -79,7 +79,7 @@ export default function BackOfficePoparticles({ blog_name: blog_name }) {
                       <strong className="mb-5">{title}</strong>
                       {content}
                     </Link>
-                    <div >
+                    <div>
                       <span className="text-sm">{category} </span>
                     </div>
                     <div>

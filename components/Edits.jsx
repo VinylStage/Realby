@@ -33,7 +33,7 @@ export default function Edits({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/blogs/detail/${article_id}/`
+        `http://localhost:8000/blogs/detail/${article_id}/`
       );
       const data = response.data;
 
@@ -47,7 +47,7 @@ export default function Edits({
     try {
       const token = localStorage.getItem("access");
       await axios.put(
-        `https://www.realbyback.shop/blogs/detail/${article_id}/`,
+        `http://localhost:8000/blogs/detail/${article_id}/`,
         { title: title, content: content, topic: topic, category: category },
         {
           headers: {

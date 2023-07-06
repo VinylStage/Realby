@@ -18,7 +18,7 @@ export default function ArticleDetail({
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/blogs/detail/${article_id}/`
+        `http://localhost:8000/blogs/detail/${article_id}/`
       );
       const data = response.data;
 
@@ -43,7 +43,7 @@ export default function ArticleDetail({
   const created_at = data.created_at;
   const id = data.id;
   const articleViewCount = async () => {
-    await axios.post(`https://www.realbyback.shop/blogs/detail/${article_id}/`);
+    await axios.post(`http://localhost:8000/blogs/detail/${article_id}/`);
   };
 
   const replaceOembedWithIframe = (content) => {
