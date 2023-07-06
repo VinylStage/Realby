@@ -1,9 +1,9 @@
 import React from "react";
-import "../styles/elisa.css";
+import "../styles/elisa-main.css";
 
 import Link from "next/link";
 
-import Nav from "@components/Nav";
+import ProfileNav from "@components/ProfileNav";
 
 // 검색엔진최적화(SEO)
 export const metadata = {
@@ -11,13 +11,13 @@ export const metadata = {
   description: "",
 };
 
-/** 메인페이지 레이아웃 */
+/** 루트 레이아웃 */
 const RootLayout = ({ children }) => {
   return (
     <html lang="kr">
       <body>
         <main className="app">
-          <Nav />
+          <ProfileNav />
         </main>
         {children}
         <footer>ⓒ 2023 Team. Survivors All Rights Reserved.</footer>
