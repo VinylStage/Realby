@@ -39,7 +39,8 @@ const ProfileNav = () => {
       await axios.post("http://localhost:8000/users/logout/", {
         token: refresh,
       });
-
+      localStorage.removeItem("access");
+      Router.refresh();
       // 로그아웃 성공 처리
     } catch (error) {
       // 로그아웃 실패 처리
