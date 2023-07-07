@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 
 /** 일반 회원가입 페이지 */
 export default function SignupView() {
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +19,12 @@ export default function SignupView() {
   const router = useRouter();
 
   async function handleSignup() {
+    
+    if (password !== confirmPassword) {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8000/users/signup/",
@@ -35,17 +42,23 @@ export default function SignupView() {
 
       if (response.status === 201) {
         setErrorMessage(""); // 이전 오류 메시지 초기화
-        alert("유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요.");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    
-    if (password !== confirmPassword) {
-      setErrorMessage("비밀번호가 일치하지 않습니다.");
-      return;
-    }
+        
+        const script = document.createElement("script");
+        script.innerHTML = `alert("유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요.");`;
+        document.head.appendChild(script);
 
+        router.reload(); // 페이지 새로고침
+
+      }
+      // 이미 존재하는 유저인 경우에 대한 처리
+      // if (response.data.message === "이미 존재하는 유저입니다.") {
+      //   const script = document.createElement("script");
+      //   script.innerHTML = `alert("이미 존재하는 유저입니다.");`;
+      //   document.head.appendChild(script);
+      // } 
+    } catch (error) {
+        console.error(error);
+      }
 
   }
 

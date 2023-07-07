@@ -52,24 +52,24 @@ const Terms = () => {
       router.push("/auth/signup"); // 필수약관에 모두 동의할 경우 회원가입 페이지로 이동
    
     } else {
-      alert("필수약관에 모두 동의해주세요.");
+      alert("필수약관에 모두 동의해주세요.");      
     }
   };
 
 
   return (
     <>
-      <Link href="/" classNameName="flex gap-2 flex-center">
+      <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
           width={200}
           height={50}
-          classNameName="object-contain"
+          className="object-contain"
         />
       </Link>
-        <ul classNameName="join_box">
-          <li classNameName="checkBox check01">
+        <ul className="join_box">
+          <li className="checkBox check01">
             <ul className="clearfix">
               <li>전체 동의하기</li>
               <li className="checkAllBtn">
@@ -171,9 +171,7 @@ const Terms = () => {
           </li>
         </ul>
         <ul className="footBtwrap clearfix">
-          <li>
-              <button className="fpmgBt2" onClick={handleNext}>다음</button>
-          </li>
+          <button className="fpmgBt2" onClick={handleNext}>다음</button>
         </ul>
     </>
   );

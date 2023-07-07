@@ -3,7 +3,7 @@ import React from "react";
 
 import TopicFeed from '@components/TopicFeed';
 
-export default function TopicFeedPage({ children, params }) {
+export default function TopicFeedPage({ params }) {
   return (
     <>
       <div className="text-2xl text-black tracking-tighter">
@@ -35,7 +35,6 @@ export default function TopicFeedPage({ children, params }) {
           </li>
         </ul>
       </div>
-      <>{children}</>
       <TopicFeed topic_name={params.topic_name} />
     </>
   );
