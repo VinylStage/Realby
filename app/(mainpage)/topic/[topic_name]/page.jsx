@@ -2,7 +2,7 @@ import React from "react";
 
 import TopicFeed from "@components/TopicFeed";
 
-export const page = () => {
+export default function TopicFeedPage({ params }) {
   return (
     <>
       <div className="text-2xl text-black tracking-tighter">

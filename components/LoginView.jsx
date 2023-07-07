@@ -79,7 +79,7 @@ export default function LoginView() {
         />
       </Link>
       <section className="col-6 col-12-narrower">
-        <form>
+        <form method="post">
           <div className="row gtr-50">
             <div className="col-12 col-12-mobile">
               <input
