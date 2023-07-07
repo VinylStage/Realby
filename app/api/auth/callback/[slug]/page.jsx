@@ -11,7 +11,9 @@ export default function KakaoCallback() {
   const router = useRouter();
 
   useEffect(() => {
-    handleKakaoLogin();
+    if (typeof window !== "undefined") {
+      handleKakaoLogin();
+    }
   }, []);
 
   async function handleKakaoLogin() {
@@ -31,47 +33,44 @@ export default function KakaoCallback() {
         }
       );
       const responseData = response.data;
-      const access_token = await response.data.access_token;
-      const refresh_token = await response.data.refresh_token;
+      const access_token = await responseData.access_token;
+      const refresh_token = await responseData.refresh_token;
       setAccess(access_token);
       setRefresh(refresh_token);
-      setKakaoJson(responseData);
       localStorage.setItem("access", access_token);
       localStorage.setItem("refresh", refresh_token);
-      handleGetToken();
+      // handleGetToken();
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function handleGetToken() {
-    try {
-      const accessExp = jwt.decode(access).exp;
-      const refreshExp = jwt.decode(refresh).exp;
-      const scope = jwt.decode(access).email;
-      await axios.post(
-        `http://localhost:8000/users/kakao/complete/`,
-        {
-          token_type: "bearer",
-          access_token: access,
-          expires_in: accessExp,
-          refresh_token: refresh,
-          refresh_token_expires_in: refreshExp,
-          scope: scope,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  const script = document.createElement("script");
-  script.innerHTML = `alert("카카오 로그인 성공"); window.location.href = "/";`;
-  document.head.appendChild(script);
-  router.push("/");
+  // async function handleGetToken() {
+  //   try {
+  //     // const accessExp = jwt.decode(access).exp;
+  //     // const refreshExp = jwt.decode(refresh).exp;
+  //     // const scope = jwt.decode(access).email;
+  //     await axios.post(
+  //       `http://localhost:8000/users/kakao/complete/`,
+  //       {
+  //         jsonData,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //       );
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.innerHTML = `alert("카카오 로그인 성공");`;
+    document.head.appendChild(script);
+    router.refresh();
+    router.push("/");
+  });
   return null;
 }

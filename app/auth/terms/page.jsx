@@ -56,17 +56,17 @@ const Terms = () => {
 
   return (
     <>
-      <Link href="/" classNameName="flex gap-2 flex-center">
+      <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
           width={200}
           height={50}
-          classNameName="object-contain"
+          className="object-contain"
         />
       </Link>
-      <ul classNameName="join_box">
-        <li classNameName="checkBox check01">
+      <ul className="join_box">
+        <li className="checkBox check01">
           <ul className="clearfix">
             <li>전체 동의하기</li>
             <li className="checkAllBtn">
