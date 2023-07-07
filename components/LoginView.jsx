@@ -1,18 +1,16 @@
 "use client";
 
+import "../styles/elisa-main.css";
 import Link from "next/link";
 import Image from "next/image";
-import "../styles/elisa-main.css";
-
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-
 import { getProviders } from "next-auth/react";
-import axios from "axios";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
 import "./Interceptors.jsx";
+import axios from "axios";
 
 /** 일반 로그인 & 소셜 로그인(회원가입) 페이지 */
 export default function LoginView() {
@@ -27,18 +25,17 @@ export default function LoginView() {
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
-
       setProviders(response);
     };
 
     setUpProviders();
   }, []);
-
+  console.log(providers);
   // 일반 로그인
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/login/",
+        "https://www.realbyback.shop/users/login/",
         {
           email: email,
           password: password,
@@ -65,9 +62,8 @@ export default function LoginView() {
   async function handleSocialLogin() {
     try {
       await axios.post(
-        `http://localhost:8000/users/${provider.name}/login/`,
+        `https://www.realbyback.shop/users/${provider.name}/login/`
       );
-
     } catch (error) {
       console.error(error);
     }
@@ -124,13 +120,15 @@ export default function LoginView() {
               <p>소셜 계정으로 시작하기</p>
               {providers &&
                 Object.values(providers).map((provider) => (
-                  <button 
+                  <button
                     type="button"
-                    key={provider.name}                  
+                    key={provider.name}
                     // onClick={() => signIn(provider.id)}
                     onClick={handleSocialLogin}
                     className=""
-                  />
+                  >
+                    버튼
+                  </button>
                 ))}
             </div>
           </div>
@@ -139,5 +137,3 @@ export default function LoginView() {
     </>
   );
 }
-
-

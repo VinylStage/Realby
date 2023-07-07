@@ -1,6 +1,5 @@
 import React from "react";
-import "../styles/elisa-main.css";
-
+import "../../styles/elisa-main.css";
 
 import FeedsNav from "@components/FeedsNav";
 
