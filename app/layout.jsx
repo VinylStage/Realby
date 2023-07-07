@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 /** 루트 레이아웃 */
-const RootLayout = ({ children }) => {
+export default function RootLayout ({ children }) {
   return (
     <html lang="kr">
       <body>
@@ -26,4 +26,3 @@ const RootLayout = ({ children }) => {
   );
 };
 
-export default RootLayout;

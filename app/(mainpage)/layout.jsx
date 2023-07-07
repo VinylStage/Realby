@@ -10,13 +10,14 @@ export const metadata = {
 };
 
 /** 메인페이지(피드, 토픽) 레이아웃 */
-const MainLayout = ({ children }) => {
+export default function MainLayout ({ children }) {
   return (
-    <main className="app">
-      <FeedsNav />
+    <>
+      <main className="app">
+        <FeedsNav />
+      </main>
       {children}
-    </main>
+    </>    
   );
 };
 
-export default MainLayout;

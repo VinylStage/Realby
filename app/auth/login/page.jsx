@@ -1,9 +1,10 @@
 import React from "react";
 
-import LoginView from "@components/LoginView";
+import LoginView from '@components/LoginView';
+
 
 /** 로그인 페이지 */
-const LoginPage = ({}) => {
+export default function LoginPage ({}) {
   return (
     <>
       <LoginView />
@@ -11,4 +12,3 @@ const LoginPage = ({}) => {
   );
 };
 
-export default LoginPage;
