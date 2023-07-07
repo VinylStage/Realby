@@ -1,6 +1,8 @@
 import React from "react";
 
 import TopicFeed from "@components/TopicFeed";
+import Link from "next/link";
+
 
 export default function TopicFeedPage({ params }) {
   return (

@@ -3,14 +3,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const ProfileNav = () => {
+
+const ProfileNav = ({ }) => {
   // const isUserLoggedIn = false;
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-
+  const [currentPath, setCurrentPath] = useState("");
+  
+  const isHomePage = currentPath === "http://localhost:3000"
+  // currentPath === "http://localhost:3000/feed" ||
+  // currentPath.startsWith("http://localhost:3000/topic/");
+  console.log(isHomePage)
+  
+  
   useEffect(() => {
+    
+    setCurrentPath(window.location.href);
+
+
     async function checkUserLoggedIn() {
       try {
         const access = localStorage.getItem("access");
@@ -26,6 +39,7 @@ const ProfileNav = () => {
         setIsUserLoggedIn(false);
         console.error(error);
       }
+
     }
 
     checkUserLoggedIn();
@@ -57,6 +71,17 @@ const ProfileNav = () => {
           className="object-contain"
         />
       </Link>
+      {isHomePage && (
+      <>
+        <Link href="/feed" className="flex gap-2 flex-center">
+          피드
+        </Link>
+        <Link href="/topic/LIFE" className="flex gap-2 flex-center">
+          토픽
+        </Link>
+      </>
+      )}
+      
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
