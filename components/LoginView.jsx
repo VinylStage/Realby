@@ -7,11 +7,13 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getProviders } from "next-auth/react";
 import KakaoLogin from "@components/KakaoLogin";
+import Cookies from "js-cookie";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
 import "./Interceptors.jsx";
 import axios from "axios";
+import { Cookie } from "@mui/icons-material";
 
 /** 일반 로그인 & 소셜 로그인(회원가입) 페이지 */
 export default function LoginView() {
@@ -46,13 +48,16 @@ export default function LoginView() {
           },
         }
       );
+      console.log(response.request.response);
+
       const responseJson = await response.data;
       const access = responseJson.access;
+      const refresh = responseJson.refresh;
 
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
       localStorage.setItem("access", access);
-
+      Cookies.set("refresh", refresh, { expires: 1 });
       router.push("/");
     } catch (error) {
       console.error(error);
