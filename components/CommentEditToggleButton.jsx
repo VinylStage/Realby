@@ -18,7 +18,9 @@ export default function CommentEditToggleButton({ comment_id: comment_id }) {
 
     // 팝업 창이 차단되었을 경우에 대한 처리
     if (popupWindow === null || typeof popupWindow === "undefined") {
-      alert("팝업 창이 차단되었습니다.");
+      const script = document.createElement("script");
+      script.innerHTML = `alert("팝업 창이 차단되었습니다.");`;
+      document.head.appendChild(script);
     }
   };
 

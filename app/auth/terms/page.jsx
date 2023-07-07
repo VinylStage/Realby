@@ -50,30 +50,30 @@ const Terms = () => {
     if (allRequiredChecked) {
       router.push("/auth/signup"); // 필수약관에 모두 동의할 경우 회원가입 페이지로 이동
     } else {
-      alert("필수약관에 모두 동의해주세요.");
+      alert("필수약관에 모두 동의해주세요.");      
     }
   };
 
   return (
     <>
-      <Link href="/" classNameName="flex gap-2 flex-center">
+      <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/images/realby_logo/realby-color-R.png"
           alt="Realby Logo"
           width={200}
           height={50}
-          classNameName="object-contain"
+          className="object-contain"
         />
       </Link>
-      <ul classNameName="join_box">
-        <li classNameName="checkBox check01">
-          <ul className="clearfix">
-            <li>전체 동의하기</li>
-            <li className="checkAllBtn">
-              <input
-                type="checkbox"
-                name="chkAll"
-                id="chk"
+        <ul className="join_box">
+          <li className="checkBox check01">
+            <ul className="clearfix">
+              <li>전체 동의하기</li>
+              <li className="checkAllBtn">
+                <input 
+                type="checkbox" 
+                name="chkAll" 
+                id="chk" 
                 className="chkAll"
                 checked={isCheckedAll}
                 onChange={handleCheckAll}
@@ -154,26 +154,22 @@ const Terms = () => {
                 name="chk"
                 checked={isChecked.chk5}
                 onChange={() => handleCheck("chk5")}
-              />
-            </li>
-          </ul>
-          <textarea name="" id="">
-            여러분을 환영합니다. Realby 서비스 및 제품(이하 ‘서비스’)을 이용해
-            주셔서 감사합니다. 본 약관은 다양한 Realby 서비스의 이용과 관련하여
-            Realby 서비스를 제공하는 Realby 주식회사(이하 ‘Realby’)와 이를
-            이용하는 Realby 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를
-            설명하며, 아울러 여러분의 Realby 서비스 이용에 도움이 될 수 있는
-            유익한 정보를 포함하고 있습니다.
-          </textarea>
-        </li>
-      </ul>
-      <ul className="footBtwrap clearfix">
-        <li>
-          <button className="fpmgBt2" onClick={handleNext}>
-            다음
-          </button>
-        </li>
-      </ul>
+                />
+              </li>
+            </ul>
+            <textarea name="" id="">
+              여러분을 환영합니다. Realby 서비스 및 제품(이하 ‘서비스’)을 이용해
+              주셔서 감사합니다. 본 약관은 다양한 Realby 서비스의 이용과
+              관련하여 Realby 서비스를 제공하는 Realby 주식회사(이하 ‘Realby’)와
+              이를 이용하는 Realby 서비스 회원(이하 ‘회원’) 또는 비회원과의
+              관계를 설명하며, 아울러 여러분의 Realby 서비스 이용에 도움이 될 수
+              있는 유익한 정보를 포함하고 있습니다.
+            </textarea>
+          </li>
+        </ul>
+        <ul className="footBtwrap clearfix">
+          <button className="fpmgBt2" onClick={handleNext}>다음</button>
+        </ul>
     </>
   );
 };
