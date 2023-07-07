@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { getProviders } from "next-auth/react";
+import KakaoLogin from "@components/KakaoLogin";
 
 // (JWT인증) 서버 요청/응답시 설정 관련 파일
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
@@ -18,7 +19,7 @@ export default function LoginView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-
+  const [kakao, setKakao] = useState([]);
   // 소셜 로그인(회원가입)
   const [providers, setProviders] = useState(null);
 
@@ -30,12 +31,11 @@ export default function LoginView() {
 
     setUpProviders();
   }, []);
-  console.log(providers);
   // 일반 로그인
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "https://www.realbyback.shop/users/login/",
+        "http://localhost:8000/users/login/",
         {
           email: email,
           password: password,
@@ -61,9 +61,7 @@ export default function LoginView() {
 
   async function handleSocialLogin() {
     try {
-      await axios.post(
-        `https://www.realbyback.shop/users/${provider.name}/login/`
-      );
+      await axios.post(`http://localhost:8000/users/${provider.name}/login/`);
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +116,8 @@ export default function LoginView() {
             </div>
             <div className="col-12">
               <p>소셜 계정으로 시작하기</p>
-              {providers &&
+              <KakaoLogin />
+              {/* {providers &&
                 Object.values(providers).map((provider) => (
                   <button
                     type="button"
@@ -129,7 +128,13 @@ export default function LoginView() {
                   >
                     버튼
                   </button>
-                ))}
+                ))} */}
+              {/* <Link
+                href={`http://localhost:8000/users/kakao/login/`}
+                onClick={handleKakaoLogin}
+              >
+                소셜로그인
+              </Link> */}
             </div>
           </div>
         </form>

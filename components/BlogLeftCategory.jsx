@@ -41,7 +41,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://www.realbyback.shop/blogs/${blog_name}/category/`
+        `http://localhost:8000/blogs/${blog_name}/category/`
       );
 
       const data = response.data;
@@ -56,7 +56,7 @@ export default function CategoryList({ blog_name: blog_name }) {
       const token = localStorage.getItem("access");
       const userId = jwt.decode(token).user_id;
       const response = await axios.get(
-        `https://www.realbyback.shop/blogs/${blog_name}`
+        `http://localhost:8000/blogs/${blog_name}`
       );
       const data = response.data.user;
       setBlogUserId(data);
@@ -69,7 +69,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   return (
     <section className="p-2.5">
       <form className="mb-10">
-        {id === userId && (
+        {blogUsedrId === userId && (
           <Link href={`/${blog_name}/newpost`} className="hover:underline">
             ✏️글쓰기
           </Link>

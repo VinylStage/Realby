@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import jwt from "jsonwebtoken";
 
-const websocket_url = "https://www.realbyback.shop";
+const websocket_url = "http://localhost:8000";
 
 export default function BlogChat({ blog_name }) {
   const chatSocket = useRef(null);

@@ -65,6 +65,7 @@ const Terms = () => {
           className="object-contain"
         />
       </Link>
+
         <ul className="join_box">
           <li className="checkBox check01">
             <ul className="clearfix">

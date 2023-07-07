@@ -1,8 +1,5 @@
 import React from "react";
 import "../styles/elisa-main.css";
-
-import Link from "next/link";
-
 import ProfileNav from "@components/ProfileNav";
 
 // 검색엔진최적화(SEO)
