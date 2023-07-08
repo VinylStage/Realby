@@ -40,6 +40,8 @@ export default function KakaoCallback() {
       localStorage.setItem("access", access_token);
       localStorage.setItem("refresh", refresh_token);
       // handleGetToken();
+      router.refresh();
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -65,12 +67,5 @@ export default function KakaoCallback() {
   //       console.error(error);
   //     }
   //   }
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.innerHTML = `alert("카카오 로그인 성공");`;
-    document.head.appendChild(script);
-    router.refresh();
-    router.push("/");
-  });
   return null;
 }

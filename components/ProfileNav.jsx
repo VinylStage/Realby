@@ -3,25 +3,56 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const ProfileNav = () => {
   // const isUserLoggedIn = false;
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [access, setAccess] = useState(localStorage.getItem("access"));
+  const [isKakao, setIsKakao] = useState("");
+
+  // const [currentPath, setCurrentPath] = useState("");
+
+  // const isHomePage = currentPath === "http://localhost:3000";
+  // currentPath === "http://localhost:3000/feed" ||
+  // currentPath.startsWith("http://localhost:3000/topic/");
+  // console.log(isHomePage);
+
+  /** 현재 path가져오기
+   *  비동기처리가 필요없기때문에 안정적임
+   * 밑 세줄모두 Boolean으로 */
+  const pathname = usePathname();
+
+  /** {isMainPage} = 메인페이지 인지 */
+  const isMainPage = pathname === "/";
+  /** {isFeedPage} = 피드페이지인지 */
+  const isFeedPage = pathname === "/feed";
+  /** {isTopicPage} = 토픽페이지인지
+   * 토픽페이지는 startWith()를 사용햐여 "/topic/"으로 시작하는지 검증 */
+  const isTopicPage = pathname.startsWith("/topic/");
+
+  // useEffect(() => {
+  //   const access = localStorage.getItem("access");
+  //   setAccess(access);
+  // }, []);
 
   useEffect(() => {
+    // setCurrentPath(window.location.href);
+
     async function checkUserLoggedIn() {
       try {
-        const access = localStorage.getItem("access");
-
         if (access) {
           await axios.post("http://localhost:8000/users/api/token/verify/", {
             token: access,
           });
 
           setIsUserLoggedIn(true);
+          const isKakao = jwt.decode(access).user_type === "kakao";
+          setIsKakao(isKakao);
         }
       } catch (error) {
         setIsUserLoggedIn(false);
@@ -33,17 +64,28 @@ const ProfileNav = () => {
   }, []);
 
   async function handleLogout() {
-    try {
-      const refresh = localStorage.getItem("refresh");
+    if (isKakao) {
+      try {
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      try {
+        const refresh = localStorage.getItem("refresh");
 
-      await axios.post("http://localhost:8000/users/logout/", {
-        token: refresh,
-      });
-
-      // 로그아웃 성공 처리
-    } catch (error) {
-      // 로그아웃 실패 처리
-      console.error(error);
+        await axios.post("http://localhost:8000/users/logout/", {
+          token: refresh,
+        });
+        localStorage.removeItem("access");
+        localStorage.removeItem("refresh");
+        Router.refresh();
+        // 로그아웃 성공 처리
+      } catch (error) {
+        // 로그아웃 실패 처리
+        console.error(error);
+      }
     }
   }
 
@@ -58,6 +100,16 @@ const ProfileNav = () => {
           className="object-contain"
         />
       </Link>
+      {isMainPage || isFeedPage || isTopicPage ? (
+        <>
+          <Link href="/feed" className="flex gap-2 flex-center">
+            피드
+          </Link>
+          <Link href="/topic/LIFE" className="flex gap-2 flex-center">
+            토픽
+          </Link>
+        </>
+      ) : null}
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
@@ -106,18 +158,33 @@ const ProfileNav = () => {
                     블로그 관리홈
                   </Link>
                 </>
-
-                <button
-                  type="submit"
-                  onClick={() => {
-                    setToggleDropdown(false);
-                    handleLogout();
-                  }}
-                  value="Logout"
-                  className="mt-5 w-full black_btn"
-                >
-                  로그아웃
-                </button>
+                {isKakao ? (
+                  <Link href="http://localhost:8000/users/kakao/logout/">
+                    <button
+                      type="submit"
+                      onClick={() => {
+                        setToggleDropdown(false);
+                        handleLogout();
+                      }}
+                      value="Logout"
+                      className="mt-5 w-full black_btn"
+                    >
+                      로그아웃
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      setToggleDropdown(false);
+                      handleLogout();
+                    }}
+                    value="Logout"
+                    className="mt-5 w-full black_btn"
+                  >
+                    로그아웃
+                  </button>
+                )}
               </div>
             )}
           </div>
