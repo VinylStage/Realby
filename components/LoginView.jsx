@@ -13,7 +13,6 @@ import Cookies from "js-cookie";
 // 한 곳에서 import하면 해당 설정은 프로젝트 전반에 적용되어 모든 API 요청에 자동으로 적용됨
 import "./Interceptors.jsx";
 import axios from "axios";
-import { Cookie } from "@mui/icons-material";
 
 /** 일반 로그인 & 소셜 로그인(회원가입) 페이지 */
 export default function LoginView() {
@@ -21,7 +20,7 @@ export default function LoginView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [kakao, setKakao] = useState([]);
+
   // 소셜 로그인(회원가입)
   const [providers, setProviders] = useState(null);
 
@@ -57,20 +56,21 @@ export default function LoginView() {
       // refresh 토큰은 서버에서 설정한 http-only 쿠키로 자동 전달
       // access 토큰은 로컬 스토리지에 저장
       localStorage.setItem("access", access);
-      Cookies.set("refresh", refresh, { expires: 1 });
+      localStorage.setItem("refresh", refresh);
+
       router.push("/");
     } catch (error) {
       console.error(error);
     }
   }
-
-  async function handleSocialLogin() {
-    try {
-      await axios.post(`http://localhost:8000/users/${provider.name}/login/`);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  /**추후 구현예정 */
+  // async function handleSocialLogin() {
+  //   try {
+  //     await axios.post(`http://localhost:8000/users/${provider.name}/login/`);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   return (
     <>
