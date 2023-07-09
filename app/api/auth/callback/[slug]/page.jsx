@@ -12,15 +12,15 @@ export default function KakaoCallback() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      handleKakaoLogin();
     }
+    handleKakaoLogin();
   }, []);
 
   async function handleKakaoLogin() {
+    const currentURL = window.location.href;
+    const codeIndex = currentURL.indexOf("?code=");
+    const code = currentURL.substring(codeIndex + 6);
     try {
-      const currentURL = window.location.href;
-      const codeIndex = currentURL.indexOf("?code=");
-      const code = currentURL.substring(codeIndex + 6);
       const response = await axios.post(
         `http://localhost:8000/users/kakao/callback/`,
         {

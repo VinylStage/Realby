@@ -40,11 +40,6 @@ const ProfileNav = () => {
   //   setAccess(access);
   // }
 
-  useEffect(() => {
-    const access = localStorage.getItem("access");
-    setAccess(access);
-  }, []);
-
   // function useLocalStorage(key) {
   //   const storedValue = localStorage.getItem(key);
   //   useEffect(() => {
@@ -57,6 +52,8 @@ const ProfileNav = () => {
   useEffect(() => {
     // setCurrentPath(window.location.href);
 
+    const access = localStorage.getItem("access");
+    setAccess(access);
     async function checkUserLoggedIn() {
       try {
         if (access) {
