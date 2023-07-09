@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/elisa-main.css";
+import "../../styles/elisa-main.css";
 import ProfileNav from "@components/ProfileNav";
 
 // 검색엔진최적화(SEO)
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 /** 루트 레이아웃 */
-export default function RootLayout ({ children }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="kr">
       <body>
@@ -21,5 +21,4 @@ export default function RootLayout ({ children }) {
       </body>
     </html>
   );
-};
-
+}
