@@ -12,8 +12,8 @@ const ProfileNav = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [access, setAccess] = useState(localStorage.getItem("access"));
   const [isKakao, setIsKakao] = useState("");
+  const [access, setAccess] = useState("");
 
   // const [currentPath, setCurrentPath] = useState("");
 
@@ -35,10 +35,24 @@ const ProfileNav = () => {
    * 토픽페이지는 startWith()를 사용햐여 "/topic/"으로 시작하는지 검증 */
   const isTopicPage = pathname.startsWith("/topic/");
 
-  // useEffect(() => {
-  //   const access = localStorage.getItem("access");
+  // if (typeof window !== "undefined") {
+  //   localStorage.getItem("access");
   //   setAccess(access);
-  // }, []);
+  // }
+
+  useEffect(() => {
+    const access = localStorage.getItem("access");
+    setAccess(access);
+  }, []);
+
+  // function useLocalStorage(key) {
+  //   const storedValue = localStorage.getItem(key);
+  //   useEffect(() => {
+  //     localStorage.setItem(key, storedValue);
+  //   }, [key, storedValue]);
+  //   return storedValue;
+  // }
+  // const access = useLocalStorage("access");
 
   useEffect(() => {
     // setCurrentPath(window.location.href);
@@ -49,15 +63,13 @@ const ProfileNav = () => {
           await axios.post("http://localhost:8000/users/api/token/verify/", {
             token: access,
           });
-
           setIsUserLoggedIn(true);
           const isKakao = jwt.decode(access).user_type === "kakao";
           setIsKakao(isKakao);
+        } else {
+          setIsUserLoggedIn(false);
         }
-      } catch (error) {
-        setIsUserLoggedIn(false);
-        console.error(error);
-      }
+      } catch {}
     }
 
     checkUserLoggedIn();

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getProviders } from "next-auth/react";
+// import { getProviders } from "next-auth/react";
 import KakaoLogin from "@components/KakaoLogin";
 import Cookies from "js-cookie";
 
@@ -22,16 +22,16 @@ export default function LoginView() {
   const router = useRouter();
 
   // 소셜 로그인(회원가입)
-  const [providers, setProviders] = useState(null);
+  // const [providers, setProviders] = useState(null);
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
+  // useEffect(() => {
+  //   const setUpProviders = async () => {
+  //     const response = await getProviders();
+  //     setProviders(response);
+  //   };
 
-    setUpProviders();
-  }, []);
+  //   setUpProviders();
+  // }, []);
   // 일반 로그인
   async function handleLogin() {
     try {
