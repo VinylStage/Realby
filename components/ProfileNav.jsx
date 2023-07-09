@@ -49,7 +49,9 @@ const ProfileNav = () => {
   // }
   // const access = useLocalStorage("access");
 
+  const [blog, setBlog] = useState([]);
   useEffect(() => {
+    fetchData();
     // setCurrentPath(window.location.href);
 
     const access = localStorage.getItem("access");
@@ -97,6 +99,20 @@ const ProfileNav = () => {
       }
     }
   }
+
+  const fetchData = async () => {
+    try {
+      const userId = jwt.decode(access).user_id;
+      const response = await axios.get(
+        `http://localhost:8000/blogs/${userId}/list/`
+      );
+
+      const blog = response.data[0].blog_name;
+      setBlog(blog);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <nav className="flex-between w-full md-16 pt-3">
@@ -146,21 +162,21 @@ const ProfileNav = () => {
                 </Link>
                 <>
                   <Link
-                    href=""
+                    href={`/${blog}`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     내 블로그
                   </Link>
                   <Link
-                    href=""
+                    href={`/${blog}/newpost`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     글쓰기
                   </Link>
                   <Link
-                    href=""
+                    href="/user/myBlogs"
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
