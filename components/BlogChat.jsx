@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 
-const websocket_url = "localhost:8000";
+const websocket_url = "www.localhost:8000";
 
 export default function BlogChat({ blog_name }) {
   const [data, setData] = useState([]);
@@ -16,7 +16,7 @@ export default function BlogChat({ blog_name }) {
     fetchData();
 
     chatSocket.current = new WebSocket(
-      `ws://${websocket_url}/ws/livechat/${blog_name}/`
+      `wss://${websocket_url}/ws/livechat/${blog_name}/`
     );
     chatSocket.current.onmessage = function (e) {
       const data = JSON.parse(e.data);
@@ -98,7 +98,6 @@ export default function BlogChat({ blog_name }) {
           const isCurrentUser = message.user === jwt.decode(localStorage.getItem("access")).username;
           const isCurrentUserOwner = data.user === jwt.decode(localStorage.getItem("access")).user_id;
           const isHighlighted = isCurrentUserOwner && isCurrentUser;
-          const textAlign = isCurrentUser ? "right" : "left";
           const backgroundColor = isCurrentUser ? "#e1f5fe" : "#f5f5f5";
           const textColor = isHighlighted ? "red" : "black";
 
@@ -106,7 +105,6 @@ export default function BlogChat({ blog_name }) {
             <div
               key={index}
               style={{
-                textAlign: textAlign,
                 backgroundColor: backgroundColor,
                 padding: "5px",
                 marginBottom: "5px",
