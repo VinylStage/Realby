@@ -12,7 +12,7 @@ const ProfileNav = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [access, setAccess] = useState(localStorage.getItem("access"));
+  // const [access, setAccess] = useState(localStorage.getItem("access"));
   const [isKakao, setIsKakao] = useState("");
 
   // const [currentPath, setCurrentPath] = useState("");
@@ -39,6 +39,15 @@ const ProfileNav = () => {
   //   const access = localStorage.getItem("access");
   //   setAccess(access);
   // }, []);
+
+  function useLocalStorage(key) {
+    const storedValue = localStorage.getItem(key);
+    useEffect(() => {
+    localStorage.setItem(key, storedValue);
+    }, [key, storedValue]);
+    return storedValue;
+    }
+    const access = useLocalStorage("access");
 
   useEffect(() => {
     // setCurrentPath(window.location.href);
