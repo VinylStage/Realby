@@ -100,17 +100,15 @@ const ProfileNav = () => {
 
   const fetchData = async () => {
     try {
-      if (access) {
-        const decodedToken = jwt.decode(access);
-        if (decodedToken && decodedToken.user_id) {
-          const userId = jwt.decode(access).user_id;
-          const response = await axios.get(
-            `http://localhost:8000/blogs/${userId}/list/`
-          );
+      const decodedToken = jwt.decode(access);
+      if (decodedToken && decodedToken.user_id) {
+        const userId = jwt.decode(access).user_id;
+        const response = await axios.get(
+          `http://localhost:8000/blogs/${userId}/list/`
+        );
 
-          const blog = response.data[0].blog_name;
-          setBlog(blog);
-        }
+        const blog = response.data[0].blog_name;
+        setBlog(blog);
       }
     } catch (error) {
       console.error(error);

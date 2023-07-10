@@ -10,6 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { red } from "@mui/material/colors";
 import jwt from "jsonwebtoken";
+import BlogSubs from "./BlogSubs";
 
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
@@ -68,13 +69,14 @@ export default function CategoryList({ blog_name: blog_name }) {
 
   return (
     <section className="p-2.5">
+      {blogUsedrId === userId ? (
+        <Link href={`/${blog_name}/newpost`} className="hover:underline">
+          ✏️글쓰기
+        </Link>
+      ) : (
+        <BlogSubs blog_name={blog_name} />
+      )}
       <form className="mb-10">
-        {blogUsedrId === userId && (
-          <Link href={`/${blog_name}/newpost`} className="hover:underline">
-            ✏️글쓰기
-          </Link>
-        )}
-
         {data &&
           data.map((e) => {
             const id = e.id;
@@ -102,15 +104,17 @@ export default function CategoryList({ blog_name: blog_name }) {
             </button>
           </div>
           )} */}
-        <div>
-          실시간 채팅방
-          <button
-            onClick={isModalOpen ? closeModal : openModal}
-            style={{ marginLeft: "15px", color: "red" }}
-          >
-            {isModalOpen ? "비활성화" : "활성화"}
-          </button>
-        </div>
+        {blogUsedrId === userId && (
+          <div>
+            실시간 채팅방
+            <button
+              onClick={isModalOpen ? closeModal : openModal}
+              style={{ marginLeft: "15px", color: "red" }}
+            >
+              {isModalOpen ? "비활성화" : "활성화"}
+            </button>
+          </div>
+        )}
       </form>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar", "DateCalendar"]}>
