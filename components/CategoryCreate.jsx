@@ -13,7 +13,7 @@ export default function CategoryCreate({ blog_name: blog_name }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.post(
-        `http://localhost:8000/blogs/${blog_name}/category/`,
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`,
         {
           category: category,
         },

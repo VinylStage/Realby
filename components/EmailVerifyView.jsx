@@ -18,7 +18,7 @@ export default function EmailVerifyView({ uidb64: uidb64, token: token }) {
     async function verify() {
       try {
         await axios.get(
-          `http://localhost:8000/users/verify/${uidb64}/${token}`
+          `https://www.realbyback.shop/users/verify/${uidb64}/${token}`
         );
 
         // 페이지 진입시 팝업 띄우기

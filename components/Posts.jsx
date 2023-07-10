@@ -29,7 +29,7 @@ export default function Posts({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/category/`
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`
       );
       const data = response.data;
 
@@ -43,7 +43,7 @@ export default function Posts({ blog_name: blog_name }) {
     try {
       const token = localStorage.getItem("access");
       const response = await axios.post(
-        `http://localhost:8000/blogs/${blog_name}/write/`,
+        `https://www.realbyback.shop/blogs/${blog_name}/write/`,
         { title: title, content: content, topic: topic, category: category },
         {
           headers: {

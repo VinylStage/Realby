@@ -5,7 +5,9 @@ import Link from "next/link";
 export default function KakaoLogin() {
   return (
     <div>
-      <Link href="http://localhost:8000/users/kakao/login/">카카오로그인</Link>
+      <Link href="https://www.realbyback.shop/users/kakao/login/">
+        카카오로그인
+      </Link>
     </div>
   );
 }

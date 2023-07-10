@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getProviders } from "next-auth/react";
+// import { getProviders } from "next-auth/react";
 import KakaoLogin from "@components/KakaoLogin";
 import Cookies from "js-cookie";
 
@@ -22,21 +22,21 @@ export default function LoginView() {
   const router = useRouter();
 
   // 소셜 로그인(회원가입)
-  const [providers, setProviders] = useState(null);
+  // const [providers, setProviders] = useState(null);
 
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
+  // useEffect(() => {
+  //   const setUpProviders = async () => {
+  //     const response = await getProviders();
+  //     setProviders(response);
+  //   };
 
-    setUpProviders();
-  }, []);
+  //   setUpProviders();
+  // }, []);
   // 일반 로그인
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/login/",
+        "https://www.realbyback.shop/users/login/",
         {
           email: email,
           password: password,
@@ -47,7 +47,6 @@ export default function LoginView() {
           },
         }
       );
-      console.log(response.request.response);
 
       const responseJson = await response.data;
       const access = responseJson.access;
@@ -66,7 +65,7 @@ export default function LoginView() {
   /**추후 구현예정 */
   // async function handleSocialLogin() {
   //   try {
-  //     await axios.post(`http://localhost:8000/users/${provider.name}/login/`);
+  //     await axios.post(`https://www.realbyback.shop/users/${provider.name}/login/`);
   //   } catch (error) {
   //     console.error(error);
   //   }
@@ -80,11 +79,11 @@ export default function LoginView() {
           alt="Realby Logo"
           width={200}
           height={50}
-          className=""
+          className="realby-logo"
         />
       </Link>
       <section className="col-6 col-12-narrower">
-        <form method="post">
+        <form>
           <div className="row gtr-50">
             <div className="col-12 col-12-mobile">
               <input
@@ -110,7 +109,7 @@ export default function LoginView() {
             <div className="col-12">
               <ul className="actions">
                 <li>
-                  <button onClick={handleLogin} type="submit" value="Login">
+                  <button onClick={handleLogin} type="button" value="Login">
                     로그인
                   </button>
                 </li>
@@ -135,7 +134,7 @@ export default function LoginView() {
                   </button>
                 ))} */}
               {/* <Link
-                href={`http://localhost:8000/users/kakao/login/`}
+                href={`https://www.realbyback.shop/users/kakao/login/`}
                 onClick={handleKakaoLogin}
               >
                 소셜로그인

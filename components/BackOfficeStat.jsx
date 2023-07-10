@@ -15,7 +15,7 @@ export default function BackOfficeStat({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/`
+        `https://www.realbyback.shop/blogs/${blog_name}/`
       );
       const data = response.data;
 

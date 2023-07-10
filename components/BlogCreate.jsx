@@ -28,7 +28,7 @@ export default function BlogCreate() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/blogs/blogcreate/",
+        "https://www.realbyback.shop/blogs/blogcreate/",
         {
           blog_name: blog_name,
           blog_title: blog_title,

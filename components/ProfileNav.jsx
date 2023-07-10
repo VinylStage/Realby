@@ -1,9 +1,11 @@
 "use client";
 
+import "../styles/elisa-main.css";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
@@ -12,15 +14,14 @@ const ProfileNav = () => {
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const [access, setAccess] = useState(localStorage.getItem("access"));
   const [isKakao, setIsKakao] = useState("");
-
+  const [access, setAccess] = useState("");
+  const router = useRouter();
   // const [currentPath, setCurrentPath] = useState("");
 
-  // const isHomePage = currentPath === "http://localhost:3000";
-  // currentPath === "http://localhost:3000/feed" ||
-  // currentPath.startsWith("http://localhost:3000/topic/");
-  // console.log(isHomePage);
+  // const isHomePage = currentPath === "https://www.realbysurvivors.com";
+  // currentPath === "https://www.realbysurvivors.com/feed" ||
+  // currentPath.startsWith("https://www.realbysurvivors.com/topic/");
 
   /** 현재 path가져오기
    *  비동기처리가 필요없기때문에 안정적임
@@ -35,32 +36,45 @@ const ProfileNav = () => {
    * 토픽페이지는 startWith()를 사용햐여 "/topic/"으로 시작하는지 검증 */
   const isTopicPage = pathname.startsWith("/topic/");
 
-  // useEffect(() => {
-  //   const access = localStorage.getItem("access");
+  // if (typeof window !== "undefined") {
+  //   localStorage.getItem("access");
   //   setAccess(access);
-  // }, []);
+  // }
 
+  // function useLocalStorage(key) {
+  //   const storedValue = localStorage.getItem(key);
+  //   useEffect(() => {
+  //     localStorage.setItem(key, storedValue);
+  //   }, [key, storedValue]);
+  //   return storedValue;
+  // }
+  // const access = useLocalStorage("access");
+
+  const [blog, setBlog] = useState([]);
   useEffect(() => {
+    const access = localStorage.getItem("access");
+    if (access) {
+      fetchData();
+      checkUserLoggedIn();
+    }
     // setCurrentPath(window.location.href);
 
+    setAccess(access);
     async function checkUserLoggedIn() {
       try {
-        if (access) {
-          await axios.post("http://localhost:8000/users/api/token/verify/", {
+        await axios.post(
+          "https://www.realbyback.shop/users/api/token/verify/",
+          {
             token: access,
-          });
-
-          setIsUserLoggedIn(true);
-          const isKakao = jwt.decode(access).user_type === "kakao";
-          setIsKakao(isKakao);
-        }
-      } catch (error) {
+          }
+        );
+        setIsUserLoggedIn(true);
+        const isKakao = jwt.decode(access).user_type === "kakao";
+        setIsKakao(isKakao);
+      } catch {
         setIsUserLoggedIn(false);
-        console.error(error);
       }
     }
-
-    checkUserLoggedIn();
   }, []);
 
   async function handleLogout() {
@@ -75,12 +89,12 @@ const ProfileNav = () => {
       try {
         const refresh = localStorage.getItem("refresh");
 
-        await axios.post("http://localhost:8000/users/logout/", {
+        await axios.post("https://www.realbyback.shop/users/logout/", {
           token: refresh,
         });
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
-        Router.refresh();
+        router.refresh();
         // 로그아웃 성공 처리
       } catch (error) {
         // 로그아웃 실패 처리
@@ -88,6 +102,23 @@ const ProfileNav = () => {
       }
     }
   }
+
+  const fetchData = async () => {
+    try {
+      const decodedToken = jwt.decode(access);
+      if (decodedToken && decodedToken.user_id) {
+        const userId = jwt.decode(access).user_id;
+        const response = await axios.get(
+          `https://www.realbyback.shop/blogs/${userId}/list/`
+        );
+
+        const blog = response.data[0].blog_name;
+        setBlog(blog);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <nav className="flex-between w-full md-16 pt-3">
@@ -137,21 +168,21 @@ const ProfileNav = () => {
                 </Link>
                 <>
                   <Link
-                    href=""
+                    href={`/${blog}`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     내 블로그
                   </Link>
                   <Link
-                    href=""
+                    href={`/${blog}/newpost`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     글쓰기
                   </Link>
                   <Link
-                    href=""
+                    href={`/${blog}/manage`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
@@ -159,7 +190,7 @@ const ProfileNav = () => {
                   </Link>
                 </>
                 {isKakao ? (
-                  <Link href="http://localhost:8000/users/kakao/logout/">
+                  <Link href="https://www.realbyback.shop/users/kakao/logout/">
                     <button
                       type="submit"
                       onClick={() => {

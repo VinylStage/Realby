@@ -21,11 +21,14 @@ export default function ArticleDelete({
 
   async function handleArticleDelete() {
     const token = localStorage.getItem("access");
-    await axios.delete(`http://localhost:8000/blogs/detail/${article_id}/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    await axios.delete(
+      `https://www.realbyback.shop/blogs/detail/${article_id}/`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   }
 
   const idData = async () => {
@@ -33,7 +36,7 @@ export default function ArticleDelete({
       const token = localStorage.getItem("access");
       const userId = jwt.decode(token).user_id;
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}`
+        `https://www.realbyback.shop/blogs/${blog_name}`
       );
       const data = response.data.user;
 

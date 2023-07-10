@@ -4,7 +4,6 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 /** 내 블로그 리스트 */
 export default function MyBlogList() {
@@ -18,7 +17,7 @@ export default function MyBlogList() {
       const token = localStorage.getItem("access");
       const userId = jwt.decode(token).user_id;
       const response = await axios.get(
-        `http://localhost:8000/blogs/${userId}/list/`
+        `https://www.realbyback.shop/blogs/${userId}/list/`
       );
 
       const data = response.data;

@@ -13,7 +13,7 @@ export default function UpdateEditorApp({ article_id, onChange }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/detail/${article_id}/`
+        `https://www.realbyback.shop/blogs/detail/${article_id}/`
       );
       const data = response.data;
 
