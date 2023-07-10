@@ -79,7 +79,7 @@ export default function LoginView() {
           alt="Realby Logo"
           width={200}
           height={50}
-          className=""
+          className="realby-logo"
         />
       </Link>
       <section className="col-6 col-12-narrower">

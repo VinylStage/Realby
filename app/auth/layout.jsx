@@ -1,15 +1,16 @@
 import React from "react";
 
-import "../../styles/elisa-terms.css";
+import "../../styles/elisa-login.css";
 
 
 export default function AuthLayout ({ children }) {
   return (
     <html lang="kr">
       <body>
-        <main className="terms">
-        {children}
-        </main>
+        <div className="auth-top"/>
+          <main className="app">
+          {children}
+          </main>
       </body>
     </html> 
 
