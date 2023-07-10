@@ -10,7 +10,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { red } from "@mui/material/colors";
 import jwt from "jsonwebtoken";
+import blogchat from "@app/[blog_name]/blogchat/page";
 import BlogSubs from "./BlogSubs";
+
 
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
@@ -18,26 +20,82 @@ export default function CategoryList({ blog_name: blog_name }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [blogUsedrId, setBlogUserId] = useState("");
   const [userId, setUserId] = useState("");
+  const [roomActive, setRoomActive] = useState(false);
+  const [roomdata, setRoomData] = useState("");
+
 
   useEffect(() => {
-    fetchData(), fetchBlog();
+    fetchData(),
+    fetchBlog(), 
+    fetchActive();
   }, [blog_name]);
 
-  const openModal = (event) => {
+  const openModal = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("access");
     const confirmation = window.confirm("Live방송을 시작하시겠습니까?");
     if (confirmation) {
-      setIsModalOpen(true);
+      try {
+        const response = await axios.post(
+          `http://localhost:8000/livechat/${blog_name}/`,
+          null,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+        setIsModalOpen(true);
+        } catch (error) {
+        console.error(error);
+      }
+
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/livechat/active/${blog_name}/`
+        );
+        
+        setRoomActive(true)
+        setIsModalOpen(true);
+      } catch (error) {
+        console.error(error)
+      }
     }
   };
 
-  const closeModal = (event) => {
+  const closeModal = async (event) => {
     event.preventDefault();
     const confirmation = window.confirm("Live방송을 종료하시겠습니까?");
     if (confirmation) {
-      setIsModalOpen(false);
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/livechat/active/${blog_name}/`
+        );
+        
+        setRoomActive(false)
+        setIsModalOpen(false);;
+      } catch (error) {
+        console.error(error)
+      }
     }
   };
+
+  const fetchActive = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/livechat/${blog_name}/`
+      );
+
+      const data = response.data;
+
+      setRoomData(data.is_active);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
   const fetchData = async () => {
     try {
@@ -46,6 +104,7 @@ export default function CategoryList({ blog_name: blog_name }) {
       );
 
       const data = response.data;
+
       setData(data);
     } catch (error) {
       console.error(error);
@@ -94,7 +153,7 @@ export default function CategoryList({ blog_name: blog_name }) {
               </ul>
             );
           })}
-        {/* {datablog.user !== payload_parse.user_id ? (
+        {blogUsedrId !== userId ? (
             null // 조건이 참일 경우 아무것도 렌더링하지 않음
           ) : (
             <div>
@@ -103,18 +162,20 @@ export default function CategoryList({ blog_name: blog_name }) {
               {isModalOpen ? "비활성화" : "활성화"}
             </button>
           </div>
-          )} */}
-        {blogUsedrId === userId ? (
+          )}
+
+        {roomActive || roomdata ? (
           <div>
-            실시간 채팅방
-            <button
-              onClick={isModalOpen ? closeModal : openModal}
-              style={{ marginLeft: "15px", color: "red" }}
+            <Link
+              href={`/${blog_name}/blogchat`}
+              className="no-underline text-inherit hover:underline text-base" style={{ color:"red"}}
             >
-              {isModalOpen ? "비활성화" : "활성화"}
-            </button>
-          </div>
-        ) : null}
+              Live 방 입장하기
+            </Link>
+          </div> // 조건이 참일 경우 아무것도 렌더링하지 않음
+          ) : (
+            null
+          )}
       </form>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar", "DateCalendar"]}>
