@@ -83,7 +83,7 @@ export default function LoginView() {
         />
       </Link>
       <section className="col-6 col-12-narrower">
-        <form method="post">
+        <form>
           <div className="row gtr-50">
             <div className="col-12 col-12-mobile">
               <input
@@ -109,8 +109,8 @@ export default function LoginView() {
             <div className="col-12">
               <ul className="actions">
                 <li>
-                  <button onClick={handleLogin} type="submit" value="Login">
-                    로그인
+                  <button onClick={handleLogin} type="button" value="Login">
+                    로그인2
                   </button>
                 </li>
                 <li>
