@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 
@@ -14,13 +14,12 @@ const ProfileNav = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [isKakao, setIsKakao] = useState("");
   const [access, setAccess] = useState("");
-
+  const router = useRouter();
   // const [currentPath, setCurrentPath] = useState("");
 
   // const isHomePage = currentPath === "http://localhost:3000";
   // currentPath === "http://localhost:3000/feed" ||
   // currentPath.startsWith("http://localhost:3000/topic/");
-  // console.log(isHomePage);
 
   /** 현재 path가져오기
    *  비동기처리가 필요없기때문에 안정적임
@@ -51,27 +50,26 @@ const ProfileNav = () => {
 
   const [blog, setBlog] = useState([]);
   useEffect(() => {
-    fetchData();
+    const access = localStorage.getItem("access");
+    if (access) {
+      fetchData();
+      checkUserLoggedIn();
+    }
     // setCurrentPath(window.location.href);
 
-    const access = localStorage.getItem("access");
     setAccess(access);
     async function checkUserLoggedIn() {
       try {
-        if (access) {
-          await axios.post("http://localhost:8000/users/api/token/verify/", {
-            token: access,
-          });
-          setIsUserLoggedIn(true);
-          const isKakao = jwt.decode(access).user_type === "kakao";
-          setIsKakao(isKakao);
-        } else {
-          setIsUserLoggedIn(false);
-        }
-      } catch {}
+        await axios.post("http://localhost:8000/users/api/token/verify/", {
+          token: access,
+        });
+        setIsUserLoggedIn(true);
+        const isKakao = jwt.decode(access).user_type === "kakao";
+        setIsKakao(isKakao);
+      } catch {
+        setIsUserLoggedIn(false);
+      }
     }
-
-    checkUserLoggedIn();
   }, []);
 
   async function handleLogout() {
@@ -91,7 +89,7 @@ const ProfileNav = () => {
         });
         localStorage.removeItem("access");
         localStorage.removeItem("refresh");
-        Router.refresh();
+        router.refresh();
         // 로그아웃 성공 처리
       } catch (error) {
         // 로그아웃 실패 처리
@@ -102,13 +100,18 @@ const ProfileNav = () => {
 
   const fetchData = async () => {
     try {
-      const userId = jwt.decode(access).user_id;
-      const response = await axios.get(
-        `http://localhost:8000/blogs/${userId}/list/`
-      );
+      if (access) {
+        const decodedToken = jwt.decode(access);
+        if (decodedToken && decodedToken.user_id) {
+          const userId = jwt.decode(access).user_id;
+          const response = await axios.get(
+            `http://localhost:8000/blogs/${userId}/list/`
+          );
 
-      const blog = response.data[0].blog_name;
-      setBlog(blog);
+          const blog = response.data[0].blog_name;
+          setBlog(blog);
+        }
+      }
     } catch (error) {
       console.error(error);
     }

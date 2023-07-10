@@ -47,7 +47,6 @@ export default function LoginView() {
           },
         }
       );
-      console.log(response.request.response);
 
       const responseJson = await response.data;
       const access = responseJson.access;
