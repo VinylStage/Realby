@@ -13,7 +13,6 @@ import jwt from "jsonwebtoken";
 import blogchat from "@app/[blog_name]/blogchat/page";
 import BlogSubs from "./BlogSubs";
 
-
 /** 카테고리 리스트(삭제) */
 export default function CategoryList({ blog_name: blog_name }) {
   const [data, setData] = useState([]);
@@ -23,11 +22,8 @@ export default function CategoryList({ blog_name: blog_name }) {
   const [roomActive, setRoomActive] = useState(false);
   const [roomdata, setRoomData] = useState("");
 
-
   useEffect(() => {
-    fetchData(),
-    fetchBlog(), 
-    fetchActive();
+    fetchData(), fetchBlog(), fetchActive();
   }, [blog_name]);
 
   const openModal = async (event) => {
@@ -37,29 +33,29 @@ export default function CategoryList({ blog_name: blog_name }) {
     if (confirmation) {
       try {
         const response = await axios.post(
-          `http://localhost:8000/livechat/${blog_name}/`,
+          `https://www.realbyback.shop/livechat/${blog_name}/`,
           null,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         setIsModalOpen(true);
-        } catch (error) {
+      } catch (error) {
         console.error(error);
       }
 
       try {
         const response = await axios.get(
-          `http://localhost:8000/livechat/active/${blog_name}/`
+          `https://www.realbyback.shop/livechat/active/${blog_name}/`
         );
-        
-        setRoomActive(true)
+
+        setRoomActive(true);
         setIsModalOpen(true);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
   };
@@ -70,13 +66,13 @@ export default function CategoryList({ blog_name: blog_name }) {
     if (confirmation) {
       try {
         const response = await axios.get(
-          `http://localhost:8000/livechat/active/${blog_name}/`
+          `https://www.realbyback.shop/livechat/active/${blog_name}/`
         );
-        
-        setRoomActive(false)
-        setIsModalOpen(false);;
+
+        setRoomActive(false);
+        setIsModalOpen(false);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
   };
@@ -84,7 +80,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchActive = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/livechat/${blog_name}/`
+        `https://www.realbyback.shop/livechat/${blog_name}/`
       );
 
       const data = response.data;
@@ -94,8 +90,6 @@ export default function CategoryList({ blog_name: blog_name }) {
       console.error(error);
     }
   };
-
-
 
   const fetchData = async () => {
     try {
@@ -153,29 +147,29 @@ export default function CategoryList({ blog_name: blog_name }) {
               </ul>
             );
           })}
-        {blogUsedrId !== userId ? (
-            null // 조건이 참일 경우 아무것도 렌더링하지 않음
-          ) : (
-            <div>
+        {blogUsedrId !== userId ? null : ( // 조건이 참일 경우 아무것도 렌더링하지 않음
+          <div>
             실시간 채팅방
-            <button onClick={isModalOpen ? closeModal : openModal} style={{marginLeft:"15px", color:"red"}}>
+            <button
+              onClick={isModalOpen ? closeModal : openModal}
+              style={{ marginLeft: "15px", color: "red" }}
+            >
               {isModalOpen ? "비활성화" : "활성화"}
             </button>
           </div>
-          )}
+        )}
 
         {roomActive || roomdata ? (
           <div>
             <Link
               href={`/${blog_name}/blogchat`}
-              className="no-underline text-inherit hover:underline text-base" style={{ color:"red"}}
+              className="no-underline text-inherit hover:underline text-base"
+              style={{ color: "red" }}
             >
               Live 방 입장하기
             </Link>
           </div> // 조건이 참일 경우 아무것도 렌더링하지 않음
-          ) : (
-            null
-          )}
+        ) : null}
       </form>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar", "DateCalendar"]}>

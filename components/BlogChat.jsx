@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 
-const websocket_url = "www.localhost:8000";
+const websocket_url = "www.realbyback.shop";
 
 export default function BlogChat({ blog_name }) {
   const [data, setData] = useState([]);
