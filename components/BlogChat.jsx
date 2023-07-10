@@ -43,7 +43,7 @@ export default function BlogChat({ blog_name }) {
     try {
       // const token = localStorage.getItem("access");
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}`
+        `https://www.realbyback.shop/blogs/${blog_name}`
       );
       const data = response.data;
 
@@ -52,7 +52,7 @@ export default function BlogChat({ blog_name }) {
       console.error(error);
     }
   };
-  console.log(data.user)
+  console.log(data.user);
 
   const sendMessage = () => {
     const token = localStorage.getItem("access");
@@ -95,8 +95,11 @@ export default function BlogChat({ blog_name }) {
           // console.log(message, index)
           // console.log(message.user, jwt.decode(localStorage.getItem("access")).username)
           // console.log(message.user_id, jwt.decode(localStorage.getItem("access")).user_id)
-          const isCurrentUser = message.user === jwt.decode(localStorage.getItem("access")).username;
-          const isCurrentUserOwner = data.user === jwt.decode(localStorage.getItem("access")).user_id;
+          const isCurrentUser =
+            message.user ===
+            jwt.decode(localStorage.getItem("access")).username;
+          const isCurrentUserOwner =
+            data.user === jwt.decode(localStorage.getItem("access")).user_id;
           const isHighlighted = isCurrentUserOwner && isCurrentUser;
           const textAlign = isCurrentUser ? "right" : "left";
           const backgroundColor = isCurrentUser ? "#e1f5fe" : "#f5f5f5";
@@ -120,15 +123,15 @@ export default function BlogChat({ blog_name }) {
                 }}
               >
                 {message.user}:
-              </span >
-              <span 
+              </span>
+              <span
                 style={{
                   fontWeight: "bold",
                   color: textColor,
                 }}
               >
-              {" "}
-              {message.chat}
+                {" "}
+                {message.chat}
               </span>
             </div>
           );

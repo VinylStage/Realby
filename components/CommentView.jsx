@@ -23,7 +23,7 @@ export default function CommentView({
       const token = localStorage.getItem("access");
       const username = jwt.decode(token).username;
       const response = await axios.get(
-        `http://localhost:8000/blogs/${article_id}/comments/`
+        `https://www.realbyback.shop/blogs/${article_id}/comments/`
       );
       const data = response.data;
 
@@ -45,7 +45,7 @@ export default function CommentView({
           const handleCommentDelete = async () => {
             try {
               const response = await axios.delete(
-                `http://localhost:8000/blogs/comments/${comment_id}/`,
+                `https://www.realbyback.shop/blogs/comments/${comment_id}/`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,

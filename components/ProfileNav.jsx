@@ -62,9 +62,12 @@ const ProfileNav = () => {
     setAccess(access);
     async function checkUserLoggedIn() {
       try {
-        await axios.post("http://localhost:8000/users/api/token/verify/", {
-          token: access,
-        });
+        await axios.post(
+          "https://www.realbyback.shop/users/api/token/verify/",
+          {
+            token: access,
+          }
+        );
         setIsUserLoggedIn(true);
         const isKakao = jwt.decode(access).user_type === "kakao";
         setIsKakao(isKakao);
@@ -86,7 +89,7 @@ const ProfileNav = () => {
       try {
         const refresh = localStorage.getItem("refresh");
 
-        await axios.post("http://localhost:8000/users/logout/", {
+        await axios.post("https://www.realbyback.shop/users/logout/", {
           token: refresh,
         });
         localStorage.removeItem("access");
@@ -106,7 +109,7 @@ const ProfileNav = () => {
       if (decodedToken && decodedToken.user_id) {
         const userId = jwt.decode(access).user_id;
         const response = await axios.get(
-          `http://localhost:8000/blogs/${userId}/list/`
+          `https://www.realbyback.shop/blogs/${userId}/list/`
         );
 
         const blog = response.data[0].blog_name;
@@ -187,7 +190,7 @@ const ProfileNav = () => {
                   </Link>
                 </>
                 {isKakao ? (
-                  <Link href="http://localhost:8000/users/kakao/logout/">
+                  <Link href="https://www.realbyback.shop/users/kakao/logout/">
                     <button
                       type="submit"
                       onClick={() => {

@@ -25,7 +25,7 @@ export default function BlogSubs({ blog_name: blog_name }) {
   const handleSubs = async () => {
     const token = localStorage.getItem("access");
     await axios.post(
-      `http://localhost:8000/blogs/subscribe/${blog_name}/`,
+      `https://www.realbyback.shop/blogs/subscribe/${blog_name}/`,
       null,
       {
         headers: {
@@ -41,7 +41,7 @@ export default function BlogSubs({ blog_name: blog_name }) {
       if (token) {
         const userId = jwt.decode(token).user_id;
         const response = await axios.get(
-          `http://localhost:8000/blogs/${userId}/list/`
+          `https://www.realbyback.shop/blogs/${userId}/list/`
         );
         const data = response.data;
         const myBlog = data[0].blog_name;
@@ -54,7 +54,7 @@ export default function BlogSubs({ blog_name: blog_name }) {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `http://localhost:8000/blogs/subscribe/${myBlog}/`,
+      `https://www.realbyback.shop/blogs/subscribe/${myBlog}/`,
       null,
       {
         headers: {

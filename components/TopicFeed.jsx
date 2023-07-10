@@ -13,7 +13,7 @@ export default function TopicFeed({ topic_name: topic_name }) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/blogs/`);
+      const response = await axios.get(`https://www.realbyback.shop/blogs/`);
       const data = response.data;
 
       setData(data);

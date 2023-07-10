@@ -19,7 +19,7 @@ export default function KakaoCallback() {
     const code = currentURL.substring(codeIndex + 6);
     try {
       const response = await axios.post(
-        `http://localhost:8000/users/kakao/callback/`,
+        `https://www.realbyback.shop/users/kakao/callback/`,
         {
           code: code,
         },
@@ -50,7 +50,7 @@ export default function KakaoCallback() {
   //     // const refreshExp = jwt.decode(refresh).exp;
   //     // const scope = jwt.decode(access).email;
   //     await axios.post(
-  //       `http://localhost:8000/users/kakao/complete/`,
+  //       `https://www.realbyback.shop/users/kakao/complete/`,
   //       {
   //         jsonData,
   //       },

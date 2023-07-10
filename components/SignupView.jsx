@@ -24,7 +24,7 @@ export default function SignupView() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/signup/",
+        "https://www.realbyback.shop/users/signup/",
         {
           username: username,
           email: email,

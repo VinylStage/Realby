@@ -36,7 +36,7 @@ export default function LoginView() {
   async function handleLogin() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/users/login/",
+        "https://www.realbyback.shop/users/login/",
         {
           email: email,
           password: password,
@@ -65,7 +65,7 @@ export default function LoginView() {
   /**추후 구현예정 */
   // async function handleSocialLogin() {
   //   try {
-  //     await axios.post(`http://localhost:8000/users/${provider.name}/login/`);
+  //     await axios.post(`https://www.realbyback.shop/users/${provider.name}/login/`);
   //   } catch (error) {
   //     console.error(error);
   //   }
@@ -134,7 +134,7 @@ export default function LoginView() {
                   </button>
                 ))} */}
               {/* <Link
-                href={`http://localhost:8000/users/kakao/login/`}
+                href={`https://www.realbyback.shop/users/kakao/login/`}
                 onClick={handleKakaoLogin}
               >
                 소셜로그인

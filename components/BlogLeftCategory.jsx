@@ -42,7 +42,7 @@ export default function CategoryList({ blog_name: blog_name }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}/category/`
+        `https://www.realbyback.shop/blogs/${blog_name}/category/`
       );
 
       const data = response.data;
@@ -57,7 +57,7 @@ export default function CategoryList({ blog_name: blog_name }) {
       const token = localStorage.getItem("access");
       const userId = jwt.decode(token).user_id;
       const response = await axios.get(
-        `http://localhost:8000/blogs/${blog_name}`
+        `https://www.realbyback.shop/blogs/${blog_name}`
       );
       const data = response.data.user;
       setBlogUserId(data);
