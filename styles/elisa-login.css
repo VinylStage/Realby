@@ -15,6 +15,14 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+.auth-top {
+  margin-top: 100px;
+}
+
+.realby-logo {
+  margin-bottom: 30px;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
