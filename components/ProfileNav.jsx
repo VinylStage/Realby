@@ -19,9 +19,9 @@ const ProfileNav = () => {
   const router = useRouter();
   // const [currentPath, setCurrentPath] = useState("");
 
-  // const isHomePage = currentPath === "http://localhost:3000";
-  // currentPath === "http://localhost:3000/feed" ||
-  // currentPath.startsWith("http://localhost:3000/topic/");
+  // const isHomePage = currentPath === "https://www.realbysurvivors.com";
+  // currentPath === "https://www.realbysurvivors.com/feed" ||
+  // currentPath.startsWith("https://www.realbysurvivors.com/topic/");
 
   /** 현재 path가져오기
    *  비동기처리가 필요없기때문에 안정적임
