@@ -104,7 +104,7 @@ export default function CategoryList({ blog_name: blog_name }) {
             </button>
           </div>
           )} */}
-        {blogUsedrId === userId && (
+        {blogUsedrId === userId ? (
           <div>
             실시간 채팅방
             <button
@@ -114,7 +114,7 @@ export default function CategoryList({ blog_name: blog_name }) {
               {isModalOpen ? "비활성화" : "활성화"}
             </button>
           </div>
-        )}
+        ) : null}
       </form>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={["DateCalendar", "DateCalendar"]}>

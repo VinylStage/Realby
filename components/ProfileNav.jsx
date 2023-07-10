@@ -182,7 +182,7 @@ const ProfileNav = () => {
                     글쓰기
                   </Link>
                   <Link
-                    href="/user/myBlogs"
+                    href={`/${blog}/manage`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
