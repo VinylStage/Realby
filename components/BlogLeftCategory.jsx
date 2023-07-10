@@ -161,21 +161,11 @@ export default function CategoryList({ blog_name: blog_name }) {
           </div>
         )}
 
-        {roomActive ? (
+        {roomActive || roomdata ? (
           <div>
             <Link
               href={`/${blog_name}/blogchat`}
-              className="no-underline text-inherit hover:underline text-base"
-              style={{ color: "red" }}
-            >
-              Live 방 입장하기
-            </Link>
-          </div> // 조건이 참일 경우 아무것도 렌더링하지 않음
-        ) : null}
-        {roomdata ? (
-          <div>
-            <Link
-              href={`/${blog_name}/blogchat`}
+              target="_blank"
               className="no-underline text-inherit hover:underline text-base"
               style={{ color: "red" }}
             >

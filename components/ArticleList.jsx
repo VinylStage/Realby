@@ -22,7 +22,7 @@ export default function ArticleList({ blog_name: blog_name }) {
 
       setData(data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
