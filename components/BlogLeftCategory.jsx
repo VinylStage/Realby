@@ -23,7 +23,9 @@ export default function CategoryList({ blog_name: blog_name }) {
   const [roomdata, setRoomData] = useState("");
 
   useEffect(() => {
-    fetchData(), fetchBlog(), fetchActive();
+    fetchData();
+    fetchBlog();
+    fetchActive();
   }, [blog_name]);
 
   const openModal = async (event) => {
