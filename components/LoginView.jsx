@@ -110,7 +110,7 @@ export default function LoginView() {
               <ul className="actions">
                 <li>
                   <button onClick={handleLogin} type="button" value="Login">
-                    로그인2
+                    로그인
                   </button>
                 </li>
                 <li>
