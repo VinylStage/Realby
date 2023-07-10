@@ -15,8 +15,6 @@ a {
   text-decoration: none;
 }
 
-
-
 .clearfix::after {
   content: "";
   display: block;
@@ -30,6 +28,8 @@ a {
 ul.join_box {
   border: 1px solid #ddd;
   background-color: #fff;
+  width: 500px;
+  margin-top: 50px;
 }
 .checkBox,
 .checkBox > ul {
