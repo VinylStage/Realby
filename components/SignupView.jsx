@@ -124,7 +124,7 @@ export default function SignupView() {
             </div>
             <div className="col-12 col-12-mobile">
               <button onClick={handleSignup} type="button">
-                가입하기1
+                가입하기
               </button>
             </div>
           </div>
