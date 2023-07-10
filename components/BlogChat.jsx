@@ -2,15 +2,19 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 const websocket_url = "localhost:8000";
 
 export default function BlogChat({ blog_name }) {
+  const [data, setData] = useState([]);
   const chatSocket = useRef(null);
   const messageInputRef = useRef(null);
-  const [chatLog, setChatLog] = useState("");
+  const [chatLog, setChatLog] = useState([]);
 
   useEffect(() => {
+    fetchData();
+
     chatSocket.current = new WebSocket(
       `ws://${websocket_url}/ws/livechat/${blog_name}/`
     );
@@ -19,10 +23,7 @@ export default function BlogChat({ blog_name }) {
       const new_message = data["message"];
 
       // Update the chat log
-      setChatLog(
-        (prevChatLog) =>
-          prevChatLog + new_message.user + ": " + new_message.chat + "\n"
-      );
+      setChatLog((prevChatLog) => [...prevChatLog, new_message]);
     };
 
     chatSocket.current.onclose = function (e) {
@@ -37,6 +38,21 @@ export default function BlogChat({ blog_name }) {
       chatSocket.current.close();
     };
   }, [blog_name]);
+
+  const fetchData = async () => {
+    try {
+      // const token = localStorage.getItem("access");
+      const response = await axios.get(
+        `http://localhost:8000/blogs/${blog_name}`
+      );
+      const data = response.data;
+
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  console.log(data.user)
 
   const sendMessage = () => {
     const token = localStorage.getItem("access");
@@ -72,24 +88,51 @@ export default function BlogChat({ blog_name }) {
           minHeight: "200px",
           resize: "none",
           overflowWrap: "break-word",
-          direction: "rtl", // Right-to-left direction for the container
-          textAlign: "right", // Right-align the text
           padding: "5px",
         }}
       >
-        {chatLog.map((message, index) => (
-          <div key={index}>
-            <span
+        {chatLog.map((message, index) => {
+          // console.log(message, index)
+          // console.log(message.user, jwt.decode(localStorage.getItem("access")).username)
+          // console.log(message.user_id, jwt.decode(localStorage.getItem("access")).user_id)
+          const isCurrentUser = message.user === jwt.decode(localStorage.getItem("access")).username;
+          const isCurrentUserOwner = data.user === jwt.decode(localStorage.getItem("access")).user_id;
+          const isHighlighted = isCurrentUserOwner && isCurrentUser;
+          const textAlign = isCurrentUser ? "right" : "left";
+          const backgroundColor = isCurrentUser ? "#e1f5fe" : "#f5f5f5";
+          const textColor = isHighlighted ? "red" : "black";
+
+          return (
+            <div
+              key={index}
               style={{
-                fontWeight: "bold",
-                color: message.isCurrentUser ? "blue" : "black",
+                textAlign: textAlign,
+                backgroundColor: backgroundColor,
+                padding: "5px",
+                marginBottom: "5px",
+                borderRadius: "5px",
               }}
             >
-              {message.user}:{" "}
-            </span>
-            {message.chat}
-          </div>
-        ))}
+              <span
+                style={{
+                  fontWeight: "bold",
+                  color: textColor,
+                }}
+              >
+                {message.user}:
+              </span >
+              <span 
+                style={{
+                  fontWeight: "bold",
+                  color: textColor,
+                }}
+              >
+              {" "}
+              {message.chat}
+              </span>
+            </div>
+          );
+        })}
       </div>
       <br />
       <input
@@ -105,6 +148,5 @@ export default function BlogChat({ blog_name }) {
         보내기
       </button>
     </div>
-
   );
 }
