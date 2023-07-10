@@ -4,7 +4,6 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 /** 내 블로그 리스트 */
 export default function MyBlogList() {

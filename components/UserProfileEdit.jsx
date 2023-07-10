@@ -27,7 +27,6 @@ export default function UserProfileEdit() {
       });
 
       const data = response.data;
-      console.log(data);
       setData(data);
     } catch (error) {
       console.error(error);

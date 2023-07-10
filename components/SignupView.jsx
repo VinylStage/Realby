@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /** 일반 회원가입 페이지 */
 export default function SignupView() {
@@ -46,7 +46,10 @@ export default function SignupView() {
         alert(
           "유저 인증용 이메일을 전송했습니다.\n이메일을 확인하여 회원가입을 완료해주세요."
         );
-        window.close();
+
+        // 현재창닫기는 아직 위험할듯함
+        // window.close();
+
         // router.refresh(); // 페이지 새로고침
       } else {
       }
