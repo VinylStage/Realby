@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import jwt from "jsonwebtoken";
 
-const websocket_url = "http://localhost:8000";
+const websocket_url = "localhost:8000";
 
 export default function BlogChat({ blog_name }) {
   const chatSocket = useRef(null);
@@ -23,7 +23,6 @@ export default function BlogChat({ blog_name }) {
         (prevChatLog) =>
           prevChatLog + new_message.user + ": " + new_message.chat + "\n"
       );
-      console.log(e, data);
     };
 
     chatSocket.current.onclose = function (e) {
@@ -40,8 +39,8 @@ export default function BlogChat({ blog_name }) {
   }, [blog_name]);
 
   const sendMessage = () => {
-    const payload = localStorage.getItem("payload");
-    const payload_parse = JSON.parse(payload);
+    const token = localStorage.getItem("access");
+    const userName = jwt.decode(token).username;
     const messageInput = messageInputRef.current;
     const message = messageInput.value;
 
@@ -50,7 +49,7 @@ export default function BlogChat({ blog_name }) {
       JSON.stringify({
         message: message,
         command: "blog_new_message",
-        username: payload_parse.username,
+        username: userName,
       })
     );
 
@@ -66,14 +65,32 @@ export default function BlogChat({ blog_name }) {
 
   return (
     <div>
-      <textarea
+      <div
         id="chat-log"
-        cols="101"
-        rows="10"
-        style={{ border: "1px solid", minHeight: "200px", resize: "none" }}
-        value={chatLog}
-        readOnly
-      ></textarea>
+        style={{
+          border: "1px solid",
+          minHeight: "200px",
+          resize: "none",
+          overflowWrap: "break-word",
+          direction: "rtl", // Right-to-left direction for the container
+          textAlign: "right", // Right-align the text
+          padding: "5px",
+        }}
+      >
+        {chatLog.map((message, index) => (
+          <div key={index}>
+            <span
+              style={{
+                fontWeight: "bold",
+                color: message.isCurrentUser ? "blue" : "black",
+              }}
+            >
+              {message.user}:{" "}
+            </span>
+            {message.chat}
+          </div>
+        ))}
+      </div>
       <br />
       <input
         id="chat-message-input"
@@ -88,5 +105,6 @@ export default function BlogChat({ blog_name }) {
         보내기
       </button>
     </div>
+
   );
 }
