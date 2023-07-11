@@ -21,7 +21,7 @@ export default function BlogCreate() {
     }
 
     // blog_name이 영어만 가능하도록 제한
-    if (!/^[A-Za-z]+$/.test(blog_name)) {
+    if (!/^[A-Za-z]+$/.test(blog_title)) {
       alert("블로그 주소는 영어로만 입력해야 합니다.");
       return;
     }
