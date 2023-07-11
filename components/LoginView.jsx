@@ -119,7 +119,7 @@ export default function LoginView() {
               </ul>
             </div>
             <div className="col-12">
-              <p>소셜 계정으로 시작하기</p>
+              {/* <p>소셜 계정으로 시작하기</p> */}
               <KakaoLogin />
               {/* {providers &&
                 Object.values(providers).map((provider) => (

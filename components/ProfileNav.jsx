@@ -16,6 +16,7 @@ const ProfileNav = () => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const [isKakao, setIsKakao] = useState("");
   const [access, setAccess] = useState("");
+  const [blog, setBlog] = useState([]);
   const router = useRouter();
   // const [currentPath, setCurrentPath] = useState("");
 
@@ -50,7 +51,6 @@ const ProfileNav = () => {
   // }
   // const access = useLocalStorage("access");
 
-  const [blog, setBlog] = useState([]);
   useEffect(() => {
     const access = localStorage.getItem("access");
     if (access) {
@@ -71,6 +71,7 @@ const ProfileNav = () => {
         setIsUserLoggedIn(true);
         const isKakao = jwt.decode(access).user_type === "kakao";
         setIsKakao(isKakao);
+        fetchData();
       } catch {
         setIsUserLoggedIn(false);
       }
@@ -168,21 +169,21 @@ const ProfileNav = () => {
                 </Link>
                 <>
                   <Link
-                    href={`/${blog}`}
+                    href={`/user/myBlogs`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     내 블로그
                   </Link>
-                  <Link
+                  {/* <Link
                     href={`/${blog}/newpost`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
                     글쓰기
-                  </Link>
+                  </Link> */}
                   <Link
-                    href={`/${blog}/manage`}
+                    href={`/user/myBlogs`}
                     className=""
                     onClick={() => setToggleDropdown(false)}
                   >
